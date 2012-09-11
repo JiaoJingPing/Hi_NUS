@@ -6,12 +6,10 @@ if (!$js_includes)
 
 $js_includes = array_merge(array(
     'js/jquery-1.8.0.min.js', 
-    'js/bootstrap.min.js',
     'js/base.js',
     'js/google_analytics.js',
-    'js/jquery-ui-1.8.23.custom.min.js',
     'js/jquery.placeholder.min.js',
-
+    'js/jquery.mobile-1.1.1.js', 
 ), $js_includes);
 ?>
 <?php

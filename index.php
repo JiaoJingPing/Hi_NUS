@@ -10,7 +10,21 @@ echo ('cs3216 mobile app');
         <title>Mobile App</title>
     </head>
     <body>
-        
+        <div data-role="page">
+
+			<div data-role="header">
+				<h1>My Title</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">	
+				<p>Hello world</p>		
+			</div><!-- /content -->
+		</div><!-- /page -->
+
+
+
         <?php require_once 'element/include_js.php'; ?>
+    <script type="text/javascript">
+</script>
     </body>
 </html>
