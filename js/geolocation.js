@@ -18,26 +18,20 @@
         var d = new Point(1.291397, 103.783593);
         var e = new Point(1.291922, 103.783196);
         var f = new Point(1.291054, 103.781115);
-
-        var pgp = new Polygon([a,b,c,d,e,f,a]);
-
-
+        var pointList = [a,b,c,d,e,f,a];
+        var loc = new Polygon(pointList);
 
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         var accurary = position.coords.accurary;
         if (!latitude || !longitude) {
-            document.getElementById("status").innerHTML = "HTML5 Geolocation is supported in your browser, but location is currently not available.";
+            $("#status").html("HTML5 Geolocation is supported in your browser, but location is currently not available.");
             return;
         }
 
         document.getElementById("latitude").innerHTML = latitude;
         document.getElementById("longitude").innerHTML = longitude;
 
-        var current = new Point(latitude,longitude);
-        console.log(inPolygon(current,pgp));
-        if( inPolygon(current, pgp) )
-            $('#xxx').html('pgp');
         var latlng = new google.maps.LatLng(latitude, longitude);
         var myOptions = {
           zoom: 17,
@@ -45,10 +39,37 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
- 
+
+
+        var current = new Point(latitude,longitude);
+
+        $('#xxx').html('undefined');
+        if( inPolygon(current, loc) )
+        {
+            $('#xxx').html('pgp');
+            var PolygonCoords = [];
+            for (var i = 0; i < pointList.length; i++) {
+                var tmp = new google.maps.LatLng(pointList[i].getX(), pointList[i].getY());
+                PolygonCoords.push(tmp);
+            };
+
+            var highlight = new google.maps.Polygon({
+            paths: PolygonCoords,
+                strokeColor: "#FF0000",
+                strokeOpacity: 0.6,
+                strokeWeight: 2,
+                fillColor: "#FF0000",
+                fillOpacity: 0.35
+            });
+
+            highlight.setMap(map);
+        }    
+
+        var image = 'test.png';
         var marker = new google.maps.Marker({
           position: latlng, 
           map: map, 
+          icon: image,
           title:"PGP!"
         }); 
 
@@ -72,12 +93,11 @@
         break;
         }
     }
+
     function updateStatus(message){
-      document.getElementById("status").innerHTML(message);
+      $("#status").html(message);
     }
-    $(function() {
-        loadDemo();
-    });
+    
 
 
     // Geometry Class  -----------------------------------------
@@ -132,6 +152,8 @@
     }
 
     //-----------------------------------------------------
-
+    $(function() {
+        loadDemo();
+    });
 
 })();
