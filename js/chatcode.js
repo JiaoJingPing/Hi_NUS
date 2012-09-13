@@ -1,12 +1,4 @@
-<body>
-<input type="text" id="contentBox"/>
-<input type="button" id="enterButton" value="Send" disabled=true' onclick='PUBNUB.publish({channel : "hello_world",message : $("#contentBox").val()});'/>
-<br>
-<input type="text" readonly=true id="recvBox"/>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<div pub-key="pub-0d10a610-c98a-49d8-afd4-8a5f2d5974ab" sub-key="sub-22a06fee-fc1d-11e1-b851-adb3f4169f17" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
-<script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
-<script>(function(){
+function chatConnection(){
  
     // LISTEN FOR MESSAGES
     PUBNUB.subscribe({
@@ -38,5 +30,9 @@
         }
     })
  
-})();</script>
-</body>
+}
+
+function sendChat(channelName, messageVal)
+{
+	PUBNUB.publish({channel : channelName, message : messageVal});
+}
