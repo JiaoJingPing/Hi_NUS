@@ -13,7 +13,7 @@ function get_root_url() {
         $page_url .= $_SERVER["SERVER_NAME"];
     }
 
-    // if 'eureka' folder is found, use it as root, otherwise, use the real root
+    // if 'mobile' folder is found, use it as root, otherwise, use the real root
     $uri = $_SERVER['REQUEST_URI'];
     $index = strpos($uri, 'mobile');
     if ($index !== false)
@@ -32,5 +32,6 @@ function get_file_path($relative_path) {
 function get_current_page() {
     return empty($_GET['page']) ? 1 : $_GET['page'];
 }
+
 
 ?>
