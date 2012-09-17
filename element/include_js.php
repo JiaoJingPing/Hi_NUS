@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../util.php';
+require_once __DIR__ . '/js_url.php';
 global $js_includes;
 if (!$js_includes)
     $js_includes = array();

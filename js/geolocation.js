@@ -1,33 +1,37 @@
 (function() {
 
     var watchId;
-    function loadDemo() {
+    var flag=0;
+    var coor_lat;
+    var coor_long;
+    
+    function setGeolocation(data){
+        loadLocation(data);
+    }
+
+    function loadLocation(data) {
         if(navigator.geolocation) {
             document.getElementById("status").innerHTML = "HTML5 Geolocation is supported in your browser.";
-            watchId = navigator.geolocation.watchPosition(updateLocation,handleLocationError,{maximumAge:1000});
+            watchId = navigator.geolocation.watchPosition(updateLocation,handleLocationError,{maximumAge:2000});
         }
     }
 
+    function get_point_list(list){
+        var point_list = [];
+        for (var i = 0; i < list.length; i++) {
+            var point = new Point(list[i][0],list[i][1]);
+            point_list.push(point);
+        }
+        return point_list;
+    }
+
     function updateLocation(position) {
-
-            // pgp points
-
-        var a = new Point(1.292309, 103.780096);
-        var b = new Point(1.291429, 103.779001);
-        var c = new Point(1.289638, 103.780954);
-        var d = new Point(1.291397, 103.783593);
-        var e = new Point(1.291922, 103.783196);
-        var f = new Point(1.291054, 103.781115);
-
-        var pgp = new Polygon([a,b,c,d,e,f,a]);
-
-
 
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         var accurary = position.coords.accurary;
         if (!latitude || !longitude) {
-            document.getElementById("status").innerHTML = "HTML5 Geolocation is supported in your browser, but location is currently not available.";
+            $("#status").html("HTML5 Geolocation is supported in your browser, but location is currently not available.");
             return;
         }
 
@@ -35,24 +39,98 @@
         //document.getElementById("latitude").innerHTML = latitude;
         //document.getElementById("longitude").innerHTML = longitude;
 
-        var current = new Point(latitude,longitude);
-        console.log(inPolygon(current,pgp));
-        if(inPolygon(current, pgp) )
-            document.getElementById("status").innerHTML = "You are in PGP!";
-        var latlng = new google.maps.LatLng(latitude, longitude);
-        var myOptions = {
-          zoom: 17,
-          center: latlng,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
- 
-        var marker = new google.maps.Marker({
-          position: latlng, 
-          map: map, 
-          title:"PGP!"
-        }); 
 
+        //cache the location choose whether to update the map
+        if(flag!=0)
+            var distance = haversine(latitude,longitude,coor_lat,coor_long);
+        if(flag==0 || distance>getSencitiveDistance()){  
+            flag = 1;
+            coor_lat = latitude;
+            coor_long = longitude;
+
+            var latlng = new google.maps.LatLng(latitude, longitude);
+            var myOptions = {
+              zoom: 17,
+              center: latlng,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
+
+            var current = new Point(latitude,longitude);
+
+            $('#xxx').html('undefined');
+
+            //check location{
+            // highlight and make mark
+            //}
+                console.log(window.mydata);
+
+            for (var i = 0; i < window.mydata.length; i++) {
+                    var loc_name = window.mydata[i].name;
+                    var loc_polygon = window.mydata[i].polygon;
+                    loc_polygon.push(loc_polygon[0]);
+
+                    if(inPolygon(current,loc_polygon)){
+
+                        $('#xxx').html(loc_name);
+                        var PolygonCoords = [];
+                        for (var i = 0; i < loc_polygon.length; i++) {
+                            var tmp = new google.maps.LatLng(loc_polygon[i].getX(), loc_polygon[i].getY());
+                            PolygonCoords.push(tmp);
+                        };
+                        //highlight
+                        var highlight = new google.maps.Polygon({
+                            paths: PolygonCoords,
+                            strokeColor: "#FF0000",
+                            strokeOpacity: 0.6,
+                            strokeWeight: 2,
+                            fillColor: "#FF0000",
+                            fillOpacity: 0.35
+                        });
+
+                        highlight.setMap(map);
+
+                        //mark
+                        var image = 'test.png';
+                        var marker = new google.maps.Marker({
+                            position: latlng, 
+                            map: map, 
+                            icon: image,
+                            title:"PGP!"
+                        }); 
+                        break;
+                    }
+            }  
+        }
+    }
+
+    function getSencitiveDistance(){
+        return 20;
+    }
+
+    function rad(x){
+        return x * Math.PI / 180;
+    }
+
+    function haversine(p1_latitude,p1_longtitude,p2_latitude,p2_longtitude){
+        var R = 6371
+        var p1 = {
+            latitude:p1_latitude,
+            longitude:p1_longtitude
+        };
+        var p2 = {
+            latitude:p2_latitude,
+            longitude:p2_longtitude
+        };
+        var dLat  = rad(p2.latitude - p1.latitude)
+        var dLong = rad(p2.longitude - p1.longitude)
+
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(rad(p1.latitude)) * Math.cos(rad(p2.latitude)) * Math.sin(dLong/2) * Math.sin(dLong/2)
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+        var d = R * c
+
+        return Math.round(d)
     }
 
     function handleLocationError(error){
@@ -73,12 +151,11 @@
         break;
         }
     }
+
     function updateStatus(message){
-      document.getElementById("status").innerHTML(message);
+      $("#status").html(message);
     }
-    $(function() {
-        loadDemo();
-    });
+    
 
 
     // Geometry Class  -----------------------------------------
@@ -117,7 +194,9 @@
 
     
     function inPolygon(point, polygon){   //important !!! the last point must equal to the first point
-        var polygon = polygon.getPoints();
+        
+
+        //var polygon = polygon.getPoints();
         var eps = 0.0000001;
         if(polygon.length == 0)
             return false;
@@ -128,11 +207,30 @@
             else
                 sum += angle(point, polygon[i], polygon[i+1]);
         }
-        console.log(sum);
+
         return ( Math.abs(sum-2*Math.PI) < eps || Math.abs(sum+2*Math.PI) < eps );
     }
-
+    
     //-----------------------------------------------------
+    $(function() {
+        $.get(urlConfig.location, function(data) {
+            if(window.mydata == undefined){
+                var list = data;
+                // pgp points
+                var location = [];
 
-
+                for (var i = 0; i < list.length; i++) {
+                    var tmp_geo = list[i].geometry;
+                    var point_list = get_point_list(tmp_geo);
+                    var tmp = {
+                        name: list[i].name,
+                        polygon: point_list, 
+                    };
+                    location.push(tmp);
+                }
+                window.mydata = location;
+            }  
+            setGeolocation();
+        }, 'json');
+    });
 })();
