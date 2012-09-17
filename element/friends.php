@@ -5,29 +5,29 @@
 			Friends
 		</h3>
 	</div>
-	<div data-role="content" style="padding: 15px" class="middlecontent">
+	<div data-role="content" class="middlecontent">
 	Content goes here
 	</div>
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
 			<ul>
 				<li>
-					<a href="#page1" data-theme="" data-icon="home">
+					<a href="#page1" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="home">
 						Nearby
 					</a>
 				</li>
 				<li>
-					<a href="#page5" data-theme="" data-icon="plus">
+					<a data-theme="b" data-icon="plus">
 						Friends
 					</a>
 				</li>
 				<li>
-					<a href="#page6" data-theme="" data-icon="info">
+					<a href="#page6" data-transition="slide" data-theme="" data-icon="info">
 						Profile
 					</a>
 				</li>
 				<li>
-					<a href="#page7" data-theme="" data-icon="gear">
+					<a href="#page7" data-transition="slide" data-theme="" data-icon="gear">
 						Setting
 					</a>
 				</li>

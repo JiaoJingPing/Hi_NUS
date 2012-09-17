@@ -8,7 +8,7 @@
 			Location LT27
 		</h3>
 	</div>
-	<div data-role="content" style="padding: 15px" class="middlecontent">
+	<div data-role="content" class="middlecontent">
 	
 	<input type="text" id="contentBox"/>
 	<input type="button" id="enterButton" value="Send" disabled=true' onclick='sendChat("hello_world", $("#contentBox").val());'/>

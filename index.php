@@ -8,24 +8,53 @@ require_once 'util.php';
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<?php require_once 'element/include_css.php'; ?>
 		<script>
+		var heightToSubtract;
+		var pageWidth;
 		window.onload = function()
                 {
-                   chatConnection(); // setup chat connection as soon as user open home page so that he dont have to wait later
-				   $('.middlecontent').animate({height: $(window).height() - ($('#topbar').height() * 2) -30}, 1500);
-				   $('#map_container').animate({height: $(window).height() - ($('#topbar').height() * 2) -30}, 1500);
+					heightToSubtract = $('#topbar').height() * 2;
+					pageWidth = $(window).width();
 					
+                   chatConnection(); // setup chat connection as soon as user open home page so that he dont have to wait later
+				   $('.middlecontent').animate({height: $(window).height() - heightToSubtract}, 1500);
+				  // $('#map_container').animate({height: $(window).height() - ($('#topbar').height() * 2)}, 1500);
+				
+					 
                 };
 		window.addEventListener('orientationchange', handleOrientation, false);
+		
 		function handleOrientation() {
 		
-			$('.middlecontent').animate({height: $(window).height() - ($('#topbar').height() * 2) -30}, 1500);
-			$('#map_container').animate({height: $(window).height() - ($('#topbar').height() * 2) -30}, 1500);
+			$('.middlecontent').animate({height: $(window).height() - heightToSubtract}, 1500);
+			
+			//$('#map_container').animate({height: $(window).height() - ($('#topbar').height() * 2)}, 1500);
+			
 			
 			
 			
 			//$('#map_container').hide();
 			//$('#map_container').height($(window).height() - ($('#topbar').height() * 2));
 			//$('#map_container').show();
+			//
+		}
+		function showDiv()
+		{
+			$('#showPeopleBtn').hide();
+			$('#hidePeopleBtn').show();
+			$('#hidePeopleBtn').css({'visibility': 'visible'});
+			$('#hidePeopleBtn').animate({'left': '+=300px'},'slow');
+			$('#slideOutDiv').animate({'left': '+=500px'},'slow');
+			
+			
+		}
+		function hideDiv()
+		{
+			
+			$('#hidePeopleBtn').hide();
+			$('#showPeopleBtn').show();
+			$('#hidePeopleBtn').animate({'left': '-=300px'},'slow');
+			$('#slideOutDiv').animate({'left': '-=500px'},'slow');
+			
 		}
 		</script>
         
@@ -36,8 +65,11 @@ require_once 'util.php';
 		<div data-role="page" id="page1" class="page">
 		    
 		        <div data-theme="a" data-role="header" id="topbar">
-		            <a data-role="button" data-transition="flip" href="#page9" class="ui-btn-left">
-		                People
+		            <a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="showDiv()" id="showPeopleBtn">
+		                Show People
+		            </a>
+					<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="hideDiv()" id="hidePeopleBtn" style="visibility: hidden;">
+		                Hide People
 		            </a>
 		            <h3>
 		                Header
@@ -46,29 +78,29 @@ require_once 'util.php';
 		                Chat
 		            </a>
 		        </div>
-			<div data-role="content" style="padding: 15px" class="middlecontent">
+			<div data-role="content" class="middlecontent">
 		        <div id="map_container" height="100%"><span id="status">Loading...</span></div>
 		     </div>
-		    <div data-role="footer" id="commonfooter">
+		    <div data-role="footer">
 			    <div data-role="navbar" data-iconpos="left" data-theme="a">
 			        <ul>
 			            <li>
-			                <a href="#page1" data-theme="" data-icon="home">
+			                <a data-icon="home" data-theme="b">
 			                    Nearby
 			                </a>
 			            </li>
 			            <li>
-			                <a href="#page5" data-theme="" data-icon="plus">
+			                <a data-transition="slide" href="#page5" data-theme="" data-icon="plus">
 			                    Friends
 			                </a>
 			            </li>
 			            <li>
-			                <a href="#page6" data-theme="" data-icon="info">
+			                <a data-transition="slide" href="#page6" data-theme="" data-icon="info">
 			                    Profile
 			                </a>
 			            </li>
 			            <li>
-			                <a href="#page7" data-theme="" data-icon="gear">
+			                <a data-transition="slide" href="#page7" data-theme="" data-icon="gear">
 			                    Setting
 			                </a>
 			            </li>
@@ -82,6 +114,21 @@ require_once 'util.php';
 				require_once 'element/include_js.php';
 				
 		?>
-	
+	<script>
+	$(window).resize(function() {
+		  
+		  pageWidth = $(window).width();
+		  if(pageWidth > 900)
+		  {
+		//	alert('show the left pane');
+		  }
+		  else
+		  {
+			//alert('hide the left pane');
+		  }
+		  
+		});
+		
+	</script>
     </body>
 </html>

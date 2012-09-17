@@ -11,7 +11,7 @@
 		            Filter
 		        </a>
 		    </div>
-		    <div data-role="content" style="padding: 15px" class="middlecontent">
+		    <div data-role="content" class="middlecontent">
 		        <ul data-role="listview" data-divider-theme="b" data-inset="true">
 		            <li data-theme="c">
 		                <a href="#page1" data-transition="slide">
