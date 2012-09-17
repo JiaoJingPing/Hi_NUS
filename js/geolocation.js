@@ -31,13 +31,14 @@
             return;
         }
 
-        document.getElementById("latitude").innerHTML = latitude;
-        document.getElementById("longitude").innerHTML = longitude;
+		// commented out as it is needed for testing only
+        //document.getElementById("latitude").innerHTML = latitude;
+        //document.getElementById("longitude").innerHTML = longitude;
 
         var current = new Point(latitude,longitude);
         console.log(inPolygon(current,pgp));
-        if( inPolygon(current, pgp) )
-            $('#xxx').html('pgp');
+        if(inPolygon(current, pgp) )
+            document.getElementById("status").innerHTML = "You are in PGP!";
         var latlng = new google.maps.LatLng(latitude, longitude);
         var myOptions = {
           zoom: 17,

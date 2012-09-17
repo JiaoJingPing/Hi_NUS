@@ -4,7 +4,7 @@ date_default_timezone_set('Asia/Singapore');
 
 function get_root_url() {
     $page_url = 'http';
-    if ($_SERVER["HTTPS"] == "on") 
+    if (!empty($_SERVER['HTTPS'])) 
         $page_url .= "s";
     $page_url .= "://";
     if ($_SERVER["SERVER_PORT"] != "80") {
