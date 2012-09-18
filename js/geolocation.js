@@ -35,74 +35,89 @@
             return;
         }
 
-		// commented out as it is needed for testing only
-        //document.getElementById("latitude").innerHTML = latitude;
-        //document.getElementById("longitude").innerHTML = longitude;
-
-
         //cache the location choose whether to update the map
         if(flag!=0)
             var distance = haversine(latitude,longitude,coor_lat,coor_long);
         if(flag==0 || distance>getSencitiveDistance()){  
             flag = 1;
+
             coor_lat = latitude;
             coor_long = longitude;
 
-            var latlng = new google.maps.LatLng(latitude, longitude);
-            var myOptions = {
-              zoom: 17,
-              center: latlng,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
+            init_map(latitude,longitude);
 
-            var current = new Point(latitude,longitude);
+            
+        }
+    }
 
-            $('#xxx').html('undefined');
+    function init_map(latitude,longitude){
+        var latlng = new google.maps.LatLng(latitude, longitude);
+        var myOptions = {
+            zoom: 17,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
+
+        var current = new Point(latitude,longitude);
+
+        $('#xxx').html('undefined');
 
             //check location{
             // highlight and make mark
             //}
-                console.log(window.mydata);
+        console.log(window.mydata);
 
-            for (var i = 0; i < window.mydata.length; i++) {
-                    var loc_name = window.mydata[i].name;
-                    var loc_polygon = window.mydata[i].polygon;
-                    loc_polygon.push(loc_polygon[0]);
+        for (var i = 0; i < window.mydata.length; i++) {
+            var loc_name = window.mydata[i].name;
+            var loc_polygon = window.mydata[i].polygon;
+            loc_polygon.push(loc_polygon[0]);
 
-                    if(inPolygon(current,loc_polygon)){
+            if(inPolygon(current,loc_polygon)){
 
-                        $('#xxx').html(loc_name);
-                        var PolygonCoords = [];
-                        for (var i = 0; i < loc_polygon.length; i++) {
-                            var tmp = new google.maps.LatLng(loc_polygon[i].getX(), loc_polygon[i].getY());
-                            PolygonCoords.push(tmp);
-                        };
-                        //highlight
-                        var highlight = new google.maps.Polygon({
-                            paths: PolygonCoords,
-                            strokeColor: "#FF0000",
-                            strokeOpacity: 0.6,
-                            strokeWeight: 2,
-                            fillColor: "#FF0000",
-                            fillOpacity: 0.35
-                        });
+                $('#xxx').html(loc_name);
+                var PolygonCoords = [];
+                for (var i = 0; i < loc_polygon.length; i++) {
+                    var tmp = new google.maps.LatLng(loc_polygon[i].getX(), loc_polygon[i].getY());
+                    PolygonCoords.push(tmp);
+                };
+                //highlight
+                var highlight = new google.maps.Polygon({
+                    paths: PolygonCoords,
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 0.6,
+                    strokeWeight: 2,
+                    fillColor: "#FF0000",
+                    fillOpacity: 0.35
+                });
+                highlight.setMap(map);
+                break;
+            }
+        }  
+            
+        var image = 'test.png';
+        var marker = new google.maps.Marker({
+            position: latlng, 
+            map: map, 
+            icon: image,
+            title:"School of computing!"
+        });
+        attachSecretMessage(marker);
 
-                        highlight.setMap(map);
-
-                        //mark
-                        var image = 'test.png';
-                        var marker = new google.maps.Marker({
-                            position: latlng, 
-                            map: map, 
-                            icon: image,
-                            title:"PGP!"
-                        }); 
-                        break;
-                    }
-            }  
+        function attachSecretMessage(marker){
+            var message = 'Here is school of computing'+'</br>'+'<a href ="#page6">Profile</a>';
+            var infowindow = new google.maps.InfoWindow(
+            {
+                content:message,
+                size: new google.maps.Size(50,50)
+            });
+            google.maps.event.addListener(marker,'click',function(){
+                infowindow.open(map,marker);
+            });
         }
     }
+
+    
 
     function getSencitiveDistance(){
         return 20;
@@ -216,7 +231,6 @@
         $.get(urlConfig.location, function(data) {
             if(window.mydata == undefined){
                 var list = data;
-                // pgp points
                 var location = [];
 
                 for (var i = 0; i < list.length; i++) {

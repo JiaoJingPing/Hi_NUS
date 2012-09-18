@@ -11,72 +11,59 @@
 		    <div data-role="content" class="middlecontent">
 		        <div class="ui-grid-a">
 		            <div class="ui-block-a">
-		                <div style="">
+		                <b>Photo</b>
+		            </div>
+		            <div class="ui-block-b">
+		            	<div style="">
 		                    <img style="width: 150px; height: 120px" src="http://assets.codiqa.com/ps/33214/5f4d06279d261a441-1111051TA1.jpg">
 		                </div>
 		            </div>
-		            <div class="ui-block-b">
-		            </div>
 		            <div class="ui-block-a">
 		                <div>
 		                    <p>
-		                        <b>
-		                            Name
-		                        </b>
+		                        <b>Name</b>
 		                    </p>
 		                </div>
 		            </div>
 		            <div class="ui-block-b">
 		                <div>
 		                    <p>
-		                        <b>
-		                            Colin Tan
-		                        </b>
+		                        <b>Colin Tan</b>
 		                    </p>
 		                </div>
 		            </div>
 		            <div class="ui-block-a">
 		                <div>
 		                    <p>
-		                        <b>
-		                            Account No
-		                        </b>
+		                        <b>Gender</b>
 		                    </p>
 		                </div>
 		            </div>
 		            <div class="ui-block-b">
 		                <div>
 		                    <p>
-		                        <b>
-		                            2503687
-		                        </b>
+		                        <b>male</b>
 		                    </p>
 		                </div>
 		            </div>
 		            <div class="ui-block-a">
 		                <div>
 		                    <p>
-		                        <b>
-		                            State
-		                        </b>
+		                        <b>Self-introduction</b>
 		                    </p>
 		                </div>
 		            </div>
 		            <div class="ui-block-b">
 		                <div>
 		                    <p>
-		                        <b>
-		                            I am very happy
-		                        </b>
+		                        <b>I am very happy</b>
 		                    </p>
 		                </div>
 		            </div>
 		            <div class="ui-block-a">
 		                <div>
 		                    <p>
-		                        <b>
-		                            Introduction
-		                        </b>
+		                        <b>Faculty</b>
 		                    </p>
 		                </div>
 		            </div>

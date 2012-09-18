@@ -21,6 +21,6 @@ $js_includes = array_merge(array(
 <?php
 foreach ($js_includes as $js)
     echo '<script src="' . get_file_url($js) . '"></script>' . "\n";
-echo '<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>'
+//echo '<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>'
 
 ?>
