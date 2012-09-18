@@ -49,11 +49,11 @@ require_once 'util.php';
 		}
 		function hideDiv()
 		{
-			
-			$('#hidePeopleBtn').hide();
-			$('#showPeopleBtn').show();
-			$('#hidePeopleBtn').animate({'left': '-=300px'},'slow');
 			$('#slideOutDiv').animate({'left': '-=500px'},'slow');
+			$('#hidePeopleBtn').animate({'left': '-=300px'},'slow',function(){
+				$('#hidePeopleBtn').hide();
+				$('#showPeopleBtn').show();
+				});
 			
 		}
 		</script>
