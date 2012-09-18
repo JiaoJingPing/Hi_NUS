@@ -11,11 +11,12 @@ require_once 'util.php';
 		<script>
 		var heightToSubtract;
 		var pageWidth;
+		var divShown;
 		window.onload = function()
                 {
 					heightToSubtract = $('#topbar').height() * 2;
 					pageWidth = $(window).width();
-					
+					divShown = 0;
                    chatConnection(); // setup chat connection as soon as user open home page so that he dont have to wait later
 				   $('.middlecontent').animate({height: $(window).height() - heightToSubtract}, 1500);
 				  // $('#map_container').animate({height: $(window).height() - ($('#topbar').height() * 2)}, 1500);
@@ -38,24 +39,45 @@ require_once 'util.php';
 			//$('#map_container').show();
 			//
 		}
+		
+		
 		function showDiv()
 		{
-			$('#showPeopleBtn').hide();
-			$('#hidePeopleBtn').show();
-			$('#hidePeopleBtn').css({'visibility': 'visible'});
-			$('#hidePeopleBtn').animate({'left': '+=300px'},'slow');
-			$('#slideOutDiv').animate({'left': '+=500px'},'slow');
-			
+			if(divShown == 0)
+			{
+				$('#showPeopleBtn').hide();
+				$('#hidePeopleBtn').show();
+				$('#hidePeopleBtn').css({'visibility': 'visible'});
+				$('#hidePeopleBtn').animate({'left': '+=300px'},'slow');
+				$('#slideOutDiv').animate({'left': '+=500px'},'slow');
+			}
+			divShown = 1;
 			
 		}
 		function hideDiv()
 		{
+			if(divShown == 1)
+			{
+				$('#slideOutDiv').animate({'left': '-=500px'},'slow');
+				$('#hidePeopleBtn').animate({'left': '-=300px'},'slow',function(){
+					$('#hidePeopleBtn').hide();
+					$('#showPeopleBtn').show();
+					});
+			}
+			divShown = 0;
 			
-			$('#hidePeopleBtn').hide();
-			$('#showPeopleBtn').show();
-			$('#hidePeopleBtn').animate({'left': '-=300px'},'slow');
-			$('#slideOutDiv').animate({'left': '-=500px'},'slow');
-			
+		}
+		function autoChangeDiv()
+		{
+			pageWidth = $(window).width();
+			if(pageWidth > 900)
+			 {
+				showDiv();
+			 }
+			 else
+			 {
+				hideDiv();
+			 }
 		}
 		</script>
         
@@ -117,19 +139,9 @@ require_once 'util.php';
 		?>
 	<script>
 	$(window).resize(function() {
-		  
-		  pageWidth = $(window).width();
-		  if(pageWidth > 900)
-		  {
-		//	alert('show the left pane');
-		  }
-		  else
-		  {
-			//alert('hide the left pane');
-		  }
-		  
+		  autoChangeDiv();
 		});
-		
+	autoChangeDiv();
 	</script>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>
     </body>
