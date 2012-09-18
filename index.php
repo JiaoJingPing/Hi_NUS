@@ -6,6 +6,7 @@ require_once 'util.php';
     <head>
 	    <meta charset="utf8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
 		<?php require_once 'element/include_css.php'; ?>
 		<script>
 		var heightToSubtract;
@@ -130,5 +131,6 @@ require_once 'util.php';
 		});
 		
 	</script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>
     </body>
 </html>
