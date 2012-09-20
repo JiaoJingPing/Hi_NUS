@@ -1,5 +1,6 @@
 (function() {
 
+
     var watchId;
     var flag=0;
     var coor_lat;
@@ -44,9 +45,7 @@
             coor_lat = latitude;
             coor_long = longitude;
 
-            init_map(latitude,longitude);
-
-            
+            init_map(latitude,longitude);    
         }
     }
 
@@ -94,24 +93,48 @@
                 break;
             }
         }  
-            
-        var image = 'test.png';
-        var marker = new google.maps.Marker({
-            position: latlng, 
-            map: map, 
-            icon: image,
-            title:"School of computing!"
-        });
-        attachSecretMessage(marker);
+        $.get(urlConfig.nearby_user, function(data) {
+            $.each(data, function(index,value){
+                console.log(value);
+                var image = new google.maps.MarkerImage('images/meinv.jpg',null,null,null,
+                            new google.maps.Size(30, 30));
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(value.coor.x, value.coor.y),
+                    map: map, 
+                    icon: image,
+                    title: value.name,
+                    content: value.status,
+                });
+                console.log(marker);
+                attachSecretMessage(marker);
 
-        function attachSecretMessage(marker){
-            var message = 'Here is school of computing'+'</br>'+'<a href ="#page6">Profile</a>';
-            var infowindow = new google.maps.InfoWindow(
+            });
+
+        },'json');
+        
+        var infowindow = new google.maps.InfoWindow(
             {
-                content:message,
+                content:'',
                 size: new google.maps.Size(50,50)
             });
-            google.maps.event.addListener(marker,'click',function(){
+        function attachSecretMessage(marker){
+            console.log(marker);
+            var message = '<table>\
+                        <tr>\
+                            <td class="left"\
+                                <span ><img src="images/meinv.jpg" height="60" width="60" /></span>\
+                            </td>\
+                            <td class="right" >\
+                                <div id="name"><b>'+marker.title+'</b> '+haversine(latitude,longitude,marker.position.Xa,marker.position.Ya)+'m'+'\
+                                </div>\
+                                <div id="other">'+marker.content+'\
+                                </div>\
+                            </td>\
+                        </tr>\
+                    </table>';
+            
+            google.maps.event.addListener(marker,'click',function(event){
+                infowindow.setContent(message);
                 infowindow.open(map,marker);
             });
         }
@@ -128,7 +151,8 @@
     }
 
     function haversine(p1_latitude,p1_longtitude,p2_latitude,p2_longtitude){
-        var R = 6371
+        console.log(arguments);
+        var R = 6371*1000;
         var p1 = {
             latitude:p1_latitude,
             longitude:p1_longtitude
@@ -144,7 +168,7 @@
                 Math.cos(rad(p1.latitude)) * Math.cos(rad(p2.latitude)) * Math.sin(dLong/2) * Math.sin(dLong/2)
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
         var d = R * c
-
+        console.log(d);
         return Math.round(d)
     }
 
