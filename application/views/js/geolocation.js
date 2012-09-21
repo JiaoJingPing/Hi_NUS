@@ -74,7 +74,7 @@
 
             if(inPolygon(current,loc_polygon)){
 
-                $('#xxx').html(loc_name);
+                $('#location_title').html(loc_name);
                 var PolygonCoords = [];
                 for (var i = 0; i < loc_polygon.length; i++) {
                     var tmp = new google.maps.LatLng(loc_polygon[i].getX(), loc_polygon[i].getY());
