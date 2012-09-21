@@ -96,7 +96,7 @@
         $.get(urlConfig.nearby_user, function(data) {
             $.each(data, function(index,value){
                 console.log(value);
-                var image = new google.maps.MarkerImage('images/meinv.jpg',null,null,null,
+                var image = new google.maps.MarkerImage('../application/views/images/meinv.jpg',null,null,null,
                             new google.maps.Size(30, 30));
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(value.coor.x, value.coor.y),
@@ -122,7 +122,7 @@
             var message = '<table>\
                         <tr>\
                             <td class="left"\
-                                <span ><img src="images/meinv.jpg" height="60" width="60" /></span>\
+                                <span ><img src="../application/views/images/meinv.jpg" height="60" width="60" /></span>\
                             </td>\
                             <td class="right" >\
                                 <div id="name"><b>'+marker.title+'</b> '+haversine(latitude,longitude,marker.position.Xa,marker.position.Ya)+'m'+'\

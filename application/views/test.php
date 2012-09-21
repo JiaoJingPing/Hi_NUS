@@ -79,6 +79,8 @@
 	</head>
 
 	<body>
+		<?php echo VIEW_URL
+		?>
 		<div>
 			<button onclick="test(this)"class="btn"id="put">
 				Put

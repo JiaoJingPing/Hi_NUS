@@ -11,7 +11,7 @@ class location extends CI_Controller {
 		$this -> load -> model('location_model');
 		$this -> load -> model('location_msg_model');
 		$this -> load -> model('output_model');
-
+		
 	}
 
 	function index() {
