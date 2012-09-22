@@ -26,7 +26,7 @@
     		<ul id="info" data-role="listview" data-inset="true">
     			<li class="single-line">
     				<div class="single-line-left">Name</div>
-    				<div class="single-line-right <?php echo($gender);?>"><?php echo($name);?></div>
+    				<div class="single-line-right" id='profile_name'></div>
     			</li>
     			<li>
     				<div>Last Location</div>
@@ -34,7 +34,7 @@
     			</li>
     			<li>
     				<div>Status</div>
-    				<div class=<?php echo($gender);?>><?php echo($status);?></div>
+    				<div id="profile_status"></div>
     			</li>
     		</ul>
     		<br/>
@@ -42,11 +42,11 @@
     			<li data-role="list-divider">Basic Info</li>
     			<li class="single-line">
     				<div class="single-line-left">Gender</div>
-    				<div class="single-line-right <?php echo($gender);?>"><?php echo(ucfirst($gender));?></div>
+    				<div class="single-line-right" id="profile_gender"></div>
     			</li>
     			<li>
     				<div>Education</div>
-    				<div class= <?php echo($gender);?> ><?php echo($education);?></div>
+    				<div id="profile_education"> </div>
     			</li>	        		
     			<li>
     				<div>Hobbies</div>

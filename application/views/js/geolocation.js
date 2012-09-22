@@ -20,7 +20,7 @@
     function get_point_list(list){
         var point_list = [];
         for (var i = 0; i < list.length; i++) {
-            var point = new Point(list[i][0],list[i][1]);
+            var point = new Point(list[i].x,list[i].y);
             point_list.push(point);
         }
         return point_list;
@@ -45,10 +45,16 @@
             coor_lat = latitude;
             coor_long = longitude;
 
+            post_location(latitude,longitude);
+            my_timer = setInterval(function(){
+                post_location(latitude,longitude);
+            }, 10000);
+
             init_map(latitude,longitude);    
         }
     }
-
+    
+    var my_timer;
     function init_map(latitude,longitude){
         var latlng = new google.maps.LatLng(latitude, longitude);
         var myOptions = {
@@ -58,14 +64,13 @@
         };
         var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
 
-        var current = new Point(latitude,longitude);
 
-        $('#xxx').html('undefined');
+        var current = new Point(latitude,longitude);
+        $('#location_title').html('undefined');
 
             //check location{
             // highlight and make mark
             //}
-        console.log(window.mydata);
 
         for (var i = 0; i < window.mydata.length; i++) {
             var loc_name = window.mydata[i].name;
@@ -93,9 +98,12 @@
                 break;
             }
         }  
+
+        
+        
         $.get(urlConfig.nearby_user, function(data) {
             $.each(data, function(index,value){
-                console.log(value);
+                
                 var image = new google.maps.MarkerImage('../application/views/images/meinv.jpg',null,null,null,
                             new google.maps.Size(30, 30));
                 var marker = new google.maps.Marker({
@@ -105,7 +113,6 @@
                     title: value.name,
                     content: value.status,
                 });
-                console.log(marker);
                 attachSecretMessage(marker);
 
             });
@@ -118,7 +125,6 @@
                 size: new google.maps.Size(50,50)
             });
         function attachSecretMessage(marker){
-            console.log(marker);
             var message = '<table>\
                         <tr>\
                             <td class="left"\
@@ -140,7 +146,11 @@
         }
     }
 
-    
+    function post_location(lat,long){
+
+        var point = {x:lat, y:long};
+        $.post(urlConfig.post_location, point);
+    }
 
     function getSencitiveDistance(){
         return 20;
@@ -151,7 +161,6 @@
     }
 
     function haversine(p1_latitude,p1_longtitude,p2_latitude,p2_longtitude){
-        console.log(arguments);
         var R = 6371*1000;
         var p1 = {
             latitude:p1_latitude,
@@ -168,7 +177,6 @@
                 Math.cos(rad(p1.latitude)) * Math.cos(rad(p2.latitude)) * Math.sin(dLong/2) * Math.sin(dLong/2)
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
         var d = R * c
-        console.log(d);
         return Math.round(d)
     }
 
@@ -195,7 +203,25 @@
       $("#status").html(message);
     }
     
+    function get_location(x,y){
+        for (var i = 0; i < window.mydata.length; i++) {
+            var loc_name = window.mydata[i].name;
+            var loc_polygon = window.mydata[i].polygon;
+            loc_polygon.push(loc_polygon[0]);
+            var point = new Point(x,y);
 
+            var result= {
+                'name':'undefined',
+                'polygon': [],
+            };
+            if(inPolygon(point,loc_polygon)){
+                result['name'] = loc_name;
+                result['polygon'] = loc_polygon; 
+            }
+            break;
+        }  
+        return result;
+    }
 
     // Geometry Class  -----------------------------------------
 

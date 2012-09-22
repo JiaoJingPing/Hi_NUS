@@ -1,9 +1,16 @@
 <?php
-$urls = array('location' => 'ajax/location.php', 'nearby_user' => 'ajax/near_users.php', );
+$urls = array('location' => 'location/info',
+			  'nearby_user' => 'ajax/near_users.php', 
+			  'user' => 'user/info',
+			  'post_location' => 'user/location',
+			  );
 ?>
 <script type="text/javascript">
 urlConfig = {
 <?php
-foreach ($urls as $name => $url)
-	echo $name . ':  "' . VIEW_URL . $url . '",';
-?>};</script>
+	echo 'location' . ':  "' . WEBSITE_URL . $urls['location'] . '",';
+	echo 'post_location' . ':  "' . WEBSITE_URL . $urls['post_location'] . '",';
+	echo 'nearby_user' . ':  "' . VIEW_URL . $urls['nearby_user'] . '",';
+	echo 'user' . ':  "' . WEBSITE_URL . $urls['user'] . '",';
+?>};
+</script>

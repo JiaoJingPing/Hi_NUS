@@ -32,4 +32,7 @@ function get_file_path($relative_path) {
 function get_current_page() {
 	return empty($_GET['page']) ? 1 : $_GET['page'];
 }
+
+
+
 ?>
