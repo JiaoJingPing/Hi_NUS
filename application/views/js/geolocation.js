@@ -101,23 +101,27 @@
 
         
         
-        $.get(urlConfig.nearby_user, function(data) {
+        $.get(urlConfig.user, function(data) {
             $.each(data, function(index,value){
+                var now = new Date().getTime();
+                var mydate = Date.parse(value.last_location_timestamp);
+                if(value.geometry!=null && mydate>0){
+                    
+                    var image = new google.maps.MarkerImage('../application/views/images/meinv.jpg',null,null,null,
+                                new google.maps.Size(30, 30));
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(parseFloat(value.geometry.x), parseFloat(value.geometry.y)),
+                        map: map, 
+                        icon: image,
+                        title: value.name,
+                        content: value.status,
+                    });
+                    attachSecretMessage(marker);
+                }
                 
-                var image = new google.maps.MarkerImage('../application/views/images/meinv.jpg',null,null,null,
-                            new google.maps.Size(30, 30));
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(value.coor.x, value.coor.y),
-                    map: map, 
-                    icon: image,
-                    title: value.name,
-                    content: value.status,
-                });
-                attachSecretMessage(marker);
 
             });
-
-        },'json');
+            },'json');
         
         var infowindow = new google.maps.InfoWindow(
             {
