@@ -9,29 +9,38 @@ class user_msg_model extends CI_Model {
 		return $this -> prepareResult($q);
 	}
 
-	function getUserMsgWithCondition($data = array()) {
+	function getUserMsgWithCondition($data = array(), $email = 'testmail@gmail.com') {
 		$date = new DateTime();
 		$before = $date -> getTimestamp();
-
+		$isValidQuery = false;
 		foreach ($data as $key => $value) {
 			if ($key == 'from' && $value) {
 				$this -> db -> where('md5(user_from)', $value);
+				if ($value == $email) {
+					$isValidQuery = TRUE;
+				}
 			} else if ($key == 'to') {
 				$this -> db -> where('md5(user_to)', $value);
+				if ($value == $email) {
+					$isValidQuery = TRUE;
+				}
 			} else if ($key == 'before') {
 				$before = $value;
 			} else if ($key == 'after') {
 				$this -> db -> where('timestamp >', " FROM_UNIXTIME( " . $value . " )", FALSE);
 			}
 		}
-
 		$this -> db -> where("timestamp < ", " FROM_UNIXTIME( " . $before . " ) ", false);
+		if (!$isValidQuery) {
+			$this -> db -> where("user_from='" . $email . "' OR user_to = '", $email . "'	", false);
+		}
 		$q = $this -> db -> get($this -> tableName);
-		echo $this -> db -> last_query();
+		//echo $this -> db -> last_query();
 		return $this -> prepareResult($q);
 	}
 
 	function insertUserMsg($userMsg) {
+		//TODO need to ensure the msg is related to the called user
 		try {
 			if ($this -> isValidateInput($userMsg)) {
 				$query = "INSERT INTO `" . $this -> tableName . "` (`user_from`, `user_to`, `content`, `timestamp`)

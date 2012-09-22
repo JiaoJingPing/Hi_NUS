@@ -14,6 +14,7 @@ class output_model extends CI_Model {
 		// set the content type
 		header('Content-type: ' . $content_type);
 		if ($status == 200) {
+			//default json return type
 			echo json_encode($data);
 		} else {
 			echo $error;

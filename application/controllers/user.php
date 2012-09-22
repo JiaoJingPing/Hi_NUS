@@ -14,21 +14,13 @@ class user extends CI_Controller {
 
 	}
 
-	function index() {
-		//user/
-		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
-		$output = array();
-		$result = array();
-
-	}
-
 	function info() {
 		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 		$output = array();
 		$result = array();
 		try {
-			//email = $this -> auth_model -> getCurrentUser();
-			if (true) {
+			$email = $this -> auth_model -> getCurrentUser();
+			if ($this -> auth_model -> isMember()) {
 				//if member
 				switch($request_method) {
 					case'GET' :
@@ -65,18 +57,20 @@ class user extends CI_Controller {
 		$output = array();
 		$result = array();
 
-		if (true) {
+		if ($this -> auth_model -> isMember()) {
 			//if member
-			//TODO $email = $this -> auth_model -> getCurrentUser();
-			$email = 'elleyjiao@gmail.com';
+			$email = $this -> auth_model -> getCurrentUser();
+			//$email = 'elleyjiao@gmail.com';
 			switch($request_method) {
 				case'GET' :
+					//TODO only return message related to this user
 					$param = $this -> uri -> uri_to_assoc();
-					$result = $this -> user_msg_model -> getUserMsgWithCondition($param);
+					$result = $this -> user_msg_model -> getUserMsgWithCondition($param,$email);
 					$this -> output_model -> sendResponse(200, $result);
 					break;
 				case'POST' :
 					$param = $this -> input -> post();
+					//TODO check message are belong to this user
 					$result = $this -> user_msg_model -> insertUserMsg($param);
 					$this -> output_model -> sendResponse(200, $result);
 					break;
@@ -84,12 +78,11 @@ class user extends CI_Controller {
 					$this -> output_model -> sendResponse(405, $result);
 					break;
 				case'DELETE' :
+					//TODO logout
 					$this -> output_model -> sendResponse(405, $result);
 					break;
 				default :
-					$output['error'] = 'NO METHOD';
-					$output['method'] = $request_method;
-					$this -> load -> view('error', $output);
+					$this -> output_model -> sendResponse(405, $result);
 			}
 		} else {
 			//else
@@ -98,15 +91,15 @@ class user extends CI_Controller {
 	}
 
 	function location() {
-		//user/msg/params
+		//user/location/params
 		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 		$output = array();
 		$result = array();
 
-		if (true) {
+		if ($this -> auth_model -> isMember()) {
 			//if member
-			//$email = md5($this -> auth_model -> getCurrentUser());
-			$email = 'elleryjiao@gmail.com';
+			$email = $this -> auth_model -> getCurrentUser();
+			//$email = 'elleryjiao@gmail.com';
 			switch($request_method) {
 				case'GET' :
 					$result = $this -> user_model -> getUserLastLocation($email);

@@ -19,13 +19,9 @@ class user_model extends CI_Model {
 		$point = array();
 		foreach ($data as $key => $value) {
 			if ($key == 'email') {
-				$query = "SELECT * FROM `" . $this -> tableName . "` WHERE md5(email)='" . $value . "'";
+				$query = "SELECT email,name,gender,status,major,faculty,profile, AsText(last_location) as geometry,last_location_timestamp FROM `" . $this -> tableName . "` WHERE md5(email)='" . $value . "'";
 				$q = $this -> db -> query($query);
 				return $this -> prepareResult($q);
-			} else if ($key == 'x') {
-				$point['x'] = $value;
-			} else if ($key == 'y') {
-				$point['y'] = $value;
 			} else if ($key == 'major') {
 				$this -> db -> where('major like', '%' . $value . '%');
 			} else if ($key == 'status') {
@@ -38,10 +34,9 @@ class user_model extends CI_Model {
 				$this -> db -> where('gender', $value);
 			}
 		}
-		if (isset($point['x']) && isset($point['y'])) {
-			//$this -> db -> where('last_location', $this -> prepareGeoPoint($point));
-		}
+		$this -> db -> select('email,name,gender,status,major,faculty,profile, AsText(last_location) as geometry,last_location_timestamp');
 		$q = $this -> db -> get($this -> tableName);
+		//echo $this -> db -> last_query();
 		return $this -> prepareResult($q);
 	}
 
@@ -53,7 +48,7 @@ class user_model extends CI_Model {
 	}
 
 	function getUserLastLocation($email) {
-		$this -> db -> select('last_location,last_location_timestamp');
+		$this -> db -> select('AsText(last_location) as geometry,last_location_timestamp');
 		$this -> db -> where('email', $email);
 		$q = $this -> db -> get($this -> tableName);
 		return $this -> prepareResult($q);
@@ -133,6 +128,9 @@ class user_model extends CI_Model {
 			foreach ($resultArray->result_array() as $row) {
 				unset($row['password']);
 				//NEVER RETURN PASSWORD
+				if (isset($row['geometry'])) {
+					$row['geometry'] = $this -> reverseGeoPoint($row['geometry']);
+				}
 				$data[] = $row;
 			}
 		}
@@ -141,6 +139,16 @@ class user_model extends CI_Model {
 
 	private function prepareGeoPoint($point) {
 		return "GEOMFROMTEXT('POINT(" . $point['x'] . " " . $point['y'] . ")',0)";
+	}
+
+	private function reverseGeoPoint($string) {
+		$ptn = "/POINT/";
+		$a1 = preg_split($ptn, $string, -1, PREG_SPLIT_NO_EMPTY);
+		$string = $a1[0];
+		$ptn = "/[( )]/";
+		$a2 = preg_split($ptn, $string, -1, PREG_SPLIT_NO_EMPTY);
+		$result = array('x' => $a2[0], 'y' => $a2[1]);
+		return $result;
 	}
 
 }

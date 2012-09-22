@@ -12,8 +12,6 @@ class auth_model extends CI_Model {
 			header('WWW-Authenticate: Basic realm="server realm rocks"');
 			header('HTTP/1.0 401 Unauthorized');
 			return false;
-		} else if ($this -> isAdmin()) {
-			return false;
 		} else {
 			return $this -> user_model -> authenticate($_SERVER['PHP_AUTH_USER'], md5($_SERVER['PHP_AUTH_PW']));
 		}

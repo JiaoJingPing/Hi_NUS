@@ -11,14 +11,6 @@ class location extends CI_Controller {
 		$this -> load -> model('location_model');
 		$this -> load -> model('location_msg_model');
 		$this -> load -> model('output_model');
-		
-	}
-
-	function index() {
-		//location/
-		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
-		$output = array();
-		$result = array();
 
 	}
 
@@ -28,7 +20,7 @@ class location extends CI_Controller {
 		$result = array();
 		try {
 			//TODO AUTHENTICATION
-			if (true) {
+			if ($this -> auth_model -> isMember()) {
 				//if member
 				switch($request_method) {
 					case'GET' :
@@ -77,19 +69,18 @@ class location extends CI_Controller {
 		$output = array();
 		$result = array();
 
-		if (true) {
+		if ($this -> auth_model -> isMember()) {
 			//if member
-			//TODO $email = $this -> auth_model -> getCurrentUser();
-			$email = 'elleyjiao@gmail.com';
+			$email = $this -> auth_model -> getCurrentUser();
 			switch($request_method) {
 				case'GET' :
 					$param = $this -> uri -> uri_to_assoc();
-					$result = $this -> user_msg_model -> getLocationMsgWithCondition($param);
+					$result = $this -> location_msg_model -> getLocationMsgWithCondition($param, $email);
 					$this -> output_model -> sendResponse(200, $result);
 					break;
 				case'POST' :
 					$param = $this -> input -> post();
-					$result = $this -> user_msg_model -> insertLocationMsg($param);
+					$result = $this -> location_msg_model -> insertLocationMsg($param, $email);
 					$this -> output_model -> sendResponse(200, $result);
 					break;
 				case'PUT' :
@@ -109,34 +100,33 @@ class location extends CI_Controller {
 		}
 	}
 
+	//@Depratiated
 	function user() {
-		//user/msg/params
+
+		//location/user/params
 		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 		$output = array();
 		$result = array();
 
-		if (true) {
+		if ($this->auth_model->isMember()) {
 			//if member
-			//$email = md5($this -> auth_model -> getCurrentUser());
-			$email = 'elleryjiao@gmail.com';
+			$email = $this -> auth_model -> getCurrentUser();
+			//$email = 'elleryjiao@gmail.com';
 			switch($request_method) {
 				case'GET' :
-					$result = $this -> user_model -> getUserLastLocation($email);
 					$this -> output_model -> sendResponse(200, $result);
 					break;
 				case'POST' :
-					$param = $this -> input -> post();
-					$result = $this -> user_model -> updateUserLastLocation($email, $param);
-					$this -> output_model -> sendResponse(200, $result);
+					$this -> output_model -> sendResponse(405, $result);
 					break;
 				case'PUT' :
+					$this -> output_model -> sendResponse(405, $result);
 					break;
 				case'DELETE' :
+					$this -> output_model -> sendResponse(405, $result);
 					break;
 				default :
-					$output['error'] = 'NO METHOD';
-					$output['method'] = $request_method;
-					$this -> load -> view('error', $output);
+					$this -> output_model -> sendResponse(405, $result);
 			}
 		} else {
 			//else

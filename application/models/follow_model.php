@@ -1,5 +1,6 @@
 <?php
 class follow_model extends CI_Model {
+
 	var $tableName = 'follow';
 	var $notNullKeys = array('user', 'user_followed');
 	var $primaryKeys = array('user', 'user_followed');
@@ -9,40 +10,38 @@ class follow_model extends CI_Model {
 		return $this -> prepareResult($q);
 	}
 
-	function insertFollow($follow) {
-		if ($this -> isValidateInput($follow) && (!$this -> isExist($follow))) {
-			$query = "INSERT INTO `" . $this -> database . "`.`follow` (`user`, `user_followed`, `timestamp`) 
-			VALUES ('" . $users['user'] . "', '" . $users['user_followed'] . "',  CURRENT_TIMESTAMP)";
-			$this -> db -> query($query);
-			return TRUE;
-		} else {
-			return false;
-		}
+	function getFollower($email) {
+		$q = $this -> db -> select('user');
+		$this -> db -> where('user_followed', $email);
+		$q = $this -> db -> get($this -> tableName);
+		return $this -> prepareResult($q);
 	}
 
-	function isExist($input) {
-		foreach ($this->primaryKeys as $key) {
-			$this -> db -> where($key, $input[$key]);
-		}
-		$query = $this -> db -> get($this -> tableName);
-		if ($query -> num_rows() > 0) {
+	function getFollowed($email) {
+		$q = $this -> db -> select('user_followed');
+		$this -> db -> where('user', $email);
+		$q = $this -> db -> get($this -> tableName);
+		return $this -> prepareResult($q);
+	}
+
+	function addFollowed($user, $param) {
+		if (isset($param['user_followed']) && (!$this -> isExist($user, $param['user_followed']))) {
+			$user_followed = $param['user_followed'];
+			$query = "INSERT INTO `" . $this -> tableName . "` (`user`, `user_followed`, `timestamp`) 
+			VALUES ('" . $user . "', '" . $user_followed . "',  CURRENT_TIMESTAMP)";
+			$this -> db -> query($query);
 			return TRUE;
 		} else {
 			return FALSE;
 		}
+
 	}
 
-	function isValidateInput($input) {
-		$result = true;
-		foreach ($this->notNullKeys as $key) {
-			$result = $result && (array_key_exists($key, $input));
-			if ($result == true) {
-				$result = $result && (!(is_null($input[$key]) || $input[$key] == ''));
-			} else {
-				break;
-			}
-		}
-		return $result;
+	function isExist($user, $user_followed) {
+		$this -> db -> where('user', $user);
+		$this -> db -> where('user_followed', $user_followed);
+		$q = $this -> db -> get($this -> tableName);
+		return ($q -> num_rows() > 0);
 	}
 
 	private function prepareResult($resultArray = array()) {
