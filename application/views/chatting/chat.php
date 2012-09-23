@@ -4,7 +4,7 @@
 <body onload="chatConnection();">
 
 	<input type="text" id="contentBox"/>
-	<input type="button" id="enterButton" value="Send" disabled=true' onclick='sendChat("hello_world", $("#contentBox").val());'/>
+	<input type="button" id="enterButton" value="Send" disabled=true onclick='sendChat("hello_world", $("#contentBox").val());'/>
 	<br>
 	<input type="text" readonly=true id="recvBox"/>
 	<?php $this->load->view('element/include_js.php') ?>

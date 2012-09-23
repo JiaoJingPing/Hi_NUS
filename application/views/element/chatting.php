@@ -11,7 +11,7 @@
 	<div data-role="content" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
 	
 	<input type="text" id="contentBox"/>
-	<input type="button" id="enterButton" value="Send" disabled=true' onclick='sendChat("hello_world", $("#contentBox").val());'/>
+	<input type="button" id="enterButton" value="Send" disabled='true' />
 	<br>
 	<textarea readonly=true id="recvBox" rows="15" cols="300">
 	

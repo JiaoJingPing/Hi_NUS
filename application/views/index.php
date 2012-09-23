@@ -18,7 +18,7 @@ $this -> load -> view('util.php');
 				heightToSubtract = $('#topbar').height() * 2;
 				pageWidth = $(window).width();
 				divShown = 0;
-				chatConnection();
+				
 				// setup chat connection as soon as user open home page so that he dont have to wait later
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract

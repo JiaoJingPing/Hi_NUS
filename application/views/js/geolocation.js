@@ -80,6 +80,13 @@
             if(inPolygon(current,loc_polygon)){
 
                 $('#location_title').html(loc_name);
+                //chat room update
+
+                chatConnection(loc_name);
+                $('#enterButton').click(function(){
+                    sendChat(loc_name, $("#contentBox").val());
+                });
+                ///////////////////
                 var PolygonCoords = [];
                 for (var i = 0; i < loc_polygon.length; i++) {
                     var tmp = new google.maps.LatLng(loc_polygon[i].getX(), loc_polygon[i].getY());
