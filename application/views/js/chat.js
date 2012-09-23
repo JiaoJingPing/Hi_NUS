@@ -1,7 +1,10 @@
 (function(){
 
-	$("#contentBox").keydown(function(){
-		$('#enterButton').button('enable');
+	$("#contentBox").keyup(function(){
+		if($('#contentBox').val().length>0 )
+			$('#enterButton').button('enable');
+		else
+			$('#enterButton').button('disable');
 	})
 	
 })()

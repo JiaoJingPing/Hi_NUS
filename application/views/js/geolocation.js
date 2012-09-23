@@ -6,13 +6,13 @@
     var coor_lat;
     var coor_long;
     
-    function setGeolocation(data){
-        loadLocation(data);
+    function setGeolocation(){
+        loadLocation();
     }
 
-    function loadLocation(data) {
+    function loadLocation() {
         if(navigator.geolocation) {
-            document.getElementById("status").innerHTML = "HTML5 Geolocation is supported in your browser.";
+            //document.getElementById("status").innerHTML = "HTML5 Geolocation is supported in your browser.";
             watchId = navigator.geolocation.watchPosition(updateLocation,handleLocationError,{maximumAge:2000});
         }
     }
@@ -64,6 +64,11 @@
         };
         var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
 
+        //show me 
+        $('#show_me').click(function(){
+            console.log(1);
+            map.panTo(latlng);
+        });
 
         var current = new Point(latitude,longitude);
         $('#location_title').html('undefined');
@@ -287,8 +292,7 @@
         return ( Math.abs(sum-2*Math.PI) < eps || Math.abs(sum+2*Math.PI) < eps );
     }
     
-    //-----------------------------------------------------
-    $(function() {
+    function init(){
         $.get(urlConfig.location, function(data) {
             if(window.mydata == undefined){
                 var list = data;
@@ -307,5 +311,18 @@
             }  
             setGeolocation();
         }, 'json');
+    }
+
+    $('a[href*="#page1"]').click(function(){
+        console.log('refresh');
+        init();
+    });
+
+    //-----------------------------------------------------
+    $(function() {
+        $('#map_container').on('fixed',function(){
+            console.log('init map')
+            init();
+        });
     });
 })();
