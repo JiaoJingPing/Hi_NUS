@@ -62,7 +62,7 @@ $friend_info .= '
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
 			<ul>
 				<li>
-					<a href="#page1" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="home"> Nearby </a>
+					<a id='friends_nearby' href="#page1" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="home"> Nearby </a>
 				</li>
 				<li>
 					<a data-theme="b" data-icon="plus"> Friends </a>

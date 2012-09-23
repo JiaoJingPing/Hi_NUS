@@ -16,6 +16,7 @@ $js_includes = array_merge(
 		  'js/geolocation.js', 
 		  'js/profile.js',
 		  'js/chat.js',
+		  'js/nearby.js',
     ), $js_includes);
 ?>
 <?php

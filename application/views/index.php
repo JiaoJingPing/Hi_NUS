@@ -23,7 +23,9 @@ $this -> load -> view('util.php');
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract
 				}, 1500);
-				// $('#map_container').animate({height: $(window).height() - ($('#topbar').height() * 2)}, 1500);
+				
+				$('#map_container').animate({height: $(window).height() - heightToSubtract}, 1500)
+					.trigger('fixed');
 
 			};
 			window.addEventListener('orientationchange', handleOrientation, false);
@@ -42,48 +44,6 @@ $this -> load -> view('util.php');
 				//
 			}
 
-			function showDiv() {
-				if (divShown == 0) {
-					$('#showPeopleBtn').hide();
-					$('#hidePeopleBtn').show();
-					$('#hidePeopleBtn').css({
-						'visibility' : 'visible'
-					});
-					$('#hidePeopleBtn').animate({
-						'left' : '+=300px'
-					}, 'slow');
-					$('#slideOutDiv').animate({
-						'left' : '+=500px'
-					}, 'slow');
-				}
-				divShown = 1;
-
-			}
-
-			function hideDiv() {
-				if (divShown == 1) {
-					$('#slideOutDiv').animate({
-						'left' : '-=500px'
-					}, 'slow');
-					$('#hidePeopleBtn').animate({
-						'left' : '-=300px'
-					}, 'slow', function() {
-						$('#hidePeopleBtn').hide();
-						$('#showPeopleBtn').show();
-					});
-				}
-				divShown = 0;
-
-			}
-
-			function autoChangeDiv() {
-				pageWidth = $(window).width();
-				if (pageWidth > 900) {
-					showDiv();
-				} else {
-					hideDiv();
-				}
-			}
 		</script>
 
 		<title>Mobile App</title>
@@ -93,13 +53,12 @@ $this -> load -> view('util.php');
 		<div data-role="page" id="page1" class="page">
 
 			<div data-theme="a" data-role="header" id="topbar">
-				<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="showDiv()" id="showPeopleBtn"> Show People </a>
-				<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="hideDiv()" id="hidePeopleBtn" style="visibility: hidden;"> Hide People </a>
+				<button  data-mini="true" class="ui-btn-left" id="show_me" style="width:50px" > Show Me </button>
 				<h3 id="location_title"> Header </h3>
 				<a data-role="button" data-transition="flip" href="#page4" class="ui-btn-right"> Chat </a>
 			</div>
 			<div data-role="content" class="middlecontent">
-				<div id="map_container" height="100%">
+				<div id="map_container" style="height:568px">
 					<span id="status">Loading...</span>
 				</div>
 			</div>

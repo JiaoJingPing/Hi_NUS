@@ -1,6 +1,52 @@
 <!-- chat -->
+<script>
+	function showDiv() {
+		if (divShown == 0) {
+			$('#showPeopleBtn').hide();
+			$('#hidePeopleBtn').show();
+			$('#hidePeopleBtn').css({
+				'visibility' : 'visible'
+			});
+			$('#hidePeopleBtn').animate({
+				'left' : '+=300px'
+			}, 'slow');
+			$('#slideOutDiv').animate({
+				'left' : '+=500px'
+			}, 'slow');
+		}
+		divShown = 1;
+
+	}
+
+	function hideDiv() {
+		if (divShown == 1) {
+			$('#slideOutDiv').animate({
+				'left' : '-=500px'
+			}, 'slow');
+			$('#hidePeopleBtn').animate({
+				'left' : '-=300px'
+			}, 'slow', function() {
+				$('#hidePeopleBtn').hide();
+				$('#showPeopleBtn').show();
+			});
+		}
+		divShown = 0;
+
+	}
+
+	function autoChangeDiv() {
+		pageWidth = $(window).width();
+		if (pageWidth > 900) {
+			showDiv();
+		} else {
+			hideDiv();
+		}
+	}
+</script>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
+		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="showDiv()" id="showPeopleBtn"> Show People </a>
+		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="hideDiv()" id="hidePeopleBtn" style="visibility: hidden;"> Hide People </a>
 		<a data-role="button" data-transition="flip" href="#page1" class="ui-btn-right">
 			Map
 		</a>
@@ -13,7 +59,7 @@
 	<input type="text" id="contentBox"/>
 	<input type="button" id="enterButton" value="Send" disabled='true' />
 	<br>
-	<textarea readonly=true id="recvBox" rows="15" cols="300">
+	<textarea readonly=true id="recvBox" rows="50" cols="300">
 	
 	</textarea>
 
