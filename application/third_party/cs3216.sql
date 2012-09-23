@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Sep 22, 2012 at 01:30 PM
+-- Generation Time: Sep 23, 2012 at 04:29 PM
 -- Server version: 5.5.21-log
 -- PHP Version: 5.3.15
 
@@ -33,6 +33,16 @@ CREATE TABLE IF NOT EXISTS `follow` (
   PRIMARY KEY (`user_followed`,`user`),
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `follow`
+--
+
+INSERT INTO `follow` (`user`, `user_followed`, `timestamp`) VALUES
+('elleryjiao@gmail.com', 'admin', '2012-09-22 15:51:17'),
+('test2email', 'elleryjiao@gmail.com', '2012-09-22 07:45:24'),
+('admin', 'test2email', '2012-09-22 07:45:24'),
+('elleryjiao@gmail.com', 'test2email', '2012-09-22 07:45:13');
 
 -- --------------------------------------------------------
 
@@ -134,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `status` text CHARACTER SET utf8,
   `major` varchar(32) CHARACTER SET utf8 DEFAULT NULL,
   `faculty` varchar(16) CHARACTER SET utf8 DEFAULT NULL,
-  `profile` mediumblob,
+  `profile` varchar(256) DEFAULT 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg',
   `last_location` geometry NOT NULL,
   `last_location_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`email`),
@@ -146,13 +156,14 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`email`, `name`, `password`, `gender`, `status`, `major`, `faculty`, `profile`, `last_location`, `last_location_timestamp`) VALUES
-('121', '121', '121', 'female', '121', NULL, NULL, NULL, '\0\0\0\0\0\0\0\0\0\0\0\0\0?\0\0\0\0\0\0\0@', '0000-00-00 00:00:00'),
-('22', '11', '212', 'female', NULL, NULL, NULL, NULL, '\0\0\0\0\0\0\0\0\0\0\0\0\0?\0\0\0\0\0\0?', '0000-00-00 00:00:00'),
-('admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'male', NULL, NULL, NULL, NULL, '\0\0\0\0\0\0\0\0\0\0\0\0\0?\0\0\0\0\0\0?', '0000-00-00 00:00:00'),
-('elleryjiao@gmail.com', 'Apple', '5011e35943a47afdf6c4b2ae2c354865', 'male', 'changed', 'CS', 'SOC', NULL, '\0\0\0\0\0\0\0\0\0\0\0\0\0$@\0\0\0\0\0\0$@', '2012-09-21 01:13:32'),
-('test2email', 'test2name', '098f6bcd4621d373cade4e832627b4f6', 'male', NULL, NULL, NULL, NULL, '', '0000-00-00 00:00:00'),
-('testadss', 'jjp', 'a3dcb4d229de6fde0db5686dee47145d', 'male', 'sdasd', 'ad', 'asd', NULL, '\0\0\0\0\0\0\0\0\0\0\0\0\0?\0\0\0\0\0\0\0@', '0000-00-00 00:00:00'),
-('testemail@gmail.com', 'testuser', 'ec02c59dee6faaca3189bace969c22d3', 'male', 'asdasd', 'cs', 'soc', NULL, '', '0000-00-00 00:00:00');
+('121', '121', '121', 'female', '121', NULL, NULL, 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg', '\0\0\0\0\0\0\0€…;‚Î¶Ù?#öæ\rÚY@', '2012-09-23 00:00:00'),
+('22', '11', '212', 'female', NULL, NULL, NULL, 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg', '\0\0\0\0\0\0\07v‰£ ≥Ù?≤êo•\rÚY@', '2012-09-23 00:00:00'),
+('admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'male', NULL, NULL, NULL, 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg', '\0\0\0\0\0\0\0˘ø~„∆®Ù?^\n¥‡ÍÒY@', '2012-09-23 08:29:55'),
+('elleryjiao@gmail.com', 'Apple', '5011e35943a47afdf6c4b2ae2c354865', 'male', 'changed', 'CS', 'SOC', 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg', '\0\0\0\0\0\0\0õMëçQ®Ù?ä∆&ÁÒY@', '2012-09-23 07:59:10'),
+('newuser@gmail.com', 'newuser', '098f6bcd4621d373cade4e832627b4f6', 'male', 'ahha', 'test', NULL, 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg', '', '2012-09-23 08:12:25'),
+('test2email', 'test2name', '098f6bcd4621d373cade4e832627b4f6', 'male', NULL, NULL, NULL, 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg', '', '0000-00-00 00:00:00'),
+('testadss', 'jjp', 'a3dcb4d229de6fde0db5686dee47145d', 'male', 'sdasd', 'ad', 'asd', 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg', '\0\0\0\0\0\0\0\0\0\0\0\0\0?\0\0\0\0\0\0\0@', '0000-00-00 00:00:00'),
+('testemail@gmail.com', 'testuser', 'ec02c59dee6faaca3189bace969c22d3', 'male', 'asdasd', 'cs', 'soc', 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -176,6 +187,7 @@ CREATE TABLE IF NOT EXISTS `user_msg` (
 INSERT INTO `user_msg` (`user_from`, `user_to`, `content`, `timestamp`) VALUES
 ('admin', 'elleryjiao@gmail.com', 'adsasd', '2012-09-20 22:05:36'),
 ('elleryjiao@gmail.com', 'admin', '', '2012-09-20 21:35:53'),
+('elleryjiao@gmail.com', 'admin', 'wtf', '2012-09-23 05:21:39'),
 ('elleryjiao@gmail.com', 'testemail@gmail.com', 'haha', '2012-09-20 23:35:28'),
 ('test2email', 'testadss', 'asda', '2012-09-20 22:08:22'),
 ('testadss', 'testadss', 'test', '2012-09-20 21:35:29'),
