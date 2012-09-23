@@ -1,7 +1,6 @@
 <?php
 class auth_model extends CI_Model {
 	const ADMIN_NAME = 'admin';
-	const REALM = 'realm';
 	function __construct() {
 		parent::__construct();
 		$this -> load -> model('user_model');
@@ -35,6 +34,11 @@ class auth_model extends CI_Model {
 		} else {
 			return false;
 		}
+	}
+
+	function logout() {
+		Header('WWW-Authenticate: Basic realm="protected area"');
+		Header('HTTP/1.0 401 Unauthorized');
 	}
 
 }

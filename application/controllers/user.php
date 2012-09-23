@@ -14,14 +14,33 @@ class user extends CI_Controller {
 
 	}
 
+	function index() {
+		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
+		$output = array();
+		$result = array();
+		//TODO reorder the logic
+		if ($this -> auth_model -> isMember()) {
+			if ($request_method == 'POST') {
+				$param = $this -> input -> post();
+				$result = $this -> user_model -> insertUser($param);
+				$this -> output_model -> sendResponse(200, $result);
+			}
+
+		} else {
+			$this -> output_model -> sendResponse(405, $result);
+		}
+
+	}
+
 	function info() {
 		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 		$output = array();
 		$result = array();
 		try {
-			$email = $this -> auth_model -> getCurrentUser();
+
 			if ($this -> auth_model -> isMember()) {
 				//if member
+				$email = $this -> auth_model -> getCurrentUser();
 				switch($request_method) {
 					case'GET' :
 						$param = $this -> uri -> uri_to_assoc();

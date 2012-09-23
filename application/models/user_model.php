@@ -1,5 +1,10 @@
 <?php
 class user_model extends CI_Model {
+	function __construct() {
+		parent::__construct();
+		$this -> load -> model('profile_model');
+	}
+
 	var $tableName = 'user';
 	var $notNullKeys = array('name', 'password', 'email', 'gender');
 	var $primaryKeys = array('email');
@@ -73,16 +78,15 @@ class user_model extends CI_Model {
 
 	function insertUser($user = array()) {
 		if ($this -> isValidateInput($user) && (!$this -> isExist($user))) {
-
+			$default_profile = $this -> profile_model -> getDefaultProfile($user['gender']);
 			$default = 'NULL';
 			$status = array_key_exists('status', $user) ? "'" . $user['status'] . "'" : $default;
 			$faculty = array_key_exists('faculty', $user) ? "'" . $user['faculty'] . "'" : $default;
 			$major = array_key_exists('major', $user) ? "'" . $user['major'] . "'" : $default;
-			$profile = array_key_exists('profile', $user) ? $user['profile'] : $default;
+			$profile = array_key_exists('profile', $user) ? $user['profile'] : $default_profile;
 
 			$query = "INSERT INTO `" . $this -> tableName . "` ( `email` ,`name` ,`password` ,`gender` ,`status` , `major` ,`faculty` ,`profile`)
-			VALUES ('" . $user['email'] . "',  '" . $user['name'] . "', MD5(  '" . $user['password'] . "' ) ,  '" . $user['gender'] . "',  " . $status . ",  " . $major . ",  " . $faculty . ", " . $profile . ")";
-
+			VALUES ('" . $user['email'] . "',  '" . $user['name'] . "', MD5(  '" . $user['password'] . "' ) ,  '" . $user['gender'] . "',  " . $status . ",  " . $major . ",  " . $faculty . ", '" . $profile . "')";
 			$this -> db -> query($query);
 			return TRUE;
 		} else {
@@ -101,6 +105,7 @@ class user_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
 	function authenticate($email, $pw) {
 		$this -> db -> where('email', $email);
 		$this -> db -> where('password', $pw);

@@ -18,8 +18,9 @@ class follow extends CI_Controller {
 		$output = array();
 		$result = array();
 		try {
-			$email = $this -> auth_model -> getCurrentUser();
+			
 			if ($this -> auth_model -> isMember()) {
+				$email = $this -> auth_model -> getCurrentUser();
 				//if member
 				switch($request_method) {
 					case'GET' :
@@ -51,8 +52,9 @@ class follow extends CI_Controller {
 		$output = array();
 		$result = array();
 		try {
-			$email = $this -> auth_model -> getCurrentUser();
+			
 			if ($this -> auth_model -> isMember()) {
+				$email = $this -> auth_model -> getCurrentUser();
 				//if member
 				switch($request_method) {
 					case'GET' :
