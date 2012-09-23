@@ -1,7 +1,12 @@
 <?php
 class user_msg_model extends CI_Model {
+	function __construct() {
+		parent::__construct();
+		$this -> load -> model('user_model');
+	}
+
 	var $tableName = 'user_msg';
-	var $notNullKeys = array('user_from', 'user_to', 'content');
+	var $notNullKeys = array('user_to', 'content');
 	var $primaryKeys = array('user_from', 'user_to');
 
 	function getAllUserMsg() {
@@ -39,20 +44,16 @@ class user_msg_model extends CI_Model {
 		return $this -> prepareResult($q);
 	}
 
-	function insertUserMsg($userMsg) {
-		//TODO need to ensure the msg is related to the called user
-		try {
-			if ($this -> isValidateInput($userMsg)) {
-				$query = "INSERT INTO `" . $this -> tableName . "` (`user_from`, `user_to`, `content`, `timestamp`)
-				VALUES ('" . $userMsg['user_from'] . "', '" . $userMsg['user_to'] . "', '" . $userMsg['content'] . "', CURRENT_TIMESTAMP)";
-				$this -> db -> query($query);
-				return TRUE;
-			} else {
-				return false;
-			}
-		} catch (Exception $e) {
-			throw $e;
+	function insertUserMsg($userMsg, $email) {
+		if ($this -> isValidateInput($userMsg)) {
+			$query = "INSERT INTO `" . $this -> tableName . "` (`user_from`, `user_to`, `content`, `timestamp`)
+				VALUES ('" . $email . "', '" . $userMsg['user_to'] . "', '" . $userMsg['content'] . "', CURRENT_TIMESTAMP)";
+			$this -> db -> query($query);
+			return TRUE;
+		} else {
+			return false;
 		}
+
 	}
 
 	function isValidateInput($input) {
@@ -65,6 +66,7 @@ class user_msg_model extends CI_Model {
 				break;
 			}
 		}
+		$result = $result && $this -> user_model -> isExist(array('email' => $input['user_to']));
 		return $result;
 	}
 

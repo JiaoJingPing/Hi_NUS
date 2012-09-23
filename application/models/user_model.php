@@ -41,10 +41,14 @@ class user_model extends CI_Model {
 	}
 
 	function updateUserLastLocation($email, $point) {
-		$query = "UPDATE  `" . $this -> tableName . "` SET  `last_location` = " . $this -> prepareGeoPoint($point) . " ,`last_location_timestamp` =  CURRENT_TIMESTAMP WHERE `email` =  '" . $email . "'";
-		$q = $this -> db -> query($query);
-		//echo $this -> db -> last_query();
-		return $this -> getUserWithEmail($email);
+		if (isset($point['x']) && isset($point['y'])) {
+			$query = "UPDATE  `" . $this -> tableName . "` SET  `last_location` = " . $this -> prepareGeoPoint($point) . " ,`last_location_timestamp` =  CURRENT_TIMESTAMP WHERE `email` =  '" . $email . "'";
+			$q = $this -> db -> query($query);
+			//echo $this -> db -> last_query();
+			return $this -> getUserWithEmail($email);
+		} else {
+			return false;
+		}
 	}
 
 	function getUserLastLocation($email) {
@@ -97,7 +101,6 @@ class user_model extends CI_Model {
 			return FALSE;
 		}
 	}
-
 	function authenticate($email, $pw) {
 		$this -> db -> where('email', $email);
 		$this -> db -> where('password', $pw);

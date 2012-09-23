@@ -39,10 +39,10 @@ class follow extends CI_Controller {
 						$this -> output_model -> sendResponse(405, $result);
 				}
 			} else {
-				$this -> output_model -> sendResponse(405, $result);
+				$this -> output_model -> sendResponse(401, $result);
 			}
 		} catch(Exception $e) {
-			$this -> output_model -> sendResponse(400, $result, $e -> getMessage());
+			$this -> output_model -> sendResponse(405, $result, $e -> getMessage());
 		}
 	}
 
@@ -74,7 +74,7 @@ class follow extends CI_Controller {
 						$this -> output_model -> sendResponse(405, $result);
 				}
 			} else {
-				$this -> output_model -> sendResponse(405, $result);
+				$this -> output_model -> sendResponse(401, $result);
 			}
 		} catch(Exception $e) {
 			$this -> output_model -> sendResponse(400, $result, $e -> getMessage());

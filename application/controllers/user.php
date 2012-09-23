@@ -43,8 +43,7 @@ class user extends CI_Controller {
 						$this -> output_model -> sendResponse(405, $result);
 				}
 			} else {
-				//else
-				//TODO redirect to loggin page or index
+				$this -> output_model -> sendResponse(401, $result);
 			}
 		} catch(Exception $e) {
 			$this -> output_model -> sendResponse(400, $result, $e -> getMessage());
@@ -63,15 +62,14 @@ class user extends CI_Controller {
 			//$email = 'elleyjiao@gmail.com';
 			switch($request_method) {
 				case'GET' :
-					//TODO only return message related to this user
 					$param = $this -> uri -> uri_to_assoc();
-					$result = $this -> user_msg_model -> getUserMsgWithCondition($param,$email);
+					$result = $this -> user_msg_model -> getUserMsgWithCondition($param, $email);
 					$this -> output_model -> sendResponse(200, $result);
 					break;
 				case'POST' :
 					$param = $this -> input -> post();
 					//TODO check message are belong to this user
-					$result = $this -> user_msg_model -> insertUserMsg($param);
+					$result = $this -> user_msg_model -> insertUserMsg($param, $email);
 					$this -> output_model -> sendResponse(200, $result);
 					break;
 				case'PUT' :
@@ -86,7 +84,7 @@ class user extends CI_Controller {
 			}
 		} else {
 			//else
-			$this -> output_model -> sendResponse(405, $result);
+			$this -> output_model -> sendResponse(401, $result);
 		}
 	}
 
@@ -121,7 +119,7 @@ class user extends CI_Controller {
 			}
 		} else {
 			//else
-			$this -> output_model -> sendResponse(405, $result);
+			$this -> output_model -> sendResponse(401, $result);
 		}
 	}
 

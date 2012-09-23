@@ -1,5 +1,9 @@
 <?php
 class follow_model extends CI_Model {
+	function __construct() {
+		parent::__construct();
+		$this -> load -> model('user_model');
+	}
 
 	var $tableName = 'follow';
 	var $notNullKeys = array('user', 'user_followed');
@@ -25,11 +29,12 @@ class follow_model extends CI_Model {
 	}
 
 	function addFollowed($user, $param) {
-		if (isset($param['user_followed']) && (!$this -> isExist($user, $param['user_followed']))) {
+		if (isset($param['user_followed']) && ($this -> isValidInput($user, $param['user_followed']))) {
 			$user_followed = $param['user_followed'];
 			$query = "INSERT INTO `" . $this -> tableName . "` (`user`, `user_followed`, `timestamp`) 
 			VALUES ('" . $user . "', '" . $user_followed . "',  CURRENT_TIMESTAMP)";
 			$this -> db -> query($query);
+
 			return TRUE;
 		} else {
 			return FALSE;
@@ -37,11 +42,15 @@ class follow_model extends CI_Model {
 
 	}
 
-	function isExist($user, $user_followed) {
-		$this -> db -> where('user', $user);
-		$this -> db -> where('user_followed', $user_followed);
-		$q = $this -> db -> get($this -> tableName);
-		return ($q -> num_rows() > 0);
+	function isValidInput($user, $user_followed) {
+		if ($this -> user_model -> isExist(array('email' => $user)) && $this -> user_model -> isExist(array('email' => $user_followed))) {
+			$this -> db -> where('user', $user);
+			$this -> db -> where('user_followed', $user_followed);
+			$q = $this -> db -> get($this -> tableName);
+			return ($q -> num_rows() > 0);
+		} else {
+			return FALSE;
+		}
 	}
 
 	private function prepareResult($resultArray = array()) {

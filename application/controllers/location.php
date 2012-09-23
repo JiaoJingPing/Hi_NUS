@@ -96,7 +96,7 @@ class location extends CI_Controller {
 			}
 		} else {
 			//else
-			$this -> output_model -> sendResponse(405, $result);
+			$this -> output_model -> sendResponse(401, $result);
 		}
 	}
 
@@ -130,7 +130,7 @@ class location extends CI_Controller {
 			}
 		} else {
 			//else
-			$this -> output_model -> sendResponse(405, $result);
+			$this -> output_model -> sendResponse(401, $result);
 		}
 	}
 
