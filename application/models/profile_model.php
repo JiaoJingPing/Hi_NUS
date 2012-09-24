@@ -4,10 +4,10 @@ class profile_model extends CI_Model {
 		parent::__construct();
 	}
 
-	var $profiles = array('male' => 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/male.jpg', 'female' => 'http://ec2-122-248-209-136.ap-southeast-1.compute.amazonaws.com/application/views/images/profile/female.jpg');
+	var $profiles = array('male' => '/application/views/images/profile/male.jpg', 'female' => '/application/views/images/profile/female.jpg');
 
 	function getDefaultProfile($gender = 'male') {
-		return $this -> profiles[$gender];
+		return base_url() . $this -> profiles[$gender];
 	}
 
 }

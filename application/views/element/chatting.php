@@ -41,6 +41,10 @@
 		} else {
 			hideDiv();
 		}
+		$('#slideOutDiv').animate({
+				height : $(window).height() - heightToSubtract/2
+			}, 'slow');
+		<!--$('#slideOutDiv').tinyscrollbar();-->
 	}
 </script>
 <div data-role="page" id="page4" height="350px">
@@ -50,9 +54,7 @@
 		<a data-role="button" data-transition="flip" href="#page1" class="ui-btn-right">
 			Map
 		</a>
-		<h3>
-			Location LT27
-		</h3>
+		<h3 id="location_title"> Header </h3>
 	</div>
 	<div data-role="content" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
 	
