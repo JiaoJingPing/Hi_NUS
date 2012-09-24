@@ -13,6 +13,9 @@
 			$('#slideOutDiv').animate({
 				'left' : '+=500px'
 			}, 'slow');
+			$('#contentBox').animate({
+				'left' : '+=300px'
+			},'slow');
 		}
 		divShown = 1;
 
@@ -29,6 +32,9 @@
 				$('#hidePeopleBtn').hide();
 				$('#showPeopleBtn').show();
 			});
+			$('#contentBox').animate({
+				'left' : '-=300px'
+			},'slow');
 		}
 		divShown = 0;
 
@@ -60,9 +66,24 @@
 			$('#slideOutDiv').animate({
 					height : $(window).height() - heightToSubtract/2
 				}, 'slow');
+			$('#contentBox').animate({
+				'top' : $(window).height() - heightToSubtract,
+			}, 'slow');
 		<!--$('#slideOutDiv').tinyscrollbar();-->
+		  $('#contentBox').watermark('Type to chat!');
 	}
 </script>
+<style>
+#contentBox
+{
+	position: absolute;
+    top: 500px;
+    left: 0px;
+	width: 90%;
+	float: left;
+}
+
+</style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
 		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="showDiv()" id="showPeopleBtn"> Show People </a>
@@ -74,13 +95,16 @@
 	</div>
 	<div data-role="content" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
 	
-	<input type="text" id="contentBox"/>
-	<input type="button" id="enterButton" value="Send" disabled='true' />
+	
+	
 	<br>
 	<textarea readonly=true id="recvBox" rows="50" cols="300">
 	
 	</textarea>
 
+	<input type="text" id="contentBox"/>
+	<input type="button" id="enterButton" value="Send" disabled='true'/>
+	
 	</div>
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
