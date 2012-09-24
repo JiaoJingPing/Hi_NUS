@@ -115,9 +115,9 @@
 {
 	background: url('../application/views/images/chatrecv.png');
 	padding:20px; 
-	height: 100px;
-	width: 400px;
-	font-size: 20pt;
+	height: 40px;
+	width: 300px;
+	font-size: 1em;
 	text-align: right;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
@@ -127,9 +127,9 @@
 	position: absolute;
 	background: url('../application/views/images/chatsend.png');
 	padding:20px; 
-	height: 100px;
-	width: 400px;
-	font-size: 20pt;
+	height: 40px;
+	width: 300px;
+	font-size: 1em;
 	text-align: left;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
@@ -142,7 +142,7 @@
     left: 0px;
 	width: 90%;
 	float: left;
-	overflow: hidden;
+	overflow: scroll;
 }
 #sendBtn
 {
