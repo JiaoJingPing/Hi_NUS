@@ -2,7 +2,7 @@
 <script>
 	function showDiv() {
 		if (divShown == 0) {
-		$('#chatmiddle').animate({'width' : $(window).width() - 300},'slow');
+			
 			$('#showPeopleBtn').hide();
 			$('#hidePeopleBtn').show();
 			$('#hidePeopleBtn').css({
@@ -17,6 +17,9 @@
 			$('#contentBox').animate({
 				'left' : '+=300px'
 			},'slow');
+			$('#msgRcv').animate({
+				width :  $(window).width() - 300
+			}, 'slow');
 		}
 		divShown = 1;
 
@@ -24,7 +27,7 @@
 
 	function hideDiv() {
 		if (divShown == 1) {
-		$('#chatmiddle').animate({'width' : $(window).width()},'slow');
+			
 			$('#slideOutDiv').animate({
 				'left' : '-=500px'
 			}, 'slow');
@@ -37,6 +40,9 @@
 			$('#contentBox').animate({
 				'left' : '-=300px'
 			},'slow');
+			$('#msgRcv').animate({
+				width :  $(window).width()
+			}, 'slow');
 		}
 		divShown = 0;
 
@@ -79,7 +85,7 @@
 		  $('#contentBox').watermark('Type to chat!');
 		  $('#contentBox').animate({'width': '90%'},'slow');
 		  $('#sendBtn').animate({'width': '10%'},'slow');
-		  
+		  $('#msgRcv').animate({'height': $(window).height() - heightToSubtract*2}, 'slow');
 	}
 </script>
 <style>
@@ -99,7 +105,14 @@
     right: 0px;
 	width: 10%;
 }
-
+#msgRcv
+{
+	position: absolute;
+	background: url('../application/views/css/images/chatbg.png');
+	background-repeat: repeat;
+	height: 700px;
+	right: 0px;
+}
 </style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
@@ -114,11 +127,10 @@
 	
 	
 	
-	<br>
+	<div id="msgRcv">
 	<textarea readonly=true id="recvBox" rows="50" cols="300">
-	
 	</textarea>
-
+	</div>
 	<input type="text" id="contentBox"/>
 		<div id="sendBtn">
 		<input type="button" id="enterButton" value="Send" disabled='true'/>
