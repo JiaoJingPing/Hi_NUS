@@ -85,7 +85,7 @@
 		  $('#contentBox').watermark('Type to chat!');
 		  $('#contentBox').animate({'width': '90%'},'slow');
 		  $('#sendBtn').animate({'width': '10%'},'slow');
-		  $('#msgRcv').animate({'height': $(window).height() - heightToSubtract*2}, 'slow');
+		  $('#msgRcv').animate({'height': $(window).height() - heightToSubtract}, 'slow');
 	}
 </script>
 <style>
