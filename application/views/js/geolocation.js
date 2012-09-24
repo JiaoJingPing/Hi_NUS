@@ -15,7 +15,7 @@
     function loadLocation() {
         if(navigator.geolocation) {
             //document.getElementById("status").innerHTML = "HTML5 Geolocation is supported in your browser.";
-            watchId = navigator.geolocation.watchPosition(updateLocation,handleLocationError,{maximumAge:2000});
+            watchId = navigator.geolocation.watchPosition(updateLocation,handleLocationError,{ maximumAge:2000});
         }
     }
 
@@ -116,11 +116,17 @@
 
         
         
+
+        
         $.get(urlConfig.user, function(data) {
             $.each(data, function(index,value){
                 var now = new Date().getTime();
                 var mydate = Date.parse(value.last_location_timestamp);
-                if(value.geometry!=null && mydate>0){
+                
+                console.log(now-mydate);
+                mydate = (now - mydate);
+
+                if(value.geometry!=null && mydate < 1500){
                     
                     var image = new google.maps.MarkerImage('../application/views/images/meinv.jpg',null,null,null,
                                 new google.maps.Size(30, 30));
@@ -131,6 +137,7 @@
                         title: value.name,
                         content: value.status,
                     });
+                
                     attachSecretMessage(marker);
                 }
                 

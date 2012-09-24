@@ -2,6 +2,7 @@
 <script>
 	function showDiv() {
 		if (divShown == 0) {
+		$('#chatmiddle').animate({'width' : $(window).width() - 300},'slow');
 			$('#showPeopleBtn').hide();
 			$('#hidePeopleBtn').show();
 			$('#hidePeopleBtn').css({
@@ -23,6 +24,7 @@
 
 	function hideDiv() {
 		if (divShown == 1) {
+		$('#chatmiddle').animate({'width' : $(window).width()},'slow');
 			$('#slideOutDiv').animate({
 				'left' : '-=500px'
 			}, 'slow');
@@ -69,8 +71,15 @@
 			$('#contentBox').animate({
 				'top' : $(window).height() - heightToSubtract,
 			}, 'slow');
+			$('#sendBtn').animate({
+				'top' : $(window).height() - heightToSubtract,
+			}, 'slow');
 		<!--$('#slideOutDiv').tinyscrollbar();-->
+		  
 		  $('#contentBox').watermark('Type to chat!');
+		  $('#contentBox').animate({'width': '90%'},'slow');
+		  $('#sendBtn').animate({'width': '10%'},'slow');
+		  
 	}
 </script>
 <style>
@@ -81,6 +90,14 @@
     left: 0px;
 	width: 90%;
 	float: left;
+	overflow: hidden;
+}
+#sendBtn
+{
+	position: absolute;
+    top: 500px;
+    right: 0px;
+	width: 10%;
 }
 
 </style>
@@ -93,7 +110,7 @@
 		</a>
 		<h3 id="location_title"> Header </h3>
 	</div>
-	<div data-role="content" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
+	<div data-role="content" id="chatmiddle" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
 	
 	
 	
@@ -103,8 +120,9 @@
 	</textarea>
 
 	<input type="text" id="contentBox"/>
-	<input type="button" id="enterButton" value="Send" disabled='true'/>
-	
+		<div id="sendBtn">
+		<input type="button" id="enterButton" value="Send" disabled='true'/>
+		</div>
 	</div>
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
