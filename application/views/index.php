@@ -14,11 +14,12 @@ $this -> load -> view('util.php');
 			var heightToSubtract;
 			var pageWidth;
 			var divShown;
+			var chatScreen;
 			window.onload = function() {
 				heightToSubtract = $('#topbar').height() * 2;
 				pageWidth = $(window).width();
 				divShown = 0;
-				
+				chatScreen = 0;
 				// setup chat connection as soon as user open home page so that he dont have to wait later
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract
@@ -51,7 +52,7 @@ $this -> load -> view('util.php');
 			<div data-theme="a" data-role="header" id="topbar">
 				<button  data-mini="true" class="ui-btn-left" id="show_me" style="width:50px" > Show Me </button>
 				<h3 id="location_title"> Header </h3>
-				<a data-role="button" data-transition="flip" href="#page4" onClick="autoChangeDiv();" class="ui-btn-right"> Chat </a>
+				<a data-role="button" data-transition="flip" href="#page4" onClick="switchToChat();" class="ui-btn-right"> Chat </a>
 			</div>
 			<div data-role="content" class="middlecontent">
 				<div id="map_container" style="height:568px">

@@ -33,17 +33,33 @@
 		divShown = 0;
 
 	}
-
-	function autoChangeDiv() {
-		pageWidth = $(window).width();
-		if (pageWidth > 900) {
-			showDiv();
-		} else {
+	function switchToChat() {
+	
+		if(chatScreen == 0)
+		{
+			chatScreen = 1;
+			autoChangeDiv();
+		}
+		else if(chatScreen == 1)
+		{
+			chatScreen = 0;
 			hideDiv();
 		}
-		$('#slideOutDiv').animate({
-				height : $(window).height() - heightToSubtract/2
-			}, 'slow');
+			
+	}
+	
+	function autoChangeDiv() {
+			
+			pageWidth = $(window).width();
+			if (pageWidth > 900) {
+				showDiv();
+			} else {
+				hideDiv();
+			}
+			
+			$('#slideOutDiv').animate({
+					height : $(window).height() - heightToSubtract/2
+				}, 'slow');
 		<!--$('#slideOutDiv').tinyscrollbar();-->
 	}
 </script>
@@ -51,7 +67,7 @@
 	<div data-theme="a" data-role="header">
 		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="showDiv()" id="showPeopleBtn"> Show People </a>
 		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="hideDiv()" id="hidePeopleBtn" style="visibility: hidden;"> Hide People </a>
-		<a data-role="button" data-transition="flip" href="#page1" class="ui-btn-right">
+		<a data-role="button" data-transition="flip" href="#page1" onClick="switchToChat();" class="ui-btn-right">
 			Map
 		</a>
 		<h3 id="location_title"> Header </h3>
