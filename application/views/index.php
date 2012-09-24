@@ -26,9 +26,11 @@ $this -> load -> view('util.php');
 				
 				$('#map_container').animate({height: $(window).height() - heightToSubtract}, 1500)
 					.trigger('fixed');
-
+			
 			};
 			window.addEventListener('orientationchange', handleOrientation, false);
+
+			
 
 			function handleOrientation() {
 
@@ -36,12 +38,6 @@ $this -> load -> view('util.php');
 					height : $(window).height() - heightToSubtract
 				}, 1500);
 
-				//$('#map_container').animate({height: $(window).height() - ($('#topbar').height() * 2)}, 1500);
-
-				//$('#map_container').hide();
-				//$('#map_container').height($(window).height() - ($('#topbar').height() * 2));
-				//$('#map_container').show();
-				//
 			}
 
 		</script>
@@ -55,7 +51,7 @@ $this -> load -> view('util.php');
 			<div data-theme="a" data-role="header" id="topbar">
 				<button  data-mini="true" class="ui-btn-left" id="show_me" style="width:50px" > Show Me </button>
 				<h3 id="location_title"> Header </h3>
-				<a data-role="button" data-transition="flip" href="#page4" class="ui-btn-right"> Chat </a>
+				<a data-role="button" data-transition="flip" href="#page4" onClick="autoChangeDiv();" class="ui-btn-right"> Chat </a>
 			</div>
 			<div data-role="content" class="middlecontent">
 				<div id="map_container" style="height:568px">

@@ -17,6 +17,7 @@ $js_includes = array_merge(
 		  'js/profile.js',
 		  'js/chat.js',
 		  'js/nearby.js',
+		  'js/jquery.tinyscrollbar.min',
     ), $js_includes);
 ?>
 <?php
