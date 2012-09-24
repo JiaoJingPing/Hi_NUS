@@ -15,11 +15,13 @@
 				'left' : '+=500px'
 			}, 'slow');
 			$('#contentBox').animate({
-				'left' : '+=300px'
+				'left' : '+=300px',
+				width: $(window).width()*.9 - 300
 			},'slow');
 			$('#msgRcv').animate({
 				width :  $(window).width() - 300
 			}, 'slow');
+			
 		}
 		divShown = 1;
 
@@ -38,11 +40,13 @@
 				$('#showPeopleBtn').show();
 			});
 			$('#contentBox').animate({
-				'left' : '-=300px'
+				'left' : '-=300px',
+				width: $(window).width()*.9
 			},'slow');
 			$('#msgRcv').animate({
 				width :  $(window).width()
 			}, 'slow');
+		
 		}
 		divShown = 0;
 
@@ -63,7 +67,8 @@
 	}
 	
 	function autoChangeDiv() {
-			
+			if(chatScreen == 0)
+				return;
 			pageWidth = $(window).width();
 			if (pageWidth > 900) {
 				showDiv();
@@ -83,12 +88,53 @@
 		<!--$('#slideOutDiv').tinyscrollbar();-->
 		  
 		  $('#contentBox').watermark('Type to chat!');
-		  $('#contentBox').animate({'width': '90%'},'slow');
-		  $('#sendBtn').animate({'width': '10%'},'slow');
-		  $('#msgRcv').animate({'height': $(window).height() - heightToSubtract}, 'slow');
+		  $('#sendBtn').animate({width:  $(window).width()*.1},'slow');
+		  $('#msgRcv').animate({height: $(window).height() - heightToSubtract}, 'slow');
+		
+	}
+	function gotMessage(msg)
+	{
+		if(msg == $('#contentBox').val())
+			appendSend(msg);
+		else
+			appendRecv(msg);
+	}
+	function appendRecv(msg)
+	{
+			$('#msgRcv').append('<div class="recvMsg">'+msg+'</div><br>');
+	}
+	function appendSend(msg)
+	{
+		$('#contentBox').val('');
+		$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
+		
 	}
 </script>
 <style>
+.recvMsg
+{
+	background: url('../application/views/images/chatrecv.png');
+	padding:20px; 
+	height: 100px;
+	width: 400px;
+	font-size: 20pt;
+	text-align: right;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.sendMsg
+{
+	position: absolute;
+	background: url('../application/views/images/chatsend.png');
+	padding:20px; 
+	height: 100px;
+	width: 400px;
+	font-size: 20pt;
+	text-align: left;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	right: 0px;
+}
 #contentBox
 {
 	position: absolute;
@@ -128,10 +174,12 @@
 	
 	
 	<div id="msgRcv">
-	<textarea readonly=true id="recvBox" rows="50" cols="300">
-	</textarea>
+	<!--<textarea readonly=true id="recvBox" rows="50" cols="300">
+	</textarea>-->
 	</div>
+	
 	<input type="text" id="contentBox"/>
+	
 		<div id="sendBtn">
 		<input type="button" id="enterButton" value="Send" disabled='true'/>
 		</div>
@@ -140,22 +188,22 @@
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
 			<ul>
 				<li>
-					<a href="#page1" data-theme="" data-icon="home">
+					<a href="#page1" data-theme="" onClick="switchToChat();" data-icon="home">
 						Nearby
 					</a>
 				</li>
 				<li>
-					<a href="#page5" data-theme="" data-icon="plus">
+					<a href="#page5" data-theme="" onClick="switchToChat();" data-icon="plus">
 						Friends
 					</a>
 				</li>
 				<li>
-					<a href="#page6" data-theme="" data-icon="info">
+					<a href="#page6" data-theme="" onClick="switchToChat();" data-icon="info">
 						Profile
 					</a>
 				</li>
 				<li>
-					<a href="#page7" data-theme="" data-icon="gear">
+					<a href="#page7" data-theme="" onClick="switchToChat();" data-icon="gear">
 						Setting
 					</a>
 				</li>

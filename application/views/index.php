@@ -38,7 +38,7 @@ $this -> load -> view('util.php');
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract
 				}, 1500);
-
+				$('#map_container').animate({height: $(window).height() - heightToSubtract}, 1500);
 			}
 
 		</script>
@@ -55,7 +55,7 @@ $this -> load -> view('util.php');
 				<a data-role="button" data-transition="flip" href="#page4" onClick="switchToChat();" class="ui-btn-right"> Chat </a>
 			</div>
 			<div data-role="content" class="middlecontent">
-				<div id="map_container" style="height:568px">
+				<div id="map_container" style="height:600px">
 					<span id="status">Loading...</span>
 				</div>
 			</div>
@@ -84,10 +84,10 @@ $this -> load -> view('util.php');
 		$this -> load -> view('element/include_js.php');
 		?>
 		<script>
+			
 			$(window).resize(function() {
 				autoChangeDiv();
-			});
-			autoChangeDiv();
+			});			
 		</script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>
 	</body>

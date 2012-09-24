@@ -8,9 +8,8 @@ function chatConnection(channel_name){
                                          // OR WHEN PAGE CHANGES.
  
         callback   : function(message) { // RECEIVED A MESSAGE.
-            
-			$('#recvBox').val($('#recvBox').val() + '\n' + message);
-			
+           
+			gotMessage(message);
         },
  
         disconnect : function() {        // LOST CONNECTION.

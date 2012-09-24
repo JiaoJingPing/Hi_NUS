@@ -69,7 +69,6 @@
 
         //show me 
         $('#show_me').click(function(){
-            console.log(1);
             map.panTo(latlng);
         });
 
@@ -331,7 +330,7 @@
     //-----------------------------------------------------
     $(function() {
         $('#map_container').on('fixed',function(){
-            console.log('init map')
+         
             init();
         });
     });
