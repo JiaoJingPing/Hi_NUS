@@ -6,6 +6,8 @@
     var coor_lat;
     var coor_long;
     
+    
+
     function setGeolocation(){
         loadLocation();
     }
@@ -54,6 +56,7 @@
         }
     }
     
+
     var my_timer;
     function init_map(latitude,longitude){
         var latlng = new google.maps.LatLng(latitude, longitude);
