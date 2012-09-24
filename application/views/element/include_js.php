@@ -18,7 +18,7 @@ $js_includes = array_merge(
 		  'js/chat.js',
 		  'js/nearby.js',
 		  'js/friends.js',
-		  'js/jquery.tinyscrollbar.min',
+		  'js/jquery.watermark.min.js',
     ), $js_includes);
 ?>
 <?php
