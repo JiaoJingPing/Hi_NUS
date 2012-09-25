@@ -22,23 +22,32 @@ $this -> load -> view('util.php');
 				chatScreen = 0;
 				// setup chat connection as soon as user open home page so that he dont have to wait later
 				$('.middlecontent').animate({
-					height : $(window).height() - heightToSubtract
+					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500);
 				
-				$('#map_container').animate({height: $(window).height() - heightToSubtract}, 1500)
+				$('#map_container').animate({height: (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract}, 1500)
 					.trigger('fixed');
 			
 			};
 			window.addEventListener('orientationchange', handleOrientation, false);
+			var supportsOrientationChange = "onorientationchange" in window,
+											orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
-			
-
-			function handleOrientation() {
-
+			window.addEventListener(orientationEvent, function() { // for android
+				//alert('hi');
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract
 				}, 1500);
 				$('#map_container').animate({height: $(window).height() - heightToSubtract}, 1500);
+			}, false);
+
+
+			function handleOrientation() { // for ios
+				
+				$('.middlecontent').animate({
+					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
+				}, 1500);
+				$('#map_container').animate({height: (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract}, 1500);
 			}
 
 		</script>
@@ -112,6 +121,9 @@ $this -> load -> view('util.php');
 						$('#enterButton').click();
 		   }
 		 });
+		 $('#contentBox').focus(function() {
+			hideDiv();
+		});
 		</script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>
 	</body>

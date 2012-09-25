@@ -23,7 +23,7 @@ class user extends CI_Controller {
 			$this -> output_model -> sendResponse(405, $result);
 		} else {
 			if ($request_method == 'POST') {
-				$param = $this -> input -> post(null, true);
+				$param = $this -> input -> post();
 				$result = $this -> user_model -> insertUser($param);
 				$this -> output_model -> sendResponse(200, $result);
 			}
@@ -60,6 +60,7 @@ class user extends CI_Controller {
 
 			if ($this -> auth_model -> isMember()) {
 				//if member
+
 				$email = $this -> auth_model -> getCurrentUser();
 				switch($request_method) {
 					case'GET' :
@@ -68,7 +69,7 @@ class user extends CI_Controller {
 						$this -> output_model -> sendResponse(200, $result);
 						break;
 					case'POST' :
-						$data = $this -> input -> post(null, TRUE);
+						$data = $this -> input -> post();
 						$result = $this -> user_model -> updateUser($email, $data);
 						$this -> output_model -> sendResponse(200, $result);
 						break;
@@ -106,7 +107,7 @@ class user extends CI_Controller {
 					$this -> output_model -> sendResponse(200, $result);
 					break;
 				case'POST' :
-					$param = $this -> input -> post(null, TRUE);
+					$param = $this -> input -> post();
 					//TODO check message are belong to this user
 					$result = $this -> user_msg_model -> insertUserMsg($param, $email);
 					$this -> output_model -> sendResponse(200, $result);

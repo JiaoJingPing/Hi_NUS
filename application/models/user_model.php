@@ -66,11 +66,11 @@ class user_model extends CI_Model {
 	function updateUser($email, $data) {
 
 		if (isset($data['email']))
-			unset($array['email']);
+			unset($data['email']);
 		if (isset($data['password']))
-			unset($array['password']);
+			unset($data['password']);
 		if (isset($data['last_location']))
-			unset($array['last_location']);
+			unset($data['last_location']);
 		$this -> db -> where('email', $email);
 		$this -> db -> update($this -> tableName, $data);
 		return $this -> getUserWithEmail($email);

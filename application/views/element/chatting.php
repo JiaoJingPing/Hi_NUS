@@ -1,27 +1,74 @@
 <!-- chat -->
 <script>
+	function hideAllForSmallScreen()
+	{
+				$('#showPeopleBtn').hide();
+				$('#hidePeopleBtn').show();
+				$('#hidePeopleBtn').css({
+					'visibility' : 'visible'
+				});
+				$('#hidePeopleBtn').animate({
+					'left' : '+=300px'
+				}, 'slow');
+				$('#slideOutDiv').animate({
+					'left' : '+=500px'
+				}, 'slow');
+				$('#contentBox').hide();
+				$('#chatTable').hide();
+				$('#goToMap').hide();
+				$('#enterButton').hide();
+	}
+	function showAllForSmallScreen()
+	{
+				$('#showPeopleBtn').show();
+				$('#hidePeopleBtn').hide();
+				$('#hidePeopleBtn').css({
+					'visibility' : 'collapse'
+				});
+				$('#hidePeopleBtn').animate({
+					'left' : '-=300px'
+				}, 'slow');
+				$('#slideOutDiv').animate({
+					'left' : '-=500px'
+				}, 'slow');
+				$('#contentBox').show();
+				$('#chatTable').show();
+				$('#goToMap').show();
+				$('#enterButton').show();
+	}
 	function showDiv() {
 		if (divShown == 0) {
-			
-			$('#showPeopleBtn').hide();
-			$('#hidePeopleBtn').show();
-			$('#hidePeopleBtn').css({
-				'visibility' : 'visible'
-			});
-			$('#hidePeopleBtn').animate({
-				'left' : '+=300px'
-			}, 'slow');
-			$('#slideOutDiv').animate({
-				'left' : '+=500px'
-			}, 'slow');
-			$('#contentBox').animate({
-				'left' : '+=300px',
-				width: $(window).width()*.9 - 300
-			},'slow');
-			$('#msgRcv').animate({
-				width :  $(window).width() - 300
-			}, 'slow');
-			
+			if(!(navigator.platform == 'Win32' || navigator.platform == 'MacIntel' || navigator.platform == 'iPad'))
+			{
+				// this means not computer or ipad - so screen too small
+				hideAllForSmallScreen();
+			}
+			else
+			{
+				$('#showPeopleBtn').hide();
+				$('#hidePeopleBtn').show();
+				$('#hidePeopleBtn').css({
+					'visibility' : 'visible'
+				});
+				$('#hidePeopleBtn').animate({
+					'left' : '+=300px'
+				}, 'slow');
+				$('#slideOutDiv').animate({
+					'left' : '+=500px'
+				}, 'slow');
+				$('#contentBox').animate({
+					'left' : '+=300px',
+					width: $(window).width()*.9 - 300
+				},'slow');
+				/*$('#msgRcv').animate({
+					width :  $(window).width() - 300
+				}, 'slow');*/
+				
+				$('#chatTable').animate({
+					'left' : '+=300px',
+					width :  $(window).width() - 300
+				},'slow');
+			}
 		}
 		divShown = 1;
 
@@ -30,23 +77,34 @@
 	function hideDiv() {
 		if (divShown == 1) {
 			
-			$('#slideOutDiv').animate({
-				'left' : '-=500px'
-			}, 'slow');
-			$('#hidePeopleBtn').animate({
-				'left' : '-=300px'
-			}, 'slow', function() {
-				$('#hidePeopleBtn').hide();
-				$('#showPeopleBtn').show();
-			});
-			$('#contentBox').animate({
-				'left' : '-=300px',
-				width: $(window).width()*.9
-			},'slow');
-			$('#msgRcv').animate({
-				width :  $(window).width()
-			}, 'slow');
-		
+			if(!(navigator.platform == 'Win32' || navigator.platform == 'MacIntel' || navigator.platform == 'iPad'))
+			{
+				// this means not computer or ipad - so screen too small
+				showAllForSmallScreen();
+			}
+			else
+			{
+				$('#slideOutDiv').animate({
+					'left' : '-=500px'
+				}, 'slow');
+				$('#hidePeopleBtn').animate({
+					'left' : '-=300px'
+				}, 'slow', function() {
+					$('#hidePeopleBtn').hide();
+					$('#showPeopleBtn').show();
+				});
+				$('#contentBox').animate({
+					'left' : '-=300px',
+					width: $(window).width()*.9
+				},'slow');
+				/*$('#msgRcv').animate({
+					width :  $(window).width()
+				}, 'slow');*/
+				$('#chatTable').animate({
+					'left' : '-=300px',
+					width :  $(window).width()
+				}, 'slow');
+			}
 		}
 		divShown = 0;
 
@@ -70,12 +128,15 @@
 			if(chatScreen == 0)
 				return;
 			pageWidth = $(window).width();
-			if (pageWidth > 900) {
-				showDiv();
+			if (pageWidth > 900 && $(window).height() > 600) {
+				if(navigator.platform == 'Win32' || navigator.platform == 'MacIntel')
+					showDiv();
 			} else {
 				hideDiv();
 			}
-			
+			$('#contentBox').animate({
+				width: $(window).width()*.9 - (divShown * 300)
+			},'slow');
 			$('#slideOutDiv').animate({
 					height : $(window).height() - heightToSubtract/2
 				}, 'slow');
@@ -93,8 +154,9 @@
 		  
 		  $('#contentBox').watermark('Type to chat!');
 		  $('#sendBtn').animate({width:  $(window).width()*.1},'slow');
-		  $('#sendBtn').animate({height:  $('#contentBox').height},'slow');
-		  $('#msgRcv').animate({height: $(window).height() - heightToSubtract}, 'slow');
+		  //sendBtn').animate({height:  $('#contentBox').height()},'slow');
+		  //$('#msgRcv').animate({height: $(window).height() - heightToSubtract}, 'slow');
+		  $('#chatTable').animate({height: $(window).height() - heightToSubtract}, 'slow');
 		
 	}
 	function gotMessage(msg)
@@ -106,12 +168,14 @@
 	}
 	function appendRecv(msg)
 	{
-			$('#msgRcv').append('<div class="recvMsg">'+msg+'</div><br>');
+			//$('#msgRcv').append('<div class="recvMsg">'+msg+'</div><br>');
+			$('#chatTable').append('<tr><td class="recvMsg" colspan=1 rowspan=1>'+msg+'</td></tr>');
 	}
 	function appendSend(msg)
 	{
 		$('#contentBox').val('');
-		$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
+		//$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
+		$('#chatTable').append('<tr><td class="sendMsg" colspan=1 rowspan=1>'+msg+'</td></tr>');
 		endSending();
 	}
 
@@ -131,6 +195,7 @@
 <style>
 .recvMsg
 {
+	position: absolute;
 	background: url('../application/views/images/chatrecv.png');
 	padding:20px; 
 	height: 40px;
@@ -186,12 +251,29 @@
 	visibility: collapse;
 	padding-bottom: 20px;
 }
+#chatTable
+{
+	position: absolute;
+	right: 0px;
+}
+.outerDiv
+{
+	 max-height: 500px; 
+	 overflow-y: scroll;
+     display: inline-block;
+	 margin-right: 10px;
+}
+.innerDiv
+{
+	 width: 100%; 
+	 margin-right: 20px; 
+}
 </style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
 		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="showDiv()" id="showPeopleBtn"> Show People </a>
 		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="hideDiv()" id="hidePeopleBtn" style="visibility: hidden;"> Hide People </a>
-		<a data-role="button" data-transition="flip" href="#page1" onClick="switchToChat();" class="ui-btn-right">
+		<a data-role="button" data-transition="flip" href="#page1" onClick="switchToChat();" class="ui-btn-right" id="goToMap">
 			Map
 		</a>
 		<h3 id="location_title"> Header </h3>
@@ -199,11 +281,13 @@
 	<div data-role="content" id="chatmiddle" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
 	
 	
-	
-	<div id="msgRcv">
-	
+	<div class="outerDiv">
+	<div class="innerDiv">
+		<table id="chatTable">
+		
+		</table>
 	</div>
-	
+	</div>
 	<input type="text" id="contentBox"/>
 		<img src="../application/views/images/spinner.gif" id="waitImg"/>
 		<div id="sendBtn" valign="middle">
