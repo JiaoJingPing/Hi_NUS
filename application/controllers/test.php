@@ -13,4 +13,8 @@ class test extends CI_Controller {
 		$this -> load -> view('test');
 	}
 
+	function authtest() {
+		$this -> load -> view('authtest');
+	}
+
 }
