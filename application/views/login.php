@@ -100,7 +100,6 @@ $this -> load -> view('util.php');
 		</div>
 		
 		<?php
-		$this -> load -> view('element/include_php.php');
 		$this -> load -> view('element/include_js.php');
 		?>
 	</body>
