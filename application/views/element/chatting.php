@@ -80,15 +80,20 @@
 					height : $(window).height() - heightToSubtract/2
 				}, 'slow');
 			$('#contentBox').animate({
-				'top' : $(window).height() - heightToSubtract,
+				'bottom' : heightToSubtract/2,
 			}, 'slow');
 			$('#sendBtn').animate({
-				'top' : $(window).height() - heightToSubtract,
+				'bottom' : heightToSubtract/2,
 			}, 'slow');
-		<!--$('#slideOutDiv').tinyscrollbar();-->
+			$('#waitImg').animate({
+				'bottom' : heightToSubtract/2,
+				'right': $(window).width()*.11,
+			}, 'slow');
+		
 		  
 		  $('#contentBox').watermark('Type to chat!');
 		  $('#sendBtn').animate({width:  $(window).width()*.1},'slow');
+		  $('#sendBtn').animate({height:  $('#contentBox').height},'slow');
 		  $('#msgRcv').animate({height: $(window).height() - heightToSubtract}, 'slow');
 		
 	}
@@ -107,7 +112,20 @@
 	{
 		$('#contentBox').val('');
 		$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
-		
+		endSending();
+	}
+
+	function startSending()
+	{
+			$('#enterButton').button('disable');
+			$('#contentBox').attr('disabled',true);
+			$('#waitImg').css('visibility', 'visible');
+	}
+	function endSending()
+	{
+			$('#enterButton').button('enable');
+			$("#contentBox").removeAttr('disabled');
+			$('#waitImg').css('visibility', 'collapse');
 	}
 </script>
 <style>
@@ -121,6 +139,7 @@
 	text-align: right;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+	font-family:arial; 
 }
 .sendMsg
 {
@@ -134,11 +153,12 @@
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	right: 0px;
+	color: #FFFFFF;
+	font-family:arial; 
 }
 #contentBox
 {
 	position: absolute;
-    top: 500px;
     left: 0px;
 	width: 90%;
 	float: left;
@@ -147,9 +167,10 @@
 #sendBtn
 {
 	position: absolute;
-    top: 500px;
+    
     right: 0px;
 	width: 10%;
+	
 }
 #msgRcv
 {
@@ -158,6 +179,12 @@
 	background-repeat: repeat;
 	height: 700px;
 	right: 0px;
+}
+#waitImg
+{
+	position: absolute;
+	visibility: collapse;
+	padding-bottom: 20px;
 }
 </style>
 <div data-role="page" id="page4" height="350px">
@@ -174,14 +201,13 @@
 	
 	
 	<div id="msgRcv">
-	<!--<textarea readonly=true id="recvBox" rows="50" cols="300">
-	</textarea>-->
+	
 	</div>
 	
 	<input type="text" id="contentBox"/>
-	
-		<div id="sendBtn">
-		<input type="button" id="enterButton" value="Send" disabled='true'/>
+		<img src="../application/views/images/spinner.gif" id="waitImg"/>
+		<div id="sendBtn" valign="middle">
+		<input type="button" onClick="startSending();" id="enterButton" value="Go!" disabled='true'/>
 		</div>
 	</div>
 	<div data-role="footer">

@@ -103,6 +103,15 @@ $this -> load -> view('util.php');
 			$(window).resize(function() {
 				autoChangeDiv();
 			});			
+			$( window ).bind('keypress', function(e){
+			if (e.keyCode == 13 ) {
+			
+				if($('#contentBox').val().length > 0)
+					var curElement = document.activeElement;
+					if(curElement.nodeName == "INPUT")
+						$('#enterButton').click();
+		   }
+		 });
 		</script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>
 	</body>

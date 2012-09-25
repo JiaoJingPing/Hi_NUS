@@ -30,6 +30,7 @@ function chatConnection(channel_name){
 
 function sendChat(channelName, messageVal)
 {
-    console.log(channelName);
+    //console.log(channelName);
+	//$('#sendBtn').css({background: white url(‘images/imagebutton.gif’) no-repeat top;});
 	PUBNUB.publish({channel : channelName, message : messageVal});
 }
