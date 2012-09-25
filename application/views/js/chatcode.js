@@ -8,9 +8,8 @@ function chatConnection(channel_name){
                                          // OR WHEN PAGE CHANGES.
  
         callback   : function(message) { // RECEIVED A MESSAGE.
-            
-			$('#recvBox').val($('#recvBox').val() + '\n' + message);
-			
+           
+			gotMessage(message);
         },
  
         disconnect : function() {        // LOST CONNECTION.
@@ -31,6 +30,7 @@ function chatConnection(channel_name){
 
 function sendChat(channelName, messageVal)
 {
-    console.log(channelName);
+    //console.log(channelName);
+	//$('#sendBtn').css({background: white url(‘images/imagebutton.gif’) no-repeat top;});
 	PUBNUB.publish({channel : channelName, message : messageVal});
 }

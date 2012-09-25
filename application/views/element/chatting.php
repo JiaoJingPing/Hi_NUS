@@ -2,7 +2,7 @@
 <script>
 	function showDiv() {
 		if (divShown == 0) {
-		$('#chatmiddle').animate({'width' : $(window).width() - 300},'slow');
+			
 			$('#showPeopleBtn').hide();
 			$('#hidePeopleBtn').show();
 			$('#hidePeopleBtn').css({
@@ -15,8 +15,13 @@
 				'left' : '+=500px'
 			}, 'slow');
 			$('#contentBox').animate({
-				'left' : '+=300px'
+				'left' : '+=300px',
+				width: $(window).width()*.9 - 300
 			},'slow');
+			$('#msgRcv').animate({
+				width :  $(window).width() - 300
+			}, 'slow');
+			
 		}
 		divShown = 1;
 
@@ -24,7 +29,7 @@
 
 	function hideDiv() {
 		if (divShown == 1) {
-		$('#chatmiddle').animate({'width' : $(window).width()},'slow');
+			
 			$('#slideOutDiv').animate({
 				'left' : '-=500px'
 			}, 'slow');
@@ -35,8 +40,13 @@
 				$('#showPeopleBtn').show();
 			});
 			$('#contentBox').animate({
-				'left' : '-=300px'
+				'left' : '-=300px',
+				width: $(window).width()*.9
 			},'slow');
+			$('#msgRcv').animate({
+				width :  $(window).width()
+			}, 'slow');
+		
 		}
 		divShown = 0;
 
@@ -57,7 +67,8 @@
 	}
 	
 	function autoChangeDiv() {
-			
+			if(chatScreen == 0)
+				return;
 			pageWidth = $(window).width();
 			if (pageWidth > 900) {
 				showDiv();
@@ -69,37 +80,112 @@
 					height : $(window).height() - heightToSubtract/2
 				}, 'slow');
 			$('#contentBox').animate({
-				'top' : $(window).height() - heightToSubtract,
+				'bottom' : heightToSubtract/2,
 			}, 'slow');
 			$('#sendBtn').animate({
-				'top' : $(window).height() - heightToSubtract,
+				'bottom' : heightToSubtract/2,
 			}, 'slow');
-		<!--$('#slideOutDiv').tinyscrollbar();-->
+			$('#waitImg').animate({
+				'bottom' : heightToSubtract/2,
+				'right': $(window).width()*.11,
+			}, 'slow');
+		
 		  
 		  $('#contentBox').watermark('Type to chat!');
-		  $('#contentBox').animate({'width': '90%'},'slow');
-		  $('#sendBtn').animate({'width': '10%'},'slow');
-		  
+		  $('#sendBtn').animate({width:  $(window).width()*.1},'slow');
+		  $('#sendBtn').animate({height:  $('#contentBox').height},'slow');
+		  $('#msgRcv').animate({height: $(window).height() - heightToSubtract}, 'slow');
+		
+	}
+	function gotMessage(msg)
+	{
+		if(msg == $('#contentBox').val())
+			appendSend(msg);
+		else
+			appendRecv(msg);
+	}
+	function appendRecv(msg)
+	{
+			$('#msgRcv').append('<div class="recvMsg">'+msg+'</div><br>');
+	}
+	function appendSend(msg)
+	{
+		$('#contentBox').val('');
+		$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
+		endSending();
+	}
+
+	function startSending()
+	{
+			$('#enterButton').button('disable');
+			$('#contentBox').attr('disabled',true);
+			$('#waitImg').css('visibility', 'visible');
+	}
+	function endSending()
+	{
+			$('#enterButton').button('enable');
+			$("#contentBox").removeAttr('disabled');
+			$('#waitImg').css('visibility', 'collapse');
 	}
 </script>
 <style>
+.recvMsg
+{
+	background: url('../application/views/images/chatrecv.png');
+	padding:20px; 
+	height: 40px;
+	width: 300px;
+	font-size: 1em;
+	text-align: right;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	font-family:arial; 
+}
+.sendMsg
+{
+	position: absolute;
+	background: url('../application/views/images/chatsend.png');
+	padding:20px; 
+	height: 40px;
+	width: 300px;
+	font-size: 1em;
+	text-align: left;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	right: 0px;
+	color: #FFFFFF;
+	font-family:arial; 
+}
 #contentBox
 {
 	position: absolute;
-    top: 500px;
     left: 0px;
 	width: 90%;
 	float: left;
-	overflow: hidden;
+	overflow: scroll;
 }
 #sendBtn
 {
 	position: absolute;
-    top: 500px;
+    
     right: 0px;
 	width: 10%;
+	
 }
-
+#msgRcv
+{
+	position: absolute;
+	background: url('../application/views/css/images/chatbg.png');
+	background-repeat: repeat;
+	height: 700px;
+	right: 0px;
+}
+#waitImg
+{
+	position: absolute;
+	visibility: collapse;
+	padding-bottom: 20px;
+}
 </style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
@@ -114,36 +200,36 @@
 	
 	
 	
-	<br>
-	<textarea readonly=true id="recvBox" rows="50" cols="300">
+	<div id="msgRcv">
 	
-	</textarea>
-
+	</div>
+	
 	<input type="text" id="contentBox"/>
-		<div id="sendBtn">
-		<input type="button" id="enterButton" value="Send" disabled='true'/>
+		<img src="../application/views/images/spinner.gif" id="waitImg"/>
+		<div id="sendBtn" valign="middle">
+		<input type="button" onClick="startSending();" id="enterButton" value="Go!" disabled='true'/>
 		</div>
 	</div>
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
 			<ul>
 				<li>
-					<a href="#page1" data-theme="" data-icon="home">
+					<a href="#page1" data-theme="" onClick="switchToChat();" data-icon="home">
 						Nearby
 					</a>
 				</li>
 				<li>
-					<a href="#page5" data-theme="" data-icon="plus">
+					<a href="#page5" data-theme="" onClick="switchToChat();" data-icon="plus">
 						Friends
 					</a>
 				</li>
 				<li>
-					<a href="#page6" data-theme="" data-icon="info">
+					<a href="#page6" data-theme="" onClick="switchToChat();" data-icon="info">
 						Profile
 					</a>
 				</li>
 				<li>
-					<a href="#page7" data-theme="" data-icon="gear">
+					<a href="#page7" data-theme="" onClick="switchToChat();" data-icon="gear">
 						Setting
 					</a>
 				</li>

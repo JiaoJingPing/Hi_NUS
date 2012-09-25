@@ -105,6 +105,14 @@ class user_model extends CI_Model {
 			return FALSE;
 		}
 	}
+	//sensitive
+	function getPassword($email = 'testuser') {
+		$this -> db -> select('password');
+		$this -> db -> where('email', $email);
+		$q = $this -> db -> get($this -> tableName);
+		$result = $q -> result_array();
+		return $result[0]['password'];
+	}
 
 	function authenticate($email, $pw) {
 		$this -> db -> where('email', $email);

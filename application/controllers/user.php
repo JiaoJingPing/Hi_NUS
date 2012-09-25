@@ -15,21 +15,41 @@ class user extends CI_Controller {
 	}
 
 	function index() {
+		//only for insert new user
 		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 		$output = array();
 		$result = array();
-		//TODO reorder the logic
 		if ($this -> auth_model -> isMember()) {
+			$this -> output_model -> sendResponse(405, $result);
+		} else {
 			if ($request_method == 'POST') {
-				$param = $this -> input -> post();
+				$param = $this -> input -> post(null, true);
 				$result = $this -> user_model -> insertUser($param);
 				$this -> output_model -> sendResponse(200, $result);
 			}
+		}
+	}
 
+	function login() {
+		$result = array();
+		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
+		if ($request_method == 'POST') {
+			$result = $this -> auth_model -> login();
+			$this -> output_model -> sendResponse(200, $result);
 		} else {
 			$this -> output_model -> sendResponse(405, $result);
 		}
+	}
 
+	function logout() {
+		$request_method = strtoupper($_SERVER['REQUEST_METHOD']);
+		$result = array();
+		if ($request_method == 'POST') {
+			$result1 = $this -> auth_model -> logout();
+			$this -> output_model -> sendResponse(200, $result);
+		} else {
+			$this -> output_model -> sendResponse(405, $result);
+		}
 	}
 
 	function info() {
@@ -48,7 +68,7 @@ class user extends CI_Controller {
 						$this -> output_model -> sendResponse(200, $result);
 						break;
 					case'POST' :
-						$data = $this -> input -> post();
+						$data = $this -> input -> post(null, TRUE);
 						$result = $this -> user_model -> updateUser($email, $data);
 						$this -> output_model -> sendResponse(200, $result);
 						break;
@@ -62,7 +82,7 @@ class user extends CI_Controller {
 						$this -> output_model -> sendResponse(405, $result);
 				}
 			} else {
-				$this -> output_model -> sendResponse(401, $result);
+				$this -> output_model -> sendResponse(401, "NOT LOGING");
 			}
 		} catch(Exception $e) {
 			$this -> output_model -> sendResponse(400, $result, $e -> getMessage());
@@ -86,7 +106,7 @@ class user extends CI_Controller {
 					$this -> output_model -> sendResponse(200, $result);
 					break;
 				case'POST' :
-					$param = $this -> input -> post();
+					$param = $this -> input -> post(null, TRUE);
 					//TODO check message are belong to this user
 					$result = $this -> user_msg_model -> insertUserMsg($param, $email);
 					$this -> output_model -> sendResponse(200, $result);
@@ -123,7 +143,7 @@ class user extends CI_Controller {
 					$this -> output_model -> sendResponse(200, $result);
 					break;
 				case'POST' :
-					$param = $this -> input -> post();
+					$param = $this -> input -> post(null, TRUE);
 					$result = $this -> user_model -> updateUserLastLocation($email, $param);
 					$this -> output_model -> sendResponse(200, $result);
 					break;
