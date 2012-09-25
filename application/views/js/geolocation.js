@@ -114,31 +114,41 @@
         }  
 
         
-        
 
-        
-        $.get(urlConfig.user, function(data) {
-            $.each(data, function(index,value){
-                //var now = new Date().getTime();
-                //var mydate = Date.parse(value.last_location_timestamp);
-                if(value.geometry!=null){ //&& mydate>0){
+        $.ajax({
+            type : 'GET',
+            url : urlConfig.user,
+            headers : {
+                'Authorization' : 'Basic ' + window.btoa( getCookie('user') +':' + getCookie('pw') )
+            },
+            success : function(response) {
+                var result = jQuery.parseJSON(response);
+                var data = result;
+                $.each(data, function(index,value){
+                    //var now = new Date().getTime();
+                    //var mydate = Date.parse(value.last_location_timestamp);
+                    if(value.geometry!=null){ //&& mydate>0){
+                        
+                        var image = new google.maps.MarkerImage('../application/views/images/meinv.jpg',null,null,null,
+                                    new google.maps.Size(30, 30));
+                        var marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(parseFloat(value.geometry.x), parseFloat(value.geometry.y)),
+                            map: map, 
+                            icon: image,
+                            title: value.name,
+                            content: value.status,
+                        });
                     
-                    var image = new google.maps.MarkerImage('../application/views/images/meinv.jpg',null,null,null,
-                                new google.maps.Size(30, 30));
-                    var marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(parseFloat(value.geometry.x), parseFloat(value.geometry.y)),
-                        map: map, 
-                        icon: image,
-                        title: value.name,
-                        content: value.status,
-                    });
-                
-                    attachSecretMessage(marker);
-                }
-                
+                        attachSecretMessage(marker);
+                    }
+                });
+            },
+            error : function(response) {
+                console.log('Cannot to login');
+                //direct to login
+            }
+        });
 
-            });
-            },'json');
         
         var infowindow = new google.maps.InfoWindow(
             {
@@ -170,7 +180,18 @@
     function post_location(lat,long){
 
         var point = {x:lat, y:long};
-        $.post(urlConfig.post_location, point);
+        $.ajax({
+            type : 'POST',
+            url : urlConfig.post_location,
+            headers : {
+                'Authorization' : 'Basic ' + window.btoa( getCookie('user') +':' + getCookie('pw') )
+            },
+            data:point,
+            error : function(response) {
+                console.log('cannot post location');
+                //direct to login
+            }
+        });
     }
 
     function getSencitiveDistance(){
@@ -298,24 +319,37 @@
     }
     
     function init(){
-        $.get(urlConfig.location, function(data) {
-            if(window.mydata == undefined){
-                var list = data;
-                var location = [];
+        $.ajax({
+            type : 'GET',
+            url : urlConfig.location,
+            headers : {
+                'Authorization' : 'Basic ' + window.btoa( getCookie('user') +':' + getCookie('pw') )
+            },
+            success : function(response) {
+                var result = jQuery.parseJSON(response);
+                var data = result;
+                if(window.mydata == undefined){
+                    var list = data;
+                    var location = [];
 
-                for (var i = 0; i < list.length; i++) {
-                    var tmp_geo = list[i].geometry;
-                    var point_list = get_point_list(tmp_geo);
-                    var tmp = {
-                        name: list[i].name,
-                        polygon: point_list, 
-                    };
-                    location.push(tmp);
-                }
-                window.mydata = location;
-            }  
-            setGeolocation();
-        }, 'json');
+                    for (var i = 0; i < list.length; i++) {
+                        var tmp_geo = list[i].geometry;
+                        var point_list = get_point_list(tmp_geo);
+                        var tmp = {
+                            name: list[i].name,
+                            polygon: point_list, 
+                        };
+                        location.push(tmp);
+                    }
+                    window.mydata = location;
+                }  
+                setGeolocation();
+            },
+            error : function(response) {
+                console.log('Cannot set geolocation');
+                //direct to login
+            }
+        });
     }
 
     $('a[href*="#page1"]').click(function(){

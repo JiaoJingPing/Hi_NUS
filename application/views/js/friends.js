@@ -1,4 +1,6 @@
 (function(){
+
+
 	var friends_info='';
 	$.get(urlConfig.follow, function(data){
 		console.log(data);

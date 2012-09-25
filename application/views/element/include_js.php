@@ -20,7 +20,6 @@ $js_includes = array_merge(
 		  'js/friends.js',
 		  'js/jquery.watermark.min.js',
 		  'js/login.js',
-		  'js/jQuery.cookie.js',
     ), $js_includes);
 ?>
 <?php
