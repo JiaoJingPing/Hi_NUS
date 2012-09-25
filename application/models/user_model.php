@@ -73,6 +73,7 @@ class user_model extends CI_Model {
 			unset($data['last_location']);
 		$this -> db -> where('email', $email);
 		$this -> db -> update($this -> tableName, $data);
+		$pw = $this -> getPassword($email);
 		return $this -> getUserWithEmail($email);
 	}
 
@@ -94,6 +95,8 @@ class user_model extends CI_Model {
 		}
 	}
 
+
+
 	function isExist($input) {
 		foreach ($this->primaryKeys as $key) {
 			$this -> db -> where($key, $input[$key]);
@@ -105,6 +108,7 @@ class user_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
 	//sensitive
 	function getPassword($email = 'testuser') {
 		$this -> db -> select('password');

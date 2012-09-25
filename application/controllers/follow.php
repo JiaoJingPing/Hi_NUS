@@ -18,7 +18,7 @@ class follow extends CI_Controller {
 		$output = array();
 		$result = array();
 		try {
-			
+
 			if ($this -> auth_model -> isMember()) {
 				$email = $this -> auth_model -> getCurrentUser();
 				//if member
@@ -52,7 +52,7 @@ class follow extends CI_Controller {
 		$output = array();
 		$result = array();
 		try {
-			
+
 			if ($this -> auth_model -> isMember()) {
 				$email = $this -> auth_model -> getCurrentUser();
 				//if member
@@ -70,7 +70,11 @@ class follow extends CI_Controller {
 						$this -> output_model -> sendResponse(405, $result);
 						break;
 					case'DELETE' :
-						$this -> output_model -> sendResponse(405, $result);
+						$param = explode('=', file_get_contents('php://input'));
+						$param = array($param[0] => $param[1]);
+						$result = $this -> follow_model -> unfollow($email, $param);
+						$this -> output_model -> sendResponse(200, $result);
+
 						break;
 					default :
 						$this -> output_model -> sendResponse(405, $result);

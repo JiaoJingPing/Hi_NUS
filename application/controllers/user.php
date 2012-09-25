@@ -108,7 +108,6 @@ class user extends CI_Controller {
 					break;
 				case'POST' :
 					$param = $this -> input -> post();
-					//TODO check message are belong to this user
 					$result = $this -> user_msg_model -> insertUserMsg($param, $email);
 					$this -> output_model -> sendResponse(200, $result);
 					break;

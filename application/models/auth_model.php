@@ -7,6 +7,8 @@ class auth_model extends CI_Model {
 		define('REALM', 'realm');
 	}
 
+	
+
 	function login() {
 		$result = array('isSuccess' => false, 'user' => NULL);
 
