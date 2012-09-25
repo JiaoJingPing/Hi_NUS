@@ -28,6 +28,21 @@ class follow_model extends CI_Model {
 		return $this -> prepareResult($q);
 	}
 
+	function unfollow($email, $param) {
+		if (!isset($param['user_followed'])) {
+			return false;
+		} else {
+			$user_followed = $param['user_followed'];
+			if (!$this -> isValidInput($email, $user_followed)) {
+				$query = 'DELETE FROM ' . $this -> tableName . " WHERE `user`= '" . $email . "' AND `user_followed`= '" . $user_followed . "'";
+				$this -> db -> query($query);
+				return TRUE;
+			} else {
+				return FALSE;
+			}
+		}
+	}
+
 	function addFollowed($user, $param) {
 		if (isset($param['user_followed']) && ($this -> isValidInput($user, $param['user_followed']))) {
 			$user_followed = $param['user_followed'];
@@ -47,7 +62,9 @@ class follow_model extends CI_Model {
 			$this -> db -> where('user', $user);
 			$this -> db -> where('user_followed', $user_followed);
 			$q = $this -> db -> get($this -> tableName);
-			return (!$q -> num_rows() > 0);
+
+			return ($q -> num_rows() == 0);
+
 		} else {
 			return FALSE;
 		}
