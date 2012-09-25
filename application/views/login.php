@@ -81,15 +81,16 @@ $this -> load -> view('util.php');
 		            </ul>
 		        </div>
 		        <div class='login'>
+		        	<div id="error_msg" class="error_msg"></div>
 		            <div>
 		            	<label>Email</label>
-		            	<input type='text'></input>
+		            	<input type='text' id="login_email"></input>
 		            </div>
 		            <div>
 		            	<label>Password</label>
-		            	<input type='text'></input>
+		            	<input type='text' id="login_pass"></input>
 		            </div>
-			        <div id="error_msg"></div>
+			        
 			        <div>
 			        	<a data-role='button' id="login_btn" >Login</a>
 			        </div>

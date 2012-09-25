@@ -5,6 +5,7 @@ $urls = array('location' => 'location/info',
 			  'post_location' => 'user/location',
 			  'follow'=>'follow/followed',
 			  'new_user'=>'user/',
+			  'home' => 'member',
 			  );
 ?>
 <script type="text/javascript">
@@ -16,5 +17,6 @@ urlConfig = {
 	echo 'user' . ':  "' . WEBSITE_URL . $urls['user'] . '",';
 	echo 'follow' . ':  "' . WEBSITE_URL . $urls['follow'] . '",';
 	echo 'new_user' . ':  "' . WEBSITE_URL . $urls['new_user'] . '",';
+	echo 'home' . ':  "' . WEBSITE_URL . $urls['home'] . '",';
 ?>};
 </script>

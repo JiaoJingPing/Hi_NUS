@@ -15,7 +15,7 @@
     	$('#email_error_msg').html(' ');
     	if(!isEmail( $('#email').val() )){
     		$('#email').val('');
-    		$('#email_error_msg').html('email not validate');
+    		$('#email_error_msg').html('Email not validate');
     		error=true;
     	}
 
@@ -40,12 +40,48 @@
 	    		password : $('#password').val()
     		};
     		$.post(urlConfig.new_user,user_info);
-    	}
-    	
+            window.location.href = urlConfig.home;
+    	} 
 
     });
 
+    $('a#login_btn').click(function(){
+        var error = false;
+        $('#error_msg').html(' ');
+        if(!isEmail( $('#login_email').val() )){
+            $('#email').val('');
+            $('#error_msg').html('Email not validate');
+            error=true;
+        }
+        if(!error){
+            $.ajax({
+                type : 'POST',
+                url : 'user/login',
+                headers : {
+                    'Authorization' : 'Basic ' + window.btoa('admin:' + CryptoJS.MD5('admin'))
+                },
+                success : function(response) {
+                    var result = jQuery.parseJSON(response);
+                    console.log(result);
+                    if (result.isSuccess) {
+                        $.cookie("user", result.user, {
+                            expires : 7
+                        });
+                        $.cookie("pw", CryptoJS.MD5('admin'), {
+                            expires : 7
+                        });
+                        //window.location.href = urlConfig.home;
 
+                    } else {
+                        //invalid password or email
+                        alert('Invalid pw or email');
+                    }
+                },
+                error : function(response) {
+                    alert('Failed to login')
+                }
+            });
+        }
+    });
 
-
-})();
+})()

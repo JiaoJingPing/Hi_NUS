@@ -20,10 +20,12 @@ $js_includes = array_merge(
 		  'js/friends.js',
 		  'js/jquery.watermark.min.js',
 		  'js/login.js',
+		  'js/jQuery.cookie.js',
     ), $js_includes);
 ?>
 <?php
 foreach ($js_includes as $js)
 	echo '<script src="' . VIEW_URL . $js . '"></script>' . "\n";
+
 //echo '<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>'
 ?>
