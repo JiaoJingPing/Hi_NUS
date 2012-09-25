@@ -4,6 +4,7 @@ $urls = array('location' => 'location/info',
 			  'user' => 'user/info',
 			  'post_location' => 'user/location',
 			  'follow'=>'follow/followed',
+			  'new_user'=>'user/',
 			  );
 ?>
 <script type="text/javascript">
@@ -14,5 +15,6 @@ urlConfig = {
 	echo 'nearby_user' . ':  "' . VIEW_URL . $urls['nearby_user'] . '",';
 	echo 'user' . ':  "' . WEBSITE_URL . $urls['user'] . '",';
 	echo 'follow' . ':  "' . WEBSITE_URL . $urls['follow'] . '",';
+	echo 'new_user' . ':  "' . WEBSITE_URL . $urls['new_user'] . '",';
 ?>};
 </script>
