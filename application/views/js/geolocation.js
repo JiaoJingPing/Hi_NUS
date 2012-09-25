@@ -1,5 +1,7 @@
 (function() {
-
+    if (!(getCookie('user') || getCookie('pw'))) {
+		window.location.href = urlConfig.login;
+	}
 
     var watchId;
     var flag=0;
