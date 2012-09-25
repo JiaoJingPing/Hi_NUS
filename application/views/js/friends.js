@@ -9,7 +9,6 @@
 		success : function(data) {
 			console.log(data);
 			$.each(data, function(index, value) {
-
 				var email = value.user_followed;
 				var hashed = md5(email);
 

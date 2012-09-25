@@ -19,7 +19,6 @@ $js_includes = array_merge(
 		  'js/nearby.js',
 		  'js/friends.js',
 		  'js/jquery.watermark.min.js',
-		  'js/login.js',
     ), $js_includes);
 ?>
 <?php
