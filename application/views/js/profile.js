@@ -13,6 +13,24 @@
 		$('#profile_education').addClass(data.gender);
 	},'json');
 
+	$.ajax({
+        type : 'GET',
+        url : urlConfig.user+'/email/'+hashed,
+        headers : {
+            'Authorization' : 'Basic ' + window.btoa( $.cookie('user') +':' + $.cookie('pw') )
+        },
+        success : function(response) {
+            var result = jQuery.parseJSON(response);
+            console.log(result);
+
+        },
+        error : function(response) {
+            console.log('Cannot to login');
+            //direct to login
+        }
+    });
+
+
 
 	$('a#edit_btn').click(function(){
 		$this = $(this);

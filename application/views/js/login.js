@@ -49,7 +49,7 @@
         var error = false;
         $('#error_msg').html(' ');
         if(!isEmail( $('#login_email').val() )){
-            $('#email').val('');
+            $('#login_email').val('');
             $('#error_msg').html('Email not validate');
             error=true;
         }
@@ -58,7 +58,7 @@
                 type : 'POST',
                 url : 'user/login',
                 headers : {
-                    'Authorization' : 'Basic ' + window.btoa('admin:' + CryptoJS.MD5('admin'))
+                    'Authorization' : 'Basic ' + window.btoa( $('#login_email').val() +':' + md5($('#login_pass').val() ))
                 },
                 success : function(response) {
                     var result = jQuery.parseJSON(response);
@@ -67,10 +67,10 @@
                         $.cookie("user", result.user, {
                             expires : 7
                         });
-                        $.cookie("pw", CryptoJS.MD5('admin'), {
+                        $.cookie("pw", md5($('#login_pass').val()), {
                             expires : 7
                         });
-                        //window.location.href = urlConfig.home;
+                        window.location.href = urlConfig.home;
 
                     } else {
                         //invalid password or email
