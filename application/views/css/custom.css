@@ -98,6 +98,8 @@ a.toggle_btn {
     cursor: pointer;       
 }
 
-
+div.hidden{
+	display: none;
+}
 
 

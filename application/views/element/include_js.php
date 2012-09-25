@@ -15,6 +15,7 @@ $js_includes = array_merge(
 		  'js/pubnub-3.1.min.js', 
 		  'js/geolocation.js', 
 		  'js/profile.js',
+		  'js/other_profile.js',
 		  'js/chat.js',
 		  'js/nearby.js',
 		  'js/friends.js',
@@ -24,7 +25,7 @@ $js_includes = array_merge(
 ?>
 <?php
 foreach ($js_includes as $js)
-	echo '<script src="' . VIEW_URL . $js . '"></script>' . "\n";
+	echo '<script src="' . VIEW_URL . $js .  '"></script>' . "\n";
 
 //echo '<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>'
 ?>

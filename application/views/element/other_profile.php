@@ -7,11 +7,10 @@
 	$hobbies ="Reading, Swimming, Playing games";
 ?>
 
-
-<div data-role="page" id="page6">
-    <div id='profile_header' data-theme="a" data-role="header">
-        <a id='edit_btn' data-role="button"  class="ui-btn-right" style="width:50px">Edit</a>
-        <h3>Profile</h3>
+<!-- Other Profile -->
+		<div data-role="page" id="page8">
+		     <div id='profile_header' data-theme="a" data-role="header">
+        <h3>Dear Friend</h3>
     </div>
     <div data-role="content" class="middlecontent ceil-text">
     	<div class="photo-area">
@@ -22,7 +21,7 @@
     		<ul id="info" data-role="listview" data-inset="true">
     			<li ><a href='#' class="single-line" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="arrow-r">
     				<div class="single-line-left">Name</div>
-    				<div class="single-line-right" id='profile_name'></div>
+    				<div class="single-line-right" id='other_profile_name'></div>
     			</a></li>
     			<li><a href='#'>
     				<div>Last Location</div>
@@ -30,7 +29,7 @@
     			</a></li><a href='#'>
     			<li>
     				<div>Status</div>
-    				<div id="profile_status"></div>
+    				<div id="other_profile_status"></div>
     			</a></li>
     		</ul>
     		<br/>
@@ -38,11 +37,11 @@
     			<li data-role="list-divider">Basic Info</li>
     			<li ><a class="single-line" href='#'>
     				<div class="single-line-left">Gender</div>
-    				<div class="single-line-right" id="profile_gender"></div>
+    				<div class="single-line-right" id="other_profile_gender"></div>
     			</a></li>
     			<li><a href='#'>
     				<div>Education</div>
-    				<div id="profile_education"> </div>
+    				<div id="other_profile_education"> </div>
     			</a></li>	        		
     			<li><a href='#'> 
     				<div>Hobbies</div>
@@ -50,6 +49,12 @@
     			</a></li>
     			
     		</ul>
+
+            <div style='margin-top:50px'>
+                <a id='follow_btn' data-role='button' data-inline="true">Follow</a>
+                <a id='chat_btn' data-role='button' data-inline="true">Chat</a>
+            </div>
+
         </div>
     </div>
     <div data-role="footer">
@@ -66,7 +71,7 @@
 	                </a>
 	            </li>
 	            <li>
-	                <a data-theme="b" data-icon="info">
+	                <a href="#page6" data-direction="reverse"  data-theme="" data-icon="info">
 	                    Profile
 	                </a>
 	            </li>

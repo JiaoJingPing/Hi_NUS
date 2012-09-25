@@ -135,6 +135,7 @@
                             position: new google.maps.LatLng(parseFloat(value.geometry.x), parseFloat(value.geometry.y)),
                             map: map, 
                             icon: image,
+                            email: value.email,
                             title: value.name,
                             content: value.status,
                         });
@@ -149,17 +150,26 @@
             }
         });
 
-        
+
+
+
+
         var infowindow = new google.maps.InfoWindow(
             {
                 content:'',
                 size: new google.maps.Size(50,50)
             });
         function attachSecretMessage(marker){
+            var photo =  '<span >\
+                            <a id="go_to_friend" href="#page8" data-theme="" data-icon="info">\
+                                <div class="hidden">'+marker.email+'</div>\
+                                <img src="../application/views/images/meinv.jpg" height="60" width="60" />\
+                            </a>\
+                        </span>';
             var message = '<table>\
                         <tr>\
                             <td class="left"\
-                                <span ><img src="../application/views/images/meinv.jpg" height="60" width="60" /></span>\
+                                '+photo+'\
                             </td>\
                             <td class="right" >\
                                 <div id="name"><b>'+marker.title+'</b> '+haversine(latitude,longitude,marker.position.Xa,marker.position.Ya)+'m'+'\
@@ -173,9 +183,61 @@
             google.maps.event.addListener(marker,'click',function(event){
                 infowindow.setContent(message);
                 infowindow.open(map,marker);
+                $('a#go_to_friend').click(function(){
+                    var friend_email = $(this).children('div')[0].innerHTML;
+                    var hashed = md5(friend_email);
+                    $.ajax({
+                        type : 'GET',
+                        url : urlConfig.user+'/email/'+hashed,
+                        headers : {
+                            'Authorization' : 'Basic ' + window.btoa( getCookie('user') +':' + getCookie('pw') )
+                        },
+                        success : function(response) {
+                            var result = jQuery.parseJSON(response);
+                            var data = result[0];
+                            console.log(data);
+                            $('#other_profile_name').html(data.name);
+                            $('#other_profile_name').addClass(data.gender);
+                            $('#other_profile_gender').html(data.gender.capitalize());
+                            $('#other_profile_gender').addClass(data.gender);
+                            $('#other_profile_status').html(data.status);
+                            $('#other_profile_status').addClass(data.gender);
+                            $('#other_profile_education').html(data.faculty + ' ' + data.major);
+                            $('#other_profile_education').addClass(data.gender);
+                        },
+                        error : function(response) {
+                            console.log('Cannot to login');
+                            //direct to login
+                        }
+                     });
+                    var isFollow=false;
+                    $.ajax({
+                        type : 'GET',
+                        url : urlConfig.follow,
+                        headers : {
+                            'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
+                        },
+                        success : function(data) {
+                            var data = jQuery.parseJSON(data);
+                            $('#follow_btn').children('span').children('span').text('Follow');
+                            $.each(data, function(index, value) {
+                                if(friend_email==value.user_followed){
+                                    $('#follow_btn').children('span').children('span').text('Unfollow');
+                                }
+                            });
+                        },
+                        error : function(response) {
+                            console.log('Cannot to get followed');
+                            //direct to login
+                        }
+                    });
+                })
             });
+
         }
     }
+
+    
 
     function post_location(lat,long){
 

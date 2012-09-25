@@ -47,7 +47,7 @@ class follow_model extends CI_Model {
 			$this -> db -> where('user', $user);
 			$this -> db -> where('user_followed', $user_followed);
 			$q = $this -> db -> get($this -> tableName);
-			return ($q -> num_rows() > 0);
+			return (!$q -> num_rows() > 0);
 		} else {
 			return FALSE;
 		}

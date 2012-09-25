@@ -231,6 +231,6 @@ String.prototype.capitalize = function() {
             }
         }
     }
-
+    
 
 })();
