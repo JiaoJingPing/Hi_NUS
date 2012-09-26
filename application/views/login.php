@@ -10,7 +10,10 @@ $this -> load -> view('util.php');
 		<?php
 		$this -> load -> view('element/include_css.php');
 		?>
-
+		<link rel="apple-touch-icon" href="<?php echo VIEW_URL?>images/touch-icon-iphone.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo VIEW_URL?>images/touch-icon-ipad.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="<?php echo VIEW_URL?>images/touch-icon-iphone4.png" />
+		<link rel="apple-touch-startup-image" href="<?php echo VIEW_URL?>images/splash.png" >
 		<title>Login</title>
 	</head>
 	<body>
