@@ -87,15 +87,13 @@ class user_model extends CI_Model {
 			$profile = array_key_exists('profile', $user) ? $user['profile'] : $default_profile;
 
 			$query = "INSERT INTO `" . $this -> tableName . "` ( `email` ,`name` ,`password` ,`gender` ,`status` , `major` ,`faculty` ,`profile`)
-			VALUES ('" . $user['email'] . "',  '" . $user['name'] . "', MD5(  '" . $user['password'] . "' ) ,  '" . $user['gender'] . "',  " . $status . ",  " . $major . ",  " . $faculty . ", '" . $profile . "')";
+			VALUES ('" . $user['email'] . "',  '" . $user['name'] . "', '" . $user['password'] . "' ,  '" . $user['gender'] . "',  " . $status . ",  " . $major . ",  " . $faculty . ", '" . $profile . "')";
 			$this -> db -> query($query);
 			return TRUE;
 		} else {
 			return false;
 		}
 	}
-
-
 
 	function isExist($input) {
 		foreach ($this->primaryKeys as $key) {

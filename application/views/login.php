@@ -10,20 +10,23 @@ $this -> load -> view('util.php');
 		<?php
 		$this -> load -> view('element/include_css.php');
 		?>
-
+		<link rel="apple-touch-icon" href="<?php echo VIEW_URL?>images/touch-icon-iphone.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo VIEW_URL?>images/touch-icon-ipad.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="<?php echo VIEW_URL?>images/touch-icon-iphone4.png" />
+		<link rel="apple-touch-startup-image" href="<?php echo VIEW_URL?>images/splash.png" >
 		<title>Login</title>
 	</head>
 	<body>
 		<!-- Home -->
 		<div data-role="page" id="new_uesr">
 			<div data-theme="a" data-role="header">
-				<h3>login</h3>
+				<h3>Hi NUS</h3>
 			</div>
 			<div data-role="content">
 				<div data-role="navbar">
 					<ul>
 						<li>
-							<a href="#new_uesr" data-theme="a" class="ui-btn-active ui-state-persist">New User</a>
+							<a href="#new_uesr" data-theme="a" class="ui-btn-active ui-state-persist">I am a new user</a>
 						</li>
 						<li>
 							<a href="#login" data-theme="a" >Login</a>
@@ -59,23 +62,22 @@ $this -> load -> view('util.php');
 						</input>
 					</div>
 
-					<div>
-						<a data-role='button' id="join_btn">Join</a>
+					<div align="center">
+						<a  data-role='button' data-inline='true' data-icon="check" data-role='button' id="join_btn">Join</a>
 					</div>
 				</div>
 
 			</div>
 		</div>
-
 		<div data-role="page" id="login">
 			<div data-theme="a" data-role="header">
-				<h3>login</h3>
+				<h3>Hi NUS</h3>
 			</div>
 			<div data-role="content">
 				<div data-role="navbar">
 					<ul>
 						<li>
-							<a href="#new_uesr" data-theme="a" >New User</a>
+							<a href="#new_uesr" data-theme="a" >I am a new user</a>
 						</li>
 						<li>
 							<a href="#login" data-theme="a" class="ui-btn-active ui-state-persist">Login</a>
@@ -91,18 +93,20 @@ $this -> load -> view('util.php');
 					</div>
 					<div>
 						<label>Password</label>
-						<input type='text' id="login_pass">
+						<input type='password' id="login_pass">
 						</input>
 					</div>
+					<br>
+					<div id="login-msg" >
 
-					<div>
-						<a data-role='button' id="login_btn" >Login</a>
+					</div>
+					<div align="center">
+						<a data-role='button' data-icon="check" id="login_btn" data-inline="true">Login</a>
 					</div>
 				</div>
 
 			</div>
 		</div>
-
 		<?php
 		$this -> load -> view('element/login_include_js.php');
 		?>
