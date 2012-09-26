@@ -10,7 +10,8 @@
     var coor_long;
     
     
-
+	var map;
+	
     function setGeolocation(){
         loadLocation();
     }
@@ -69,7 +70,7 @@
             center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
+        map = new google.maps.Map(document.getElementById("map_container"),myOptions);
 
         google.maps.event.trigger(map, 'resize');
 
@@ -442,8 +443,14 @@
 
     //-----------------------------------------------------
 
-    $('.page-map').live("pagecreate", function() {
-        init();
+    // $('.page-map').live("pagecreate", function() {
+        // init();
+    // });
+    $('.page-map').live('pageshow',function(){
+    	if(map!=null){
+    	 google.maps.event.trigger(map, 'resize');
+    	 }else{
+    	 	init();
+    	 }
     });
-    
 })()
