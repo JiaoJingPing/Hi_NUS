@@ -37,20 +37,19 @@
 				gender : $('a.toggle_btn > span >span').text().toLowerCase(),
 				name : $('#name').val(),
 				email : $('#email').val(),
-				password : $('#password').val()
+				password : md5($('#password').val())
 			};
 			$.post(urlConfig.new_user, user_info, function(result) {
 				console.log(result);
 				if (result) {
-					console.log('!!!!');
-					console.log($('#email').val());
 					setCookie('user', $('#email').val(), 7);
 					setCookie('pw', md5($('#password').val()), 7);
+					window.location.href = urlConfig.home;
 				} else {
 					$('#email_error_msg').html('Sorry, this email has been used');
 				}
 			}, 'json');
-			window.location.href = urlConfig.home;
+
 		}
 
 	});
