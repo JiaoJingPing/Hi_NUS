@@ -24,13 +24,15 @@ class user_model extends CI_Model {
 		$point = array();
 		foreach ($data as $key => $value) {
 			if ($key == 'email') {
-				$query = "SELECT email,name,gender,status,major,faculty,profile, AsText(last_location) as geometry,last_location_timestamp FROM `" . $this -> tableName . "` WHERE md5(email)='" . $value . "'";
+				$query = "SELECT email,name,gender,status,major,faculty,profile, AsText(last_location) as geometry,last_location_timestamp , hobbies FROM `" . $this -> tableName . "` WHERE md5(email)='" . $value . "'";
 				$q = $this -> db -> query($query);
 				return $this -> prepareResult($q);
 			} else if ($key == 'major') {
 				$this -> db -> where('major like', '%' . $value . '%');
 			} else if ($key == 'status') {
 				$this -> db -> where('status LIKE', '%' . $value . '%');
+			} else if ($key == 'hobbies') {
+				$this -> db -> where('hobbies LIKE', '%' . $value . '%');
 			} else if ($key == 'faculty') {
 				$this -> db -> where('faculty LIKE', '%' . $value . '%');
 			} else if ($key == 'name') {
@@ -39,7 +41,7 @@ class user_model extends CI_Model {
 				$this -> db -> where('gender', $value);
 			}
 		}
-		$this -> db -> select('email,name,gender,status,major,faculty,profile, AsText(last_location) as geometry,last_location_timestamp');
+		$this -> db -> select('email,name,gender,status,major,faculty,profile, AsText(last_location) as geometry,last_location_timestamp,hobbies');
 		$q = $this -> db -> get($this -> tableName);
 		//echo $this -> db -> last_query();
 		return $this -> prepareResult($q);
@@ -85,9 +87,9 @@ class user_model extends CI_Model {
 			$faculty = array_key_exists('faculty', $user) ? "'" . $user['faculty'] . "'" : $default;
 			$major = array_key_exists('major', $user) ? "'" . $user['major'] . "'" : $default;
 			$profile = array_key_exists('profile', $user) ? $user['profile'] : $default_profile;
-
-			$query = "INSERT INTO `" . $this -> tableName . "` ( `email` ,`name` ,`password` ,`gender` ,`status` , `major` ,`faculty` ,`profile`)
-			VALUES ('" . $user['email'] . "',  '" . $user['name'] . "', '" . $user['password'] . "' ,  '" . $user['gender'] . "',  " . $status . ",  " . $major . ",  " . $faculty . ", '" . $profile . "')";
+			$hobbies = array_key_exists('hobbies', $user) ? $user['hobbies'] : $default;
+			$query = "INSERT INTO `" . $this -> tableName . "` ( `email` ,`name` ,`password` ,`gender` ,`status` , `major` ,`faculty`,`hobbies` ,`profile`)
+			VALUES ('" . $user['email'] . "',  '" . $user['name'] . "', '" . $user['password'] . "' ,  '" . $user['gender'] . "',  " . $status . ",  " . $major . ",  " . $faculty . ",  " . $hobbie . ", '" . $profile . "')";
 			$this -> db -> query($query);
 			return TRUE;
 		} else {

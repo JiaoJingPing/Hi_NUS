@@ -1,7 +1,8 @@
 (function(){
 	function init(){
-		var user = getCookie('user');
-		var password = getCookie('pw');
+		var state=getState('member');
+		var user = state.user;
+		var password = state.pw;
 
 
         $('#follow_btn').click(function(){

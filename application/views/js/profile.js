@@ -1,7 +1,8 @@
 (function(){
 	function init_profile(){
-		var user = getCookie('user');
-		var password = getCookie('pw');
+		var member=getState('member');
+		var user = member.user;
+		var password = member.pw;
 		var hashed = md5(user);
 
 		$.ajax({
