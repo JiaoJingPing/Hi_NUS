@@ -128,7 +128,7 @@
             type : 'GET',
             url : urlConfig.user,
             headers : {
-                'Authorization' : 'Basic ' + window.btoa( getCookie('user') +':' + getCookie('pw') )
+                'Authorization' : 'Basic ' + window.btoa( getState('member').user + ':' + getState('member').pw )
             },
             success : function(response) {
                 var result = jQuery.parseJSON(response);
@@ -170,7 +170,7 @@
             });
         function attachSecretMessage(marker){
             var photo;
-            if(marker.email!=getCookie('user')){
+            if(marker.email!= getState('member').user){
                 photo = '<span >\
                             <a id="go_to_friend" href="#page8" data-theme="">\
                                 <div class="hidden">'+marker.email+'</div>\
@@ -210,7 +210,7 @@
                         type : 'GET',
                         url : urlConfig.user+'/email/'+hashed,
                         headers : {
-                            'Authorization' : 'Basic ' + window.btoa( getCookie('user') +':' + getCookie('pw') )
+                            'Authorization' : 'Basic ' + window.btoa( getState('member').user + ':' + getState('member').pw  )
                         },
                         success : function(response) {
                             var result = jQuery.parseJSON(response);
@@ -237,7 +237,7 @@
                         type : 'GET',
                         url : urlConfig.follow,
                         headers : {
-                            'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
+                            'Authorization' : 'Basic ' + window.btoa(getState('member').user + ':' + getState('member').pw )
                         },
                         success : function(data) {
                             console.log(1);
@@ -270,7 +270,7 @@
             type : 'POST',
             url : urlConfig.post_location,
             headers : {
-                'Authorization' : 'Basic ' + window.btoa( getCookie('user') +':' + getCookie('pw') )
+                'Authorization' : 'Basic ' + window.btoa( getState('member').user + ':' + getState('member').pw  )
             },
             data:point,
             error : function(response) {
@@ -409,7 +409,7 @@
             type : 'GET',
             url : urlConfig.location,
             headers : {
-                'Authorization' : 'Basic ' + window.btoa( getCookie('user') +':' + getCookie('pw') )
+                'Authorization' : 'Basic ' + window.btoa( getState('member').user + ':' + getState('member').pw )
             },
             success : function(response) {
                 var result = jQuery.parseJSON(response);

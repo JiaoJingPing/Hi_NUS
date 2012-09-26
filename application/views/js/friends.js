@@ -1,12 +1,13 @@
 (function() {
 
 	window.getFollowed = function (){
+		console.log(getState('member'));
 		var friends_info = '';
 		$.ajax({
 			type : 'GET',
 			url : urlConfig.follow,
 			headers : {
-				'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
+				'Authorization' : 'Basic ' + window.btoa( getState('member').user + ':' + getState('member').pw )
 			},
 			success : function(data) {
 				var data = jQuery.parseJSON(data);
@@ -19,7 +20,7 @@
 						type : "GET",
 						url : urlConfig.user + '/email/' + hashed,
 						headers : {
-							'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
+							'Authorization' : 'Basic ' + window.btoa(getState('member').user + ':' + getState('member').pw )
 						},
 						success : function(data) {
 							var data = jQuery.parseJSON(data);
@@ -52,7 +53,7 @@
 							        type : 'GET',
 							        url : urlConfig.user+'/email/'+hashed,
 							        headers : {
-							            'Authorization' : 'Basic ' + window.btoa( getCookie('user') +':' + getCookie('pw') )
+							            'Authorization' : 'Basic ' + window.btoa( getState('member').user + ':' + getState('member').pw  )
 							        },
 							        success : function(response) {
 							            var result = jQuery.parseJSON(response);
@@ -79,7 +80,7 @@
 									type : 'GET',
 									url : urlConfig.follow,
 									headers : {
-										'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
+										'Authorization' : 'Basic ' + window.btoa(getState('member').user + ':' + getState('member').pw )
 									},
 									success : function(data) {
 										var data = jQuery.parseJSON(data);

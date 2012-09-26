@@ -16,7 +16,7 @@
                     type : 'POST',
                     url : urlConfig.follow,
                     headers : {
-                        'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
+                        'Authorization' : 'Basic ' + window.btoa(getState('member').user + ':' + getState('member').pw )
                     },
                     data : {'user_followed': friend_email},
                     success : function(response) {
@@ -37,7 +37,7 @@
                     type : 'DELETE',
                     url : urlConfig.follow,
                     headers : {
-                        'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
+                        'Authorization' : 'Basic ' + window.btoa(getState('member').user + ':' + getState('member').pw )
                     },
                     data : {'user_followed': friend_email},
                     success : function(response) {

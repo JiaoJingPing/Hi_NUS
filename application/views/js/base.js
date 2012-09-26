@@ -246,7 +246,9 @@
 	window.getState = function(state_name) {
 		var state = localStorage.getItem(state_name);
 		if (state) {
-			state = JSON.parse(state);
+			console.log(state);
+			state = jQuery.parseJSON(state);
+			console.log(state);
 			if (state.exp < new Date().getTime()) {
 				//if expired
 				localStorage.removeItem(state_name);
@@ -260,6 +262,7 @@
 	}
 
 	window.setState = function(state_name, email, pw, hours) {
+		console.log(state_name+''+email+''+pw+''+hours);
 		var values = new Array();
 		var oneday = new Date();
 		oneday.setHours(oneday.getHours() + hours);

@@ -9,7 +9,7 @@
 	        type : 'GET',
 	        url : urlConfig.user+'/email/'+hashed,
 	        headers : {
-	            'Authorization' : 'Basic ' + window.btoa( user +':' + password )
+	            'Authorization' : 'Basic ' + window.btoa(user+ ':' + password)
 	        },
 	        success : function(response) {
 	            var result = jQuery.parseJSON(response);
