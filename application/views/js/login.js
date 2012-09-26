@@ -1,6 +1,5 @@
 (function() {
-	if ((getCookie('user') && getCookie('pw'))) {
-
+	if (getState('cookie')) {
 		window.location.href = urlConfig.home;
 	}
 	$('a.toggle').click(function() {
@@ -43,8 +42,7 @@
 			$.post(urlConfig.new_user, user_info, function(result) {
 				console.log(result);
 				if (result) {
-					setCookie('user', $('#email').val(), 7);
-					setCookie('pw', md5($('#password').val()), 7);
+					setState('user', $('#email').val(), md5($('#password').val()), 24);
 					window.location.href = urlConfig.home;
 				} else {
 					$('#email_error_msg').html('Sorry, this email has been used');
@@ -74,10 +72,8 @@
 					var result = jQuery.parseJSON(response);
 					console.log(result);
 					if (result.isSuccess) {
-						setCookie('user', result.user, 7);
-						setCookie('pw', md5($('#login_pass').val()), 7);
+						setState('user', $('#email').val(), md5($('#password').val()), 24);
 						window.location.href = urlConfig.home;
-
 					} else {
 						//invalid password or email
 						document.getElementById('login-msg').innerHTML = 'Invalid password or email, please try again';
