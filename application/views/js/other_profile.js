@@ -22,6 +22,8 @@
                         var result = jQuery.parseJSON(response);
                         if(result)
                             $('#follow_btn').children('span').children('span').text('Unfollow');
+                        $('#friend-list').find('li').remove();
+           				getFollowed();
                     },
                     error : function(response) {
                         console.log('Cannot to follow');
@@ -41,12 +43,16 @@
                         var result = jQuery.parseJSON(response);
                         if(result)
                             $('#follow_btn').children('span').children('span').text('Follow');
+                        $('#friend-list').find('li').remove();
+            			getFollowed();
                     },
                     error : function(response) {
                         console.log('Cannot to Unfollow');
                     }   
                 });
             }
+            
+
         });
 		
 

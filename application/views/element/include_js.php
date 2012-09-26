@@ -21,6 +21,7 @@ $js_includes = array_merge(
 		  'js/friends.js',
 		  'js/jquery.watermark.min.js',
 		  'js/setting.js',
+		  'js/profile.js',
     ), $js_includes);
 ?>
 <?php

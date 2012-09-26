@@ -28,30 +28,14 @@
 	        }
 	    });
 
-
-
-		$('a#edit_btn').click(function(){
-			$this = $(this);
-			$span = $(this).children('span').children('span');
-			if($span.text()=='Edit'){
-				$span.text('Save');
-				//$('div#profile_header').append('<a id="cencil_btn" data-role="button" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-hover-a ui-btn-up-a" style="width:80px" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Cencil</span></span></a>');
+		$('a.edit').click(function(){
+			var type = $(this).children('div')[0].innerHTML;
+			var value = $(this).children('div')[1].innerHTML;
+			$('#edit_header').html(type);
+			$("#edit_input").attr('value',value);
 			
-				$ul = $('ul#info');
-				$ul.find('a').attr('href','#page5');
-
-
-			}
-			else if($span.text()=='Save'){
-				$span.text('Edit');
-
-				$ul = $('ul#info');
-				$ul.find('a').attr('href','#');
-				//$('div#profile_header').children('a#cencil_btn').remove();
-			}
-
-
 		});
+
 	}
 	
 	init_profile();

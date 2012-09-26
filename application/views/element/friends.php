@@ -28,7 +28,7 @@
 		<h3> Friends </h3>
 	</div>
 	<div data-role="content" class="middlecontent">
-		<ul id="friend-list" data-role="listview" data-filter="true" data-inset="true" data-filter-placeholder="Search people...">
+		<ul id="friend-list" data-role="listview"  data-filter="true" data-inset="true" data-filter-placeholder="Search people..." > 
 		</ul>
 
 	</div>
