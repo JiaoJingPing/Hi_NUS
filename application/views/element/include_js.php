@@ -22,6 +22,7 @@ $js_includes = array_merge(
 		  'js/jquery.watermark.min.js',
 		  'js/setting.js',
 		  'js/profile.js',
+		  'js/edit.js',
     ), $js_includes);
 ?>
 <?php

@@ -33,7 +33,6 @@
 			var value = $(this).children('div')[1].innerHTML;
 			$('#edit_header').html(type);
 			$("#edit_input").attr('value',value);
-			
 		});
 
 	}

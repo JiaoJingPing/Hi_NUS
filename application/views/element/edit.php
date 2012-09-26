@@ -1,7 +1,7 @@
 
 <div data-role="page" id="page10">
     <div  data-theme="a" data-role="header">
-        <a id='edit_btn' href="#page6" data-role="button"  class="ui-btn-left" style="width:70px">Save</a>
+        <a id='edit_btn' href="#page6" data-role="button" class="ui-btn-left" style="width:70px">Save</a>
         <h3 id='edit_header'>Edit</h3>
     </div>
     <div data-role="content" class="info-area middlecontent ceil-text">
@@ -9,6 +9,7 @@
     		<input type="text" id="edit_input" style="margin-left:10px" value=""  />
 		</div>
 		<div id="desc" class="desc" style="margin-left:10px">
+			<div id="edit_msg" class="error_msg"></div>
 			Save information after editing
 		</div>
     </div>
