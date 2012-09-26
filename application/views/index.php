@@ -50,7 +50,7 @@ $this -> load -> view('util.php');
 				$('#map_container').animate({height: (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract}, 1500);
 			}
 
-		</script>
+		 </script>
 
 		<title>Mobile App</title>
 		
@@ -71,7 +71,7 @@ $this -> load -> view('util.php');
 	</head>
 	<body>
 		<!-- Home -->
-		<div data-role="page" id="page1" class="page">
+		<div data-role="page" id="page1" class="page-map">
 
 			<div data-theme="a" data-role="header" id="topbar">
 				<button  data-mini="true" class="ui-btn-left" id="show_me" style="width:50px" > Show Me </button>
@@ -79,7 +79,7 @@ $this -> load -> view('util.php');
 				<a data-role="button" data-transition="flip" href="#page4" onClick="switchToChat();" class="ui-btn-right"> Chat </a>
 			</div>
 			<div data-role="content" class="middlecontent">
-				<div id="map_container" style="height:600px">
+				<div id="map_container" data-role="content" style="height:600px">
 					<span id="status">Loading...</span>
 				</div>
 			</div>
@@ -125,6 +125,6 @@ $this -> load -> view('util.php');
 			hideDiv();
 		});
 		</script>
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>
+		
 	</body>
 </html>

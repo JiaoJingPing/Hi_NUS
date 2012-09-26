@@ -1,14 +1,11 @@
 <!-- Setting -->
 		<div data-role="page" id="page7" class="page">
 		     <div data-theme="a" data-role="header" id="topbar">
-		            <a data-role="button" data-transition="flip" href="#" class="ui-btn-left">
-		                People
-		            </a>
 		            <h3>
-		                Header
+		                Setting
 		            </h3>
-		            <a data-role="button" data-transition="flip" href="#page4" class="ui-btn-right">
-		                Chat
+		            <a id="logout" data-role="button" class="ui-btn-right" style="width:70px">
+		                Logout
 		            </a>
 		       </div>
 		    <div data-role="content" class="middlecontent">

@@ -29,7 +29,8 @@ $hobbies = "Reading, Swimming, Playing games";
     	<div class="info-area">
     		<ul id="info" data-role="listview" data-inset="true">
     			<li ><a href='#' class="single-line" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="arrow-r">
-    				<div class="single-line-left">Name</div>
+    				<div class="hidden" id="other_profile_email"></div>
+                    <div class="single-line-left">Name</div>
     				<div class="single-line-right" id='other_profile_name'></div>
     			</a></li>
     			<li><a href='#'>
