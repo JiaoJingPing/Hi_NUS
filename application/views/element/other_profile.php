@@ -1,10 +1,10 @@
 <?php
-	$name = "Bei Chuan";
-	$last_location ="National University of Singapore SOC";
-	$status = "CSS is really a shit stuff";
-	$gender="female";
-	$education="National University of Singapore SOC";
-	$hobbies ="Reading, Swimming, Playing games";
+$name = "Bei Chuan";
+$last_location = "National University of Singapore SOC";
+$status = "CSS is really a shit stuff";
+$gender = "female";
+$education = "National University of Singapore SOC";
+$hobbies = "Reading, Swimming, Playing games";
 ?>
 
 <!-- Other Profile -->
@@ -14,8 +14,17 @@
     </div>
     <div data-role="content" class="middlecontent ceil-text">
     	<div class="photo-area">
-    		<img class="photo"  src="http://assets.codiqa.com/ps/33214/5f4d06279d261a441-1111051TA1.jpg">
-    		<!--<button id="change_photo" data-inline="true" data-theme="e">Change</button>-->
+    		<fieldset class="ui-grid-a">
+			<div class="ui-block-a"><img class="photo" style="" src="http://assets.codiqa.com/ps/33214/5f4d06279d261a441-1111051TA1.jpg"></div>
+			<div class="ui-block-d"><!--<button id="change_photo" data-inline="true" data-theme="e">Change</button>-->
+    		<div>
+                <a id='follow_btn'data-theme='b' style="float:right" data-iconpos="right" data-role='button' data-inline="true">Follow</a>
+                <a id='chat_btn' data-theme='b' style="float:right" data-iconpos="right" data-role='button' data-inline="true">Chat</a>
+            </div>
+            </div>	   
+			</fieldset>
+    		
+    		
     	</div>
     	<div class="info-area">
     		<ul id="info" data-role="listview" data-inset="true">
@@ -25,7 +34,7 @@
     			</a></li>
     			<li><a href='#'>
     				<div>Last Location</div>
-    				<div class=<?php echo($gender);?>><?php echo($last_location);?></div>
+    				<div class=<?php echo($gender); ?>><?php echo($last_location); ?></div>
     			</a></li><a href='#'>
     			<li>
     				<div>Status</div>
@@ -45,15 +54,12 @@
     			</a></li>	        		
     			<li><a href='#'> 
     				<div>Hobbies</div>
-    				<div class = <?php echo($gender);?> > <?php echo($hobbies);?></div>
+    				<div class = <?php echo($gender); ?> > <?php echo($hobbies); ?></div>
     			</a></li>
     			
     		</ul>
 
-            <div style='margin-top:50px'>
-                <a id='follow_btn' data-role='button' data-inline="true">Follow</a>
-                <a id='chat_btn' data-role='button' data-inline="true">Chat</a>
-            </div>
+            
 
         </div>
     </div>
