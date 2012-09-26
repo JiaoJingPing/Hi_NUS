@@ -1,5 +1,5 @@
 (function() {
-    if (!(getCookie('user') || getCookie('pw'))) {
+    if (!getState('member')) {
 		window.location.href = urlConfig.login;
 	}
 

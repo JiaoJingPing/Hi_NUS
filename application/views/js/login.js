@@ -1,5 +1,5 @@
 (function() {
-	if (getState('cookie')) {
+	if (getState('member')) {
 		window.location.href = urlConfig.home;
 	}
 	$('a.toggle').click(function() {
@@ -42,7 +42,7 @@
 			$.post(urlConfig.new_user, user_info, function(result) {
 				console.log(result);
 				if (result) {
-					setState('user', $('#email').val(), md5($('#password').val()), 24);
+					setState('member', $('#email').val(), md5($('#password').val()), 24);
 					window.location.href = urlConfig.home;
 				} else {
 					$('#email_error_msg').html('Sorry, this email has been used');
@@ -72,7 +72,7 @@
 					var result = jQuery.parseJSON(response);
 					console.log(result);
 					if (result.isSuccess) {
-						setState('user', $('#email').val(), md5($('#password').val()), 24);
+						setState('member', result.user, md5($('#password').val()), 24);
 						window.location.href = urlConfig.home;
 					} else {
 						//invalid password or email
