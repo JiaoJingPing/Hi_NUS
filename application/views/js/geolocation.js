@@ -17,7 +17,7 @@
     function loadLocation() {
         if(navigator.geolocation) {
             //document.getElementById("status").innerHTML = "HTML5 Geolocation is supported in your browser.";
-            watchId = navigator.geolocation.watchPosition(updateLocation,handleLocationError,{ maximumAge:5000, enableHighAccuracy:true});
+            watchId = navigator.geolocation.watchPosition(updateLocation,handleLocationError,{ maximumAge:5000});
         }
     }
 
@@ -53,14 +53,15 @@
             my_timer = setInterval(function(){
                 post_location(latitude,longitude);
             }, 10000);
-
-            init_map(latitude,longitude);    
+        
+           init_map(latitude,longitude);    
         }
     }
     
 
     var my_timer;
     function init_map(latitude,longitude){
+
         var latlng = new google.maps.LatLng(latitude, longitude);
         var myOptions = {
             zoom: 17,
@@ -69,32 +70,32 @@
         };
         var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
 
+        google.maps.event.trigger(map, 'resize');
+
         //show me 
         $('#show_me').click(function(){
             map.panTo(latlng);
         });
 
         var current = new Point(latitude,longitude);
+        var loc_name = 'undefined';
         $('#location_title').html('undefined');
 
             //check location{
-            // highlight and make mark
+            //highlight and make mark
             //}
 
         for (var i = 0; i < window.mydata.length; i++) {
-            var loc_name = window.mydata[i].name;
+            loc_name = window.mydata[i].name;
             var loc_polygon = window.mydata[i].polygon;
             loc_polygon.push(loc_polygon[0]);
 
             if(inPolygon(current,loc_polygon)){
 
-                $('#location_title').html(loc_name);
+                $('h3#location_title').html(loc_name);
                 //chat room update
 
-                chatConnection(loc_name);
-                $('#enterButton').click(function(){
-                    sendChat(loc_name, $("#contentBox").val());
-                });
+                
                 ///////////////////
                 var PolygonCoords = [];
                 for (var i = 0; i < loc_polygon.length; i++) {
@@ -114,7 +115,12 @@
                 break;
             }
         }  
+        var chatroom = $('#location_title').html();
 
+        chatConnection(chatroom);
+        $('#enterButton').click(function(){
+            sendChat(chatroom, $("#contentBox").val());
+        });
         
 
         $.ajax({
@@ -162,20 +168,31 @@
                 size: new google.maps.Size(50,50)
             });
         function attachSecretMessage(marker){
-            var photo =  '<span >\
-                            <a id="go_to_friend" href="#page8" data-theme="" data-icon="info">\
+            var photo;
+            if(marker.email!=getCookie('user')){
+                photo = '<span >\
+                            <a id="go_to_friend" href="#page8" data-theme="">\
                                 <div class="hidden">'+marker.email+'</div>\
                                 <img src="../application/views/images/meinv.jpg" height="60" width="60" />\
                             </a>\
                         </span>';
+            }else{
+                photo = '<span >\
+                            <a id="go_to_friend" href="#page6" data-theme="">\
+                                <div class="hidden">'+marker.email+'</div>\
+                                <img src="../application/views/images/meinv.jpg" height="60" width="60" />\
+                            </a>\
+                        </span>';
+            }
+            
             var message = '<table>\
                         <tr>\
-                            <td class="left"\
+                            <td class="left">\
                                 '+photo+'\
                             </td>\
                             <td class="right" >\
                                 <div id="name"><b>'+marker.title+'</b> '+haversine(latitude,longitude,marker.position.Xa,marker.position.Ya)+'m'+'\
-                                </div>\
+                               </div>\
                                 <div id="other">'+marker.content+'\
                                 </div>\
                             </td>\
@@ -197,7 +214,7 @@
                         success : function(response) {
                             var result = jQuery.parseJSON(response);
                             var data = result[0];
-                            console.log(data);
+                            $('#other_profile_email').text(data.email);
                             $('#other_profile_name').html(data.name);
                             $('#other_profile_name').addClass(data.gender);
                             $('#other_profile_gender').html(data.gender.capitalize());
@@ -220,37 +237,12 @@
                             'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
                         },
                         success : function(data) {
+                            console.log(1);
                             var data = jQuery.parseJSON(data);
                             $('#follow_btn').children('span').children('span').text('Follow');
                             $.each(data, function(index, value) {
                                 if(friend_email==value.user_followed){
                                     $('#follow_btn').children('span').children('span').text('Unfollow');
-                                }
-                            });
-                            console.log($('#follow_btn'));
-                            $('#follow_btn').live(click,function(){
-                                //get button val
-                                console.log(1);
-                                if(true){
-                                    $.ajax({
-                                        type : 'POST',
-                                        url : urlConfig.follow,
-                                        headers : {
-                                            'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
-                                        },
-                                        data : {'user_followed': friend_email},
-                                        success : function(response) {
-                                            var result = jQuery.parseJSON(response);
-                                            if(result)
-                                                $('#follow_btn').children('span').children('span').text('Unfollow');
-                                        },
-                                        error : function(response) {
-                                            console.log('Cannot to follow');
-                                        }   
-                                    });
-                                }
-                                else{
-                                    console.log(1);
                                 }
                             });
                         },
@@ -259,7 +251,7 @@
                             //direct to login
                         }
                     });
-                    
+                   
                 })
             });
 
@@ -434,7 +426,7 @@
                     }
                     window.mydata = location;
                 }  
-                setGeolocation();
+               setGeolocation();
             },
             error : function(response) {
                 console.log('Cannot set geolocation');
@@ -443,16 +435,12 @@
         });
     }
 
-    $('a[href*="#page1"]').click(function(){
-        console.log('refresh');
-        init();
-    });
+    
 
     //-----------------------------------------------------
-    $(function() {
-        $('#map_container').on('fixed',function(){
-         
-            init();
-        });
+
+    $('.page-map').live("pagecreate", function() {
+        init();
     });
-})();
+    
+})()

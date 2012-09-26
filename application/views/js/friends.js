@@ -54,7 +54,7 @@
 						        success : function(response) {
 						            var result = jQuery.parseJSON(response);
 						            var data = result[0];
-						            console.log(data);
+						            $('#other_profile_email').text(data.email);
 									$('#other_profile_name').html(data.name);
 									$('#other_profile_name').addClass(data.gender);
 									$('#other_profile_gender').html(data.gender.capitalize());
