@@ -16,18 +16,18 @@
 		}
 		else{
 
-			$.ajax({
-		        type : 'POST',
-		        url : urlConfig.user,
-		        headers : {
-		            'Authorization' : 'Basic ' + window.btoa( getState('member').user +':' + getState('member').pw )
-		        },
-		        data : {}
-		        error : function(response) {
-		            console.log('Cannot to login');
-		            //direct to login
-		        }
-		    });
+			// $.ajax({
+		 //        type : 'POST',
+		 //        url : urlConfig.user,
+		 //        headers : {
+		 //            'Authorization' : 'Basic ' + window.btoa( getState('member').user +':' + getState('member').pw )
+		 //        },
+		 //        data : {}
+		 //        error : function(response) {
+		 //            console.log('Cannot to login');
+		 //            //direct to login
+		 //        }
+		 //    });
 
 
 

@@ -50,9 +50,13 @@ $hobbies = "Reading, Swimming, Playing games";
     				<div class="single-line-right" id="other_profile_gender"></div>
     			</a></li>
     			<li><a href='#'>
-    				<div>Education</div>
-    				<div id="other_profile_education"> </div>
-    			</a></li>	        		
+                    <div>Faculty</div>
+                    <div id="profile_faculty"> </div>
+                </a></li>
+                <li><a href='#'>
+                    <div>Major</div>
+                    <div id="profile_major"> </div>
+                </a></li>   	        		
     			<li><a href='#'> 
     				<div>Hobbies</div>
     				<div class = <?php echo($gender); ?> > <?php echo($hobbies); ?></div>

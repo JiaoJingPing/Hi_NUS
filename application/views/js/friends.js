@@ -64,8 +64,10 @@
 										$('#other_profile_gender').addClass(data.gender);
 										$('#other_profile_status').html(data.status);
 										$('#other_profile_status').addClass(data.gender);
-										$('#other_profile_education').html(data.faculty + ' ' + data.major);
-										$('#other_profile_education').addClass(data.gender);
+										$('#profile_major').html(data.major);
+										$('#profile_major').addClass(data.gender);
+										$('#profile_hobbies').html(data.hobbies);
+										$('#profile_hobbies').addClass(data.gender);
 							        },
 							        error : function(response) {
 							            console.log('Cannot to login');

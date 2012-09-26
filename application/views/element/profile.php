@@ -41,12 +41,16 @@
     				<div class="single-line-right" id="profile_gender"></div>
     			</a></li>
     			<li><a href='#page10' class='edit'>
-    				<div>Education</div>
-    				<div id="profile_education"> </div>
-    			</a></li>	        		
+    				<div>Faculty</div>
+    				<div id="profile_faculty"> </div>
+    			</a></li>
+                <li><a href='#page10' class='edit'>
+                    <div>Major</div>
+                    <div id="profile_major"> </div>
+                </a></li>	        		
     			<li><a href='#page10' class='edit'> 
     				<div>Hobbies</div>
-    				<div class = <?php echo($gender);?> > <?php echo($hobbies);?></div>
+    				<div id="profile_hobbies"></div>
     			</a></li>
     			
     		</ul>
