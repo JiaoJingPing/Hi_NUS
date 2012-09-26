@@ -1,7 +1,6 @@
 (function() {
 
 	window.getFollowed = function (){
-		console.log(getState('member'));
 		var friends_info = '';
 		$.ajax({
 			type : 'GET',

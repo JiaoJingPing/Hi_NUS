@@ -42,8 +42,9 @@
 			$.post(urlConfig.new_user, user_info, function(result) {
 				console.log(result);
 				if (result) {
+					console.log($('#password').val());
 					setState('member', $('#email').val(), md5($('#password').val()), 24);
-					window.location.href = urlConfig.home;
+					//window.location.href = urlConfig.home;
 				} else {
 					$('#email_error_msg').html('Sorry, this email has been used');
 				}
@@ -59,10 +60,9 @@
 		if (!isEmail($('#login_email').val())) {
 			$('#login_email').val('');
 			$('#error_msg').html('Email not validate');
-			//error = true;
+			error = true;
 		}
 		if (!error) {
-			console.log(111);
 			$.ajax({
 				type : 'POST',
 				url : 'user/login',
@@ -73,13 +73,14 @@
 					var result = jQuery.parseJSON(response);
 					console.log(result);
 					if (result.isSuccess) {
-						setState('member', result.user, md5($('#password').val()), 24);
+						setState('member', result.user, md5($('#login_pass').val()), 24);
 						window.location.href = urlConfig.home;
 					} else {
 						//invalid password or email
 						document.getElementById('login-msg').innerHTML = 'Invalid password or email, please try again';
 					}
 				},
+				
 			});
 		}
 	});
