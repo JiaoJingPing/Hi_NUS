@@ -1,5 +1,6 @@
 (function() {
-    if (!(getState('member').user || getState('member').pw)) {
+
+    if (!getState('member')) {
 		window.location.href = urlConfig.login;
 	}
 

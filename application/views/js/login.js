@@ -72,7 +72,11 @@
 					var result = jQuery.parseJSON(response);
 					console.log(result);
 					if (result.isSuccess) {
+<<<<<<< HEAD
 						setState('member', $('#email').val(), md5($('#password').val()), 24);
+=======
+						setState('member', result.user, md5($('#password').val()), 24);
+>>>>>>> 9baaa960c196b8128897e1c30404dfe825c2e325
 						window.location.href = urlConfig.home;
 					} else {
 						//invalid password or email
