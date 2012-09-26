@@ -1,5 +1,6 @@
 (function() {
 	if ((getCookie('user') && getCookie('pw'))) {
+
 		window.location.href = urlConfig.home;
 	}
 	$('a.toggle').click(function() {
@@ -75,22 +76,13 @@
 					if (result.isSuccess) {
 						setCookie('user', result.user, 7);
 						setCookie('pw', md5($('#login_pass').val()), 7);
-						// $.cookie("user", result.user, {
-						//     expires : 7
-						// });
-						// $.cookie("pw", md5($('#login_pass').val()), {
-						//     expires : 7
-						// });
 						window.location.href = urlConfig.home;
 
 					} else {
 						//invalid password or email
-						alert('Invalid pw or email');
+						document.getElementById('login-msg').innerHTML = 'Invalid password or email, please try again';
 					}
 				},
-				error : function(response) {
-					alert('Failed to login')
-				}
 			});
 		}
 	});
