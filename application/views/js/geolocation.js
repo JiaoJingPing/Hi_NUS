@@ -17,7 +17,7 @@
     function loadLocation() {
         if(navigator.geolocation) {
             //document.getElementById("status").innerHTML = "HTML5 Geolocation is supported in your browser.";
-            watchId = navigator.geolocation.watchPosition(updateLocation,handleLocationError,{ maximumAge:5000});
+            watchId = navigator.geolocation.watchPosition(updateLocation,handleLocationError,{ maximumAge:5000, enableHighAccuracy:true});
         }
     }
 
@@ -212,7 +212,7 @@
                             //direct to login
                         }
                      });
-                    var isFollow=false;
+
                     $.ajax({
                         type : 'GET',
                         url : urlConfig.follow,
@@ -227,12 +227,39 @@
                                     $('#follow_btn').children('span').children('span').text('Unfollow');
                                 }
                             });
+                            console.log($('#follow_btn'));
+                            $('#follow_btn').live(click,function(){
+                                //get button val
+                                console.log(1);
+                                if(true){
+                                    $.ajax({
+                                        type : 'POST',
+                                        url : urlConfig.follow,
+                                        headers : {
+                                            'Authorization' : 'Basic ' + window.btoa(getCookie('user') + ':' + getCookie('pw'))
+                                        },
+                                        data : {'user_followed': friend_email},
+                                        success : function(response) {
+                                            var result = jQuery.parseJSON(response);
+                                            if(result)
+                                                $('#follow_btn').children('span').children('span').text('Unfollow');
+                                        },
+                                        error : function(response) {
+                                            console.log('Cannot to follow');
+                                        }   
+                                    });
+                                }
+                                else{
+                                    console.log(1);
+                                }
+                            });
                         },
                         error : function(response) {
                             console.log('Cannot to get followed');
                             //direct to login
                         }
                     });
+                    
                 })
             });
 
