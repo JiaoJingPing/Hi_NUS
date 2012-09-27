@@ -213,25 +213,74 @@
 		  //sendBtn').animate({height:  $('#contentBox').height()},'slow');
 		  //$('#msgRcv').animate({height: $(window).height() - heightToSubtract}, 'slow');
 		  $('#chatTable').animate({height: $(window).height() - heightToSubtract}, 'slow');
+		  
 		
+	}
+	function makeNameBold(str)
+	{
+		var n=str.split(" ");
+		n[0] = "<b>" + n[0] + "</b>";
+		var str1 = "";
+		for(var i = 0; i < n.length; i++)
+		{
+			str1 += (n[i] + " ");
+		}
+		return str1;
+	}
+	function removeName(str)
+	{
+		var n=str.split(" ");
+		n[0] = "";
+		var str1 = "";
+		for(var i = 0; i < n.length; i++)
+		{
+			str1 += (n[i] + " ");
+		}
+		return str1;
 	}
 	function gotMessage(msg)
 	{
-		if(msg == $('#contentBox').val())
-			appendSend(msg);
+		  $('.sendMsg').css({'max-width' : $(window).width()*.3});
+		  $('.recvMsg').css({'max-width' : $(window).width()*.3});
+		if(msg == $('#profile_name').html() + ': ' + $('#contentBox').val())
+			appendSend("<b>You: </b>" + removeName(msg));
 		else
-			appendRecv(msg);
+			appendRecv(makeNameBold(msg));
+	}
+	function getTime()
+	{
+	
+		var d = new Date();
+		//var day = d.getdate(); // day of month
+		//var year = d.getFullYear(); // year - 4 digits
+		//var hours = d.getHours(); // hour 0 - 23
+		//var min = d.getMinutes(); // minutes 0 - 59
+		//var sec = d.getSeconds(); // sec 0 - 59
+		
+		//var fulltime = "";
+		//fulltime += (hours + minutes + ',' + day + '/' + month);
+		//var fulltime = d;
+		var temp = ""
+		temp += d;
+		var fulltime=temp.split(" ");
+		var day = fulltime[0];
+		var time = fulltime[4];
+		return day + ", " + time;
 	}
 	function appendRecv(msg)
 	{
 			//$('#msgRcv').append('<div class="recvMsg">'+msg+'</div><br>');
+			msg += ("<p class='timeStyle'><i>Recd At: </i>" + getTime() + "</p>");
 			$('#chatTable').append('<tr><td class="recvMsg" colspan=1 rowspan=1>'+msg+'</td></tr>');
 	}
 	function appendSend(msg)
 	{
+		
 		$('#contentBox').val('');
+		msg += ("<p class='timeStyle'><i>Sent At: </i>" + getTime() + "</p>");
 		//$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
 		$('#chatTable').append('<tr><td class="sendMsg" colspan=1 rowspan=1>'+msg+'</td></tr>');
+		
 		endSending();
 	}
 
@@ -249,6 +298,10 @@
 	}
 </script>
 <style>
+.timeStyle
+{
+	font-size: 0.8em;
+}
 .recvMsg
 {
 	position: absolute;
