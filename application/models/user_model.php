@@ -89,9 +89,9 @@ class user_model extends CI_Model {
 			$profile = array_key_exists('profile', $user) ? $user['profile'] : $default_profile;
 			$hobbies = array_key_exists('hobbies', $user) ? $user['hobbies'] : $default;
 			$query = "INSERT INTO `" . $this -> tableName . "` ( `email` ,`name` ,`password` ,`gender` ,`status` , `major` ,`faculty`,`hobbies` ,`profile`)
-			VALUES ('" . $user['email'] . "',  '" . $user['name'] . "', '" . $user['password'] . "' ,  '" . $user['gender'] . "',  " . $status . ",  " . $major . ",  " . $faculty . ",  " . $hobbie . ", '" . $profile . "')";
+			VALUES ('" . $user['email'] . "',  '" . $user['name'] . "', '" . $user['password'] . "' ,  '" . $user['gender'] . "',  " . $status . ",  " . $major . ",  " . $faculty . ",  " . $hobbies . ", '" . $profile . "')";
 			$this -> db -> query($query);
-			return TRUE;
+			return true;
 		} else {
 			return false;
 		}

@@ -40,11 +40,9 @@
 				password : md5($('#password').val())
 			};
 			$.post(urlConfig.new_user, user_info, function(result) {
-				console.log(result);
 				if (result) {
-					console.log($('#password').val());
 					setState('member', $('#email').val(), md5($('#password').val()), 24);
-					//window.location.href = urlConfig.home;
+					window.location.href = urlConfig.home;
 				} else {
 					$('#email_error_msg').html('Sorry, this email has been used');
 				}
@@ -71,7 +69,6 @@
 				},
 				success : function(response) {
 					var result = jQuery.parseJSON(response);
-					console.log(result);
 					if (result.isSuccess) {
 						setState('member', result.user, md5($('#login_pass').val()), 24);
 						window.location.href = urlConfig.home;
