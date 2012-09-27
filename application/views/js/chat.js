@@ -262,10 +262,11 @@ function removeName(str)
 function gotMessage(msg)
 {
 	  
-		
-		$('.sendMsg').css('max-width',$(window).width()*.3);
-		$('.recvMsg').css('max-width',$(window).width()*.3);
-	 
+		if($(window).width()*.3 < 250) // for smaller screens
+		{
+			$('.sendMsg').css('max-width',$(window).width()*.3);
+			$('.recvMsg').css('max-width',$(window).width()*.3);
+		}
 	  
 	 
 	if(msg == $('#self_profile_name').html() + ': ' + $('#contentBox').val())
