@@ -205,11 +205,7 @@
 			}, 'slow');
 		
 		  
-		  $('#contentBox').watermark('Type to chat, hit return to send!');
-		  $('#sendBtn').animate({width:  $(window).width()*.2},'slow');
-		  $("#sendBtn").click(function() {
-			  $('#enterButton').click();
-			});
+		
 		  //$('.recvMsg').animate({width:  $(window).width()*.25},'slow');
 		  //$('.sendMsg').animate({width:  $(window).width()*.25},'slow');
 		  //alert( $(window).width()*.25);
