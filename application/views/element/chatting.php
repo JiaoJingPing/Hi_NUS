@@ -411,7 +411,7 @@
 		<a data-role="button" data-transition="flip" href="#page1" onClick="switchToChat();" class="ui-btn-right" id="goToMap">
 			Map
 		</a>
-		<h3 id="location_title"> Header </h3>
+		<h3 id="location_title"> Somewhere Near SoC </h3>
 	</div>
 	
 	<div data-role="content" class="middlecontent">
