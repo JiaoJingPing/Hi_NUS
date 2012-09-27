@@ -211,8 +211,9 @@
 			}, 'slow');
 		
 		  
-		
-		 
+			$('#conversation').animate({
+					height : $(window).height() - (heightToSubtract * 2)
+				}, 'slow');
 		  $('#sendBtn').animate({
 					width: $(window).width()*.2
 				},'slow');
@@ -255,7 +256,7 @@
 		  $('.sendMsg').css('max-width',$(window).width()*.3);
 		  $('.recvMsg').css('max-width',$(window).width()*.3);
 		  
-		  
+		 
 		if(msg == $('#self_profile_name').html() + ': ' + $('#contentBox').val())
 			appendSend("<b>You: </b>" + removeName(msg));
 		else
@@ -289,6 +290,9 @@
 			$('#conversation').append('<br><br><br><br>');
 			for(var i = 2; i < msg.length/50; i++)
 				$('#conversation').append('<br>');
+			
+			$("#conversation").scrollTop(1000);
+			
 	}
 	function appendSend(msg)
 	{
@@ -301,6 +305,7 @@
 		for(var i = 2; i < msg.length/50; i++)
 			$('#conversation').append('<br>');
 		endSending();
+		$("#conversation").scrollTop(1000);
 	}
 
 	function startSending()
@@ -326,7 +331,7 @@
 .recvMsg
 {
 	
-	position: absolute;
+	!position: absolute;
 	background: url('../application/views/images/chatrecv.png');
 	padding:20px; 
 	height: auto;
@@ -340,11 +345,12 @@
 	word-wrap: break-word;
 	max-width:250px;
 	padding-top: 10px;
+	
 }
 .sendMsg
 {
 	
-	position: absolute;
+	!position: absolute;
 	background: url('../application/views/images/chatsend.png');
 	padding:20px; 
 	height: auto;
@@ -353,13 +359,14 @@
 	text-align: left;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
-	right: 0px;
+	float: right;
 	color: #FFFFFF;
 	font-family:arial; 
 	overflow: auto;
 	word-wrap: break-word;
 	max-width:250px;
 	padding-top: 10px;
+	
 }
 #contentBox
 {
