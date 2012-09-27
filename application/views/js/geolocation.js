@@ -83,7 +83,7 @@
         var current = new Point(latitude,longitude);
         var loc_name = 'undefined';
         $('#location_title').html('undefined');
-
+        window.set_loc_id(0);
             //check location{
             //highlight and make mark
             //}
@@ -96,7 +96,7 @@
 
                 $('h3#location_title').html(loc_name);
                 //chat room update
-
+                window.set_loc_id(window.getPlace()[i].id);
                 
                 ///////////////////
                 var PolygonCoords = [];
@@ -435,7 +435,9 @@
                     for (var i = 0; i < list.length; i++) {
                         var tmp_geo = list[i].geometry;
                         var point_list = get_point_list(tmp_geo);
+                        console.log(list[i]);
                         var tmp = {
+                            id: list[i].location_id,
                             name: list[i].name,
                             polygon: point_list, 
                         };

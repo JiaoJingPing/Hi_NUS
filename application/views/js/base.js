@@ -366,5 +366,68 @@
 		localStorage.setItem(state_name, JSON.stringify(newState));
 	}
 
+	window.get_loc_id = function() {
+		var state_name='loc_id';
+		var state = localStorage.getItem(state_name);
+		if (state) {
+			state = jQuery.parseJSON(state);
+			if (state.exp < new Date().getTime()) {
+				//if expired
+				localStorage.removeItem(state_name);
+				return false;
+			} else {
+				return state.loc_id;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	window.set_loc_id = function(loc_id) {
+		var hours=7;
+		var state_name='loc_id';
+		var values = new Array();
+		var oneday = new Date();
+		oneday.setHours(oneday.getHours() + hours);
+		//one day from now
+		var newState = {
+			loc_id : loc_id,
+			exp : oneday.getTime()
+		};
+
+		localStorage.setItem(state_name, JSON.stringify(newState));
+	}
+
+	window.get_loc_msg = function() {
+		var state_name='loc_msg';
+		var state = localStorage.getItem(state_name);
+		if (state) {
+			state = jQuery.parseJSON(state);
+			if (state.exp < new Date().getTime()) {
+				//if expired
+				localStorage.removeItem(state_name);
+				return false;
+			} else {
+				return state.loc_msg;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	window.set_loc_msg = function(loc_msg) {
+		var hours=7;
+		var state_name='loc_msg';
+		var values = new Array();
+		var oneday = new Date();
+		oneday.setHours(oneday.getHours() + hours);
+		//one day from now
+		var newState = {
+			loc_msg : loc_msg,
+			exp : oneday.getTime()
+		};
+
+		localStorage.setItem(state_name, JSON.stringify(newState));
+	}
 
 })();
