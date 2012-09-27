@@ -1,3 +1,4 @@
+
 (function() {
 
     if (!getState('member')) {
@@ -465,4 +466,5 @@
     	 	init();
     	 }
     });
+
 })()
