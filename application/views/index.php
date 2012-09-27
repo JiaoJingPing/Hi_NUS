@@ -55,6 +55,7 @@ $this -> load -> view('util.php');
 				$('#map_container').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500);
+				$('.middlecontent').stop().animate({"left": -($(".middlecontent").position().left)}, 'fast');
 			}
 
 		 </script>
