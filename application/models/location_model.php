@@ -5,7 +5,7 @@ class location_model extends CI_Model {
 	var $primaryKeys = array('name');
 
 	function getAllLocation() {
-		$query = "SELECT name, description,profile, AsText(geometry) as geometry FROM `" . $this -> tableName . "` WHERE 1";
+		$query = "SELECT location_id,name, description,profile, AsText(geometry) as geometry FROM `" . $this -> tableName . "` WHERE 1";
 		$q = $this -> db -> query($query);
 		return $this -> prepareResult($q);
 	}
