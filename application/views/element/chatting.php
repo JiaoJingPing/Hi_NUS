@@ -246,7 +246,7 @@
 		  $('.recvMsg').css('max-width',$(window).width()*.3);
 		  
 		  
-		if(msg == $('#profile_name').html() + ': ' + $('#contentBox').val())
+		if(msg == $('#self_profile_name').html() + ': ' + $('#contentBox').val())
 			appendSend("<b>You: </b>" + removeName(msg));
 		else
 			appendRecv(makeNameBold(msg));
@@ -408,7 +408,7 @@
 		
 	</div>
 	</div>
-	<div id="profile_name" style="visibility:collapse"></div>
+	
 	<input type="text" id="contentBox" style="max-height: 9%;height: 9%;overflow: auto"/>
 	<img src="../application/views/images/spinner.gif" id="waitImg"/>
 	<div id="sendBtn" valign="middle">

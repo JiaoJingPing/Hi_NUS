@@ -135,9 +135,9 @@
                 var data = result;
                 var near_people=[];
                 $.each(data, function(index,value){
-                    //var now = new Date().getTime();
-                    //var mydate = Date.parse(value.last_location_timestamp);
-                    if(value.geometry!=null){ //&& mydate>0){
+                    var now = new Date().getTime();
+                    var mydate = Date.parse(value.last_location_timestamp);
+                    if(value.geometry!=null && mydate>0 && now-mydate<90 ){
                         
                         var image = new google.maps.MarkerImage(value.profile,null,null,null,
                                     new google.maps.Size(30, 30));

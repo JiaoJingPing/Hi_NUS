@@ -2,7 +2,7 @@
 $this -> load -> view('util.php');
 ?>
 <!DOCTYPE html>
-<html>
+<html manifest="<?php echo base_url()?>cache.manifest">
 	<head>
 		<meta charset="utf8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -38,6 +38,7 @@ $this -> load -> view('util.php');
 			var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
 			window.addEventListener(orientationEvent, function() {// for android
+				//alert('hi');
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract
 				}, 1500);
@@ -54,7 +55,6 @@ $this -> load -> view('util.php');
 				$('#map_container').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500);
-				$('.middlecontent').stop().animate({"left": -($(".middlecontent").position().left)}, 'fast');
 			}
 
 		 </script>
@@ -134,10 +134,6 @@ $this -> load -> view('util.php');
 			$('#contentBox').focus(function() {
 				hideDiv();
 			});
-			// binding every thing and setting up links!
-			$('#contentBox').watermark('Type to chat, hit return to send!');
-			$('#sendBtn').animate({width:  $(window).width()*.2},'slow');
-			
 		</script>
 		
 	</body>
