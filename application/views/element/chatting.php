@@ -17,7 +17,7 @@
 	<input type="text" id="contentBox" style="max-height: 9%;height: 9%;overflow: auto"/>
 	<img src="../application/views/images/spinner.gif" id="waitImg"/>
 	<div id="sendBtn" valign="middle">
-		<input type="button" onClick="startSending();"  style="height: 9%;min-height:9%;max-height:9%;" id="enterButton" style="font-size: 0.5em" value="Go" disabled='true'/>
+		<input type="button" onClick="startSending();"  value="Go" disabled='true'/>
 	</div>
 	
 	</div>
