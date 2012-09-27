@@ -220,9 +220,12 @@
 	function makeNameBold(str)
 	{
 		var n=str.split(" ");
-		n[0] = "<b>" + n[0] + "</b>";
+		var i;
+		for(i = 0; n[i].indexOf(":") == -1; i++)
+			n[i] = "<b>" + n[i] + "</b>";
+		n[i] = "<b>" + n[i] + "</b>";
 		var str1 = "";
-		for(var i = 0; i < n.length; i++)
+		for(i = 0; i < n.length; i++)
 		{
 			str1 += (n[i] + " ");
 		}
@@ -231,9 +234,12 @@
 	function removeName(str)
 	{
 		var n=str.split(" ");
-		n[0] = "";
+		var i;
+		for(i = 0; n[i].indexOf(":") == -1; i++)
+			n[i] = "";
+		n[i] = "";
 		var str1 = "";
-		for(var i = 0; i < n.length; i++)
+		for(i = 0; i < n.length; i++)
 		{
 			str1 += (n[i] + " ");
 		}
