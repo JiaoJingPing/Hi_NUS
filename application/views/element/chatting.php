@@ -1,7 +1,20 @@
 <!-- chat -->
 <script>
+	var smallScreenLeftDiv = 0;
 	function hideAllForSmallScreen()
 	{
+				$('#slideOutDiv').animate({
+					height : $(window).height() - heightToSubtract/2
+				}, 'slow');
+				if(smallScreenLeftDiv == 0)
+				{
+				$('#slideOutDiv').animate({
+					width : 250
+				}, 'slow');
+				$('#hidePeopleBtn').html('<< Hide')
+				$('#hidePeopleBtn').animate({
+					'left' : '-=50px'
+				}, 'slow');
 				$('#showPeopleBtn').hide();
 				$('#hidePeopleBtn').show();
 				$('#hidePeopleBtn').css({
@@ -13,13 +26,36 @@
 				$('#slideOutDiv').animate({
 					'left' : '+=500px'
 				}, 'slow');
-				$('#contentBox').hide();
-				$('#chatTable').hide();
-				$('#goToMap').hide();
-				$('#enterButton').hide();
+				$('#contentBox').css({
+					'visibility' : 'collapse'
+				});;
+				$('#chatTable').css({
+					'visibility' : 'collapse'
+				});;
+				$('#goToMap').css({
+					'visibility' : 'collapse'
+				});;
+				$('#enterButton').css({
+					'visibility' : 'collapse'
+				});;
+				$('#sendBtn').css({
+					'visibility' : 'collapse'
+				});;
+				
+				}
+				
 	}
 	function showAllForSmallScreen()
 	{
+				if(smallScreenLeftDiv == 1)
+				{
+				$('#slideOutDiv').animate({
+					width : 300
+				}, 'slow');
+				//$('#hidePeopleBtn').prop('value', 'Hide People')
+				$('#hidePeopleBtn').animate({
+					'left' : '+=50px'
+				}, 'slow');
 				$('#showPeopleBtn').show();
 				$('#hidePeopleBtn').hide();
 				$('#hidePeopleBtn').css({
@@ -31,10 +67,23 @@
 				$('#slideOutDiv').animate({
 					'left' : '-=500px'
 				}, 'slow');
-				$('#contentBox').show();
-				$('#chatTable').show();
-				$('#goToMap').show();
-				$('#enterButton').show();
+				$('#contentBox').css({
+					'visibility' : 'visible'
+				});;
+				$('#chatTable').css({
+					'visibility' : 'visible'
+				});;
+				$('#goToMap').css({
+					'visibility' : 'visible'
+				});;
+				$('#enterButton').css({
+					'visibility' : 'visible'
+				});;
+				$('#sendBtn').css({
+					'visibility' : 'visible'
+				});;
+			
+				}
 	}
 	function showDiv() {
 		if (divShown == 0) {
@@ -42,6 +91,7 @@
 			{
 				// this means not computer or ipad - so screen too small
 				hideAllForSmallScreen();
+				smallScreenLeftDiv = 1;
 			}
 			else
 			{
@@ -81,6 +131,7 @@
 			{
 				// this means not computer or ipad - so screen too small
 				showAllForSmallScreen();
+				smallScreenLeftDiv = 0;
 			}
 			else
 			{
@@ -130,8 +181,10 @@
 			pageWidth = $(window).width();
 			if (pageWidth > 900 && $(window).height() > 600) {
 				if(navigator.platform == 'Win32' || navigator.platform == 'MacIntel')
+					if(smallScreenLeftDiv == 1)
 					showDiv();
 			} else {
+				if(smallScreenLeftDiv == 0)
 				hideDiv();
 			}
 			$('#contentBox').animate({
