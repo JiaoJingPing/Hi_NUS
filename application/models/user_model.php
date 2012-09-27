@@ -92,10 +92,10 @@ class user_model extends CI_Model {
 			VALUES ('" . $user['email'] . "',  '" . $user['name'] . "', '" . $user['password'] . "' ,  '" . $user['gender'] . "',  " . $status . ",  " . $major . ",  " . $faculty . ",  " . $hobbies . ", '" . $profile . "')";
 			$this -> db -> query($query);
 			//add admin as friend by default
-			$user_followed = 'admin';
-			$query = "INSERT INTO `" . "follow" . "` (`user`, `user_followed`, `timestamp`) 
-			VALUES ('" . $user['email'] . "', '" . $user_followed . "',  CURRENT_TIMESTAMP)";
-			$this -> db -> query($query);
+			// $user_followed = 'admin';
+			// $query = "INSERT INTO `" . "follow" . "` (`user`, `user_followed`, `timestamp`) 
+			// VALUES ('" . $user['email'] . "', '" . $user_followed . "',  CURRENT_TIMESTAMP)";
+			// $this -> db -> query($query);
 			return true;
 		} else {
 			return false;
