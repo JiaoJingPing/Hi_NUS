@@ -121,7 +121,7 @@
 			}
 		}
 		divShown = 1;
-
+		console.log(window.get_near_peope());
 	}
 
 	function hideDiv() {
@@ -379,13 +379,12 @@
 	right: 0px;
 	
 }
-#chatpleasework1 {
+#chatpleasework {
     border-right: 2px solid red;
   
   }
 
-  #chatpleasework1 table {
-    max-width: 400px;
+  #chatpleasework table {
     width: 100% !important;
   }
 </style>

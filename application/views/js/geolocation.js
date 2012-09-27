@@ -86,10 +86,9 @@
             //check location{
             //highlight and make mark
             //}
-
-        for (var i = 0; i < window.mydata.length; i++) {
-            loc_name = window.mydata[i].name;
-            var loc_polygon = window.mydata[i].polygon;
+        for (var i = 0; i < window.getPlace().length; i++) {
+            loc_name = window.getPlace()[i].name;
+            var loc_polygon = window.getPlace()[i].polygon;
             loc_polygon.push(loc_polygon[0]);
 
             if(inPolygon(current,loc_polygon)){
@@ -101,7 +100,7 @@
                 ///////////////////
                 var PolygonCoords = [];
                 for (var i = 0; i < loc_polygon.length; i++) {
-                    var tmp = new google.maps.LatLng(loc_polygon[i].getX(), loc_polygon[i].getY());
+                    var tmp = new google.maps.LatLng(loc_polygon[i].x, loc_polygon[i].y);
                     PolygonCoords.push(tmp);
                 };
                 //highlight
@@ -134,12 +133,13 @@
             success : function(response) {
                 var result = jQuery.parseJSON(response);
                 var data = result;
+                var near_people=[];
                 $.each(data, function(index,value){
                     //var now = new Date().getTime();
                     //var mydate = Date.parse(value.last_location_timestamp);
                     if(value.geometry!=null){ //&& mydate>0){
                         
-                        var image = new google.maps.MarkerImage('../application/views/images/meinv.jpg',null,null,null,
+                        var image = new google.maps.MarkerImage(value.profile,null,null,null,
                                     new google.maps.Size(30, 30));
                         var marker = new google.maps.Marker({
                             position: new google.maps.LatLng(parseFloat(value.geometry.x), parseFloat(value.geometry.y)),
@@ -148,11 +148,18 @@
                             email: value.email,
                             title: value.name,
                             content: value.status,
+                            pic:value.profile,
                         });
                     
                         attachSecretMessage(marker);
+
+                        if( get_location(value.geometry.x, value.geometry.y).name == loc_name ){
+                            near_people.push(value);
+                        }
+
                     }
                 });
+                window.set_near_peope(near_people);
             },
             error : function(response) {
                 console.log('Cannot to login');
@@ -175,14 +182,14 @@
                 photo = '<span >\
                             <a id="go_to_friend" href="#page8" data-theme="">\
                                 <div class="hidden">'+marker.email+'</div>\
-                                <img src="../application/views/images/meinv.jpg" height="60" width="60" />\
+                                <img src='+ marker.pic +' height="60" width="60" />\
                             </a>\
                         </span>';
             }else{
                 photo = '<span >\
                             <a id="go_to_friend" href="#page6" data-theme="">\
                                 <div class="hidden">'+marker.email+'</div>\
-                                <img src="../application/views/images/meinv.jpg" height="60" width="60" />\
+                                <img src='+marker.pic+' height="60" width="60" />\
                             </a>\
                         </span>';
             }
@@ -216,6 +223,10 @@
                         success : function(response) {
                             var result = jQuery.parseJSON(response);
                             var data = result[0];
+                            var last_loc = get_location(data.geometry.x,data.geometry.y).name;
+                            $('#other_profile_last_location').html(last_loc);
+                            $('#other_profile_last_location').addClass(data.gender);
+                            $('#other_profile').attr('src',data.profile);
                             $('#other_profile_email').text(data.email);
                             $('#other_profile_name').html(data.name);
                             $('#other_profile_name').addClass(data.gender);
@@ -262,7 +273,7 @@
         }
     }
 
-    
+
 
     function post_location(lat,long){
 
@@ -332,22 +343,24 @@
       $("#status").html(message);
     }
     
-    function get_location(x,y){
-        for (var i = 0; i < window.mydata.length; i++) {
-            var loc_name = window.mydata[i].name;
-            var loc_polygon = window.mydata[i].polygon;
+    window.get_location = function(x,y){
+        var result= {
+            'name':'undefined',
+            'polygon': [],
+        };
+        for (var i = 0; i < window.getPlace().length; i++) {
+            var loc_name = window.getPlace()[i].name;
+            var loc_polygon = window.getPlace()[i].polygon;
             loc_polygon.push(loc_polygon[0]);
             var point = new Point(x,y);
 
-            var result= {
-                'name':'undefined',
-                'polygon': [],
-            };
+            
             if(inPolygon(point,loc_polygon)){
                 result['name'] = loc_name;
                 result['polygon'] = loc_polygon; 
+                break;
             }
-            break;
+            
         }  
         return result;
     }
@@ -378,17 +391,16 @@
     // in polygon algorithm---------------------------------------
 
     function cross(p, q, r){
-        return ( r.getX()-q.getX() ) * ( p.getY()-q.getY() ) - ( r.getY()-q.getY() ) * ( p.getX()-q.getX() );
+        return ( r.x-q.x ) * ( p.y-q.y ) - ( r.y-q.y ) * ( p.x-q.x);
     }
 
     function angle(a, b, c){   // a is the middle point
-        var ux = b.getX() - a.getX(), uy = b.getY() - a.getY(), vx = c.getX() - a.getX(), vy = c.getY() - a.getY();
+        var ux = b.x - a.x, uy = b.y - a.y, vx = c.x - a.x, vy = c.y - a.y;
         return Math.acos( (ux * vx + uy * vy) / Math.sqrt( (ux * ux + uy * uy) * (vx * vx + vy * vy) ) ); 
     }
 
     
     function inPolygon(point, polygon){   //important !!! the last point must equal to the first point
-        
 
         //var polygon = polygon.getPoints();
         var eps = 0.0000001;
@@ -415,7 +427,7 @@
             success : function(response) {
                 var result = jQuery.parseJSON(response);
                 var data = result;
-                if(window.mydata == undefined){
+                if(!isPlaceSet()){
                     var list = data;
                     var location = [];
 
@@ -428,7 +440,7 @@
                         };
                         location.push(tmp);
                     }
-                    window.mydata = location;
+                    setPlace(location);
                 }  
                setGeolocation();
             },

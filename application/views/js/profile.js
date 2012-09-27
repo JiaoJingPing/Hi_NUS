@@ -1,19 +1,23 @@
-(function(){
-	function init_profile(){
-		var member=getState('member');
+(function() {
+	function init_profile() {
+		var member = getState('member');
 		var user = member.user;
 		var password = member.pw;
 		var hashed = md5(user);
 
 		$.ajax({
-	        type : 'GET',
-	        url : urlConfig.user+'/email/'+hashed,
-	        headers : {
-	            'Authorization' : 'Basic ' + window.btoa(user+ ':' + password)
-	        },
-	        success : function(response) {
-	            var result = jQuery.parseJSON(response);
-	            var data = result[0];
+			type : 'GET',
+			url : urlConfig.user + '/email/' + hashed,
+			headers : {
+				'Authorization' : 'Basic ' + window.btoa(user + ':' + password)
+			},
+			success : function(response) {
+				var result = jQuery.parseJSON(response);
+				var data = result[0];
+				var last_loc = get_location(data.geometry.x,data.geometry.y).name;
+				$('#profile_last_location').html(last_loc);
+				$('#profile_last_location').addClass(data.gender);
+				$('#profile_pic').attr("src",data.profile);
 				$('#profile_name').html(data.name);
 				$('#profile_name').addClass(data.gender);
 				$('#profile_gender').html(data.gender.capitalize());
@@ -26,22 +30,22 @@
 				$('#profile_major').addClass(data.gender);
 				$('#profile_hobbies').html(data.hobbies);
 				$('#profile_hobbies').addClass(data.gender);
-	        },
-	        error : function(response) {
-	            console.log('Cannot to login');
-	            //direct to login
-	        }
-	    });
+			},
+			error : function(response) {
+				console.log('Cannot to login');
+				//direct to login
+			}
+		});
 
-		$('a.edit').click(function(){
+		$('a.edit').click(function() {
 			var type = $(this).children('div')[0].innerHTML;
 			var value = $(this).children('div')[1].innerHTML;
 			$('#edit_header').html(type);
-			$("#edit_input").attr('value',value);
+			$("#edit_input").attr('value', value);
 		});
 
 	}
-	
+
 	init_profile();
 
 })()

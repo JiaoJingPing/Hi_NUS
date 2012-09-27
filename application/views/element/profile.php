@@ -1,12 +1,3 @@
-<?php
-	$name = "Bei Chuan";
-	$last_location ="National University of Singapore SOC";
-	$status = "CSS is really a shit stuff";
-	$gender="female";
-	$education="National University of Singapore SOC";
-	$hobbies ="Reading, Swimming, Playing games";
-?>
-
 
 <div data-role="page" id="page6">
     <div id='profile_header' data-theme="a" data-role="header">
@@ -15,7 +6,7 @@
     </div>
     <div data-role="content" class="middlecontent ceil-text">
     	<div class="photo-area">
-    		<img class="photo"  src="http://assets.codiqa.com/ps/33214/5f4d06279d261a441-1111051TA1.jpg">
+    		<img id="profile_pic" height="100" width="100" class="my_photo"  src="">
     		<!--<button id="change_photo" data-inline="true" data-theme="e">Change</button>-->
     	</div>
     	<div class="info-area">
@@ -26,7 +17,7 @@
     			</a></li>
     			<li><a>
     				<div>Last Location</div>
-    				<div class=<?php echo($gender);?>><?php echo($last_location);?></div>
+    				<div id="profile_last_location"></div>
     			</a></li>
     			<li><a href='#page10' class='edit'>
     				<div>Status</div>
@@ -42,11 +33,11 @@
     			</a></li>
     			<li><a href='#page10' class='edit'>
     				<div>Faculty</div>
-    				<div id="profile_faculty"> </div>
+    				<div id="profile_faculty"></div>
     			</a></li>
                 <li><a href='#page10' class='edit'>
                     <div>Major</div>
-                    <div id="profile_major"> </div>
+                    <div id="profile_major"></div>
                 </a></li>	        		
     			<li><a href='#page10' class='edit'> 
     				<div>Hobbies</div>

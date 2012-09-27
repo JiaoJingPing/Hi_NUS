@@ -5,6 +5,7 @@ class location_msg_model extends CI_Model {
 	var $primaryKeys = array('email', 'location_id');
 
 	function getAllLocationMsg() {
+		$this -> db -> order_by("timestamp", "desc");
 		$q = $this -> db -> get($this -> tableName);
 		return $this -> prepareResult($q);
 	}
@@ -12,7 +13,8 @@ class location_msg_model extends CI_Model {
 	function getLocationMsgWithCondition($param, $email = 'testmail@gmail.com') {
 		$date = new DateTime();
 		$before = $date -> getTimestamp();
-
+		$this -> db -> select('location.location_id AS location_id,location.name as location_name,location_msg.content as content,location_msg.email as email,location_msg.timestamp as timestamp,location.profile as location_profile');
+		$this -> db -> join('location', 'location.location_id = location_msg.location_id','right');
 		foreach ($param as $key => $value) {
 			if ($key == 'location_id' && $value) {
 				$this -> db -> where('location_id', $value);
@@ -25,6 +27,8 @@ class location_msg_model extends CI_Model {
 
 		$this -> db -> where("timestamp < ", " FROM_UNIXTIME( " . $before . " ) ", false);
 		$this -> db -> where('email', $email);
+
+		$this -> db -> order_by("location_id,timestamp", "desc");
 		$q = $this -> db -> get($this -> tableName);
 		//echo $this -> db -> last_query();
 		return $this -> prepareResult($q);
