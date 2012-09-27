@@ -1,193 +1,140 @@
 <?php
+$this -> load -> view('util.php');
+?>
+<!DOCTYPE html>
+<html manifest="<?php echo base_url()?>cache.manifest">
+	<head>
+		<meta charset="utf8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="apple-touch-icon" href="<?php echo VIEW_URL?>images/touch-icon-iphone.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo VIEW_URL?>images/touch-icon-ipad.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="<?php echo VIEW_URL?>images/touch-icon-iphone4.png" />
+			<link rel="apple-touch-startup-image" href="<?php echo VIEW_URL?>images/splash.png" >
+		<?php
+		$this -> load -> view('element/include_css.php');
+		?>
+		<script>
+			var heightToSubtract;
+			var pageWidth;
+			var divShown;
+			var chatScreen;
+			window.onload = function() {
+				heightToSubtract = $('#topbar').height() * 2;
+				pageWidth = $(window).width();
+				divShown = 0;
+				chatScreen = 0;
+				// setup chat connection as soon as user open home page so that he dont have to wait later
+				$('.middlecontent').animate({
+					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
+				}, 1500);
 
-/*
- *---------------------------------------------------------------
- * APPLICATION ENVIRONMENT
- *---------------------------------------------------------------
- *
- * You can load different configurations depending on your
- * current environment. Setting the environment also influences
- * things like logging and error reporting.
- *
- * This can be set to anything, but default usage is:
- *
- *     development
- *     testing
- *     production
- *
- * NOTE: If you change these, also change the error_reporting() code below
- *
- */
-define('ENVIRONMENT', 'development');
-/*
- *---------------------------------------------------------------
- * ERROR REPORTING
- *---------------------------------------------------------------
- *
- * Different environments will require different levels of error reporting.
- * By default development will show errors but testing and live will hide them.
- */
+				$('#map_container').animate({
+					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
+				}, 1500).trigger('fixed');
 
-if (defined('ENVIRONMENT')) {
-	switch (ENVIRONMENT) {
-		case 'development' :
-			error_reporting(E_ALL);
-			break;
+			};
+			window.addEventListener('orientationchange', handleOrientation, false);
+			var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
-		case 'testing' :
-		case 'production' :
-			error_reporting(0);
-			break;
+			window.addEventListener(orientationEvent, function() {// for android
+				//alert('hi');
+				$('.middlecontent').animate({
+					height : $(window).height() - heightToSubtract
+				}, 1500);
+				$('#map_container').animate({
+					height : $(window).height() - heightToSubtract
+				}, 1500);
+			}, false);
 
-		default :
-			exit('The application environment is not set correctly.');
-	}
-}
+			function handleOrientation() {// for ios
 
-/*
- *---------------------------------------------------------------
- * SYSTEM FOLDER NAME
- *---------------------------------------------------------------
- *
- * This variable must contain the name of your "system" folder.
- * Include the path if the folder is not in the same  directory
- * as this file.
- *
- */
-$system_path = 'system';
+				$('.middlecontent').animate({
+					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
+				}, 1500);
+				$('#map_container').animate({
+					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
+				}, 1500);
+			}
 
-/*
- *---------------------------------------------------------------
- * APPLICATION FOLDER NAME
- *---------------------------------------------------------------
- *
- * If you want this front controller to use a different "application"
- * folder then the default one you can set its name here. The folder
- * can also be renamed or relocated anywhere on your server.  If
- * you do, use a full server path. For more info please see the user guide:
- * http://codeigniter.com/user_guide/general/managing_apps.html
- *
- * NO TRAILING SLASH!
- *
- */
-$application_folder = 'application';
+		 </script>
 
-/*
- * --------------------------------------------------------------------
- * DEFAULT CONTROLLER
- * --------------------------------------------------------------------
- *
- * Normally you will set your default controller in the routes.php file.
- * You can, however, force a custom routing by hard-coding a
- * specific controller class/function here.  For most applications, you
- * WILL NOT set your routing here, but it's an option for those
- * special instances where you might want to override the standard
- * routing in a specific front controller that shares a common CI installation.
- *
- * IMPORTANT:  If you set the routing here, NO OTHER controller will be
- * callable. In essence, this preference limits your application to ONE
- * specific controller.  Leave the function name blank if you need
- * to call functions dynamically via the URI.
- *
- * Un-comment the $routing array below to use this feature
- *
- */
-// The directory name, relative to the "controllers" folder.  Leave blank
-// if your controller is not in a sub-folder within the "controllers" folder
-// $routing['directory'] = '';
+		<title>Mobile App</title>
 
-// The controller class file name.  Example:  Mycontroller
-// $routing['controller'] = '';
+		<!-- Google Analytics -->
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-35048646-1']);
+			_gaq.push(['_trackPageview']);
 
-// The controller function you wish to be called.
-// $routing['function']	= '';
+			(function() {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
 
-/*
- * -------------------------------------------------------------------
- *  CUSTOM CONFIG VALUES
- * -------------------------------------------------------------------
- *
- * The $assign_to_config array below will be passed dynamically to the
- * config class when initialized. This allows you to set custom config
- * items or override any default config values found in the config.php file.
- * This can be handy as it permits you to share one application between
- * multiple front controller files, with each file containing different
- * config values.
- *
- * Un-comment the $assign_to_config array below to use this feature
- *
- */
-// $assign_to_config['name_of_config_item'] = 'value of config item';
+		</script>
+	</head>
+	<body>
+		<!-- Home -->
+		<div data-role="page" id="page1" class="page-map">
 
-// --------------------------------------------------------------------
-// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
-// --------------------------------------------------------------------
+			<div data-theme="a" data-role="header" id="topbar">
+				<button  data-mini="true" class="ui-btn-left" id="show_me" style="width:50px" >
+					Show Me
+				</button>
+				<h3 id="location_title"> Header </h3>
+				<a data-role="button" data-transition="flip" href="#page4" onClick="switchToChat();" class="ui-btn-right"> Chat </a>
+			</div>
+			<div data-role="content" class="middlecontent">
+				<div id="map_container" data-role="content" style="height:600px">
+					<span id="status">Loading...</span>
+				</div>
+			</div>
+			<div data-role="footer">
+				<div data-role="navbar" data-iconpos="left" data-theme="a">
+					<ul>
+						<li>
+							<a data-icon="home" data-theme="b"> Nearby </a>
+						</li>
+						<li>
+							<a data-transition="slide" href="#page5" data-theme="" data-icon="plus"> Friends </a>
+						</li>
+						<li>
+							<a data-transition="slide" href="#page6" data-theme="" data-icon="info"> Profile </a>
+						</li>
+						<li>
+							<a data-transition="slide" href="#page7" data-theme="" data-icon="gear"> Setting </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div pub-key="pub-0d10a610-c98a-49d8-afd4-8a5f2d5974ab" sub-key="sub-22a06fee-fc1d-11e1-b851-adb3f4169f17" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+		<?php
+		$this -> load -> view('element/include_php.php');
+		$this -> load -> view('element/include_js.php');
+		?>
+		<script>
+			$(window).resize(function() {
+				autoChangeDiv();
+			});
+			$(window).bind('keypress', function(e) {
+				if (e.keyCode == 13) {
 
-/*
- * ---------------------------------------------------------------
- *  Resolve the system path for increased reliability
- * ---------------------------------------------------------------
- */
-
-// Set the current directory correctly for CLI requests
-if (defined('STDIN')) {
-	chdir(dirname(__FILE__));
-}
-
-if (realpath($system_path) !== FALSE) {
-	$system_path = realpath($system_path) . '/';
-}
-
-// ensure there's a trailing slash
-$system_path = rtrim($system_path, '/') . '/';
-
-// Is the system path correct?
-if (!is_dir($system_path)) {
-	exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: " . pathinfo(__FILE__, PATHINFO_BASENAME));
-}
-
-/*
- * -------------------------------------------------------------------
- *  Now that we know the path, set the main path constants
- * -------------------------------------------------------------------
- */
-// The name of THIS file
-define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
-
-// The PHP file extension
-// this global constant is deprecated.
-define('EXT', '.php');
-
-// Path to the system folder
-define('BASEPATH', str_replace("\\", "/", $system_path));
-
-// Path to the front controller (this file)
-define('FCPATH', str_replace(SELF, '', __FILE__));
-
-// Name of the "system folder"
-define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
-
-// The path to the "application" folder
-if (is_dir($application_folder)) {
-	define('APPPATH', $application_folder . '/');
-} else {
-	if (!is_dir(BASEPATH . $application_folder . '/')) {
-		exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: " . SELF);
-	}
-
-	define('APPPATH', BASEPATH . $application_folder . '/');
-}
-
-
-/*
- * --------------------------------------------------------------------
- * LOAD THE BOOTSTRAP FILE
- * --------------------------------------------------------------------
- *
- * And away we go...
- *
- */
-require_once BASEPATH . 'core/CodeIgniter.php';
-
-/* End of file index.php */
-/* Location: ./index.php */
+					if ($('#contentBox').val().length > 0)
+						var curElement = document.activeElement;
+					if (curElement.nodeName == "INPUT")
+						$('#enterButton').click();
+				}
+			});
+			$('#contentBox').focus(function() {
+				hideDiv();
+			});
+		</script>
+		
+	</body>
+</html>
