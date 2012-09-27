@@ -32,11 +32,14 @@ class follow_model extends CI_Model {
 		if (!isset($param['user_followed'])) {
 			return false;
 		} else {
-			$user_followed = $param['user_followed'];
+			$user_followed = urldecode($param['user_followed']);
 			if (!$this -> isValidInput($email, $user_followed)) {
-				$query = 'DELETE FROM ' . $this -> tableName . " WHERE `user`= '" . $email . "' AND `user_followed`= '" . $user_followed . "'";
-				$this -> db -> query($query);
-				return TRUE;
+				$this -> db -> delete($this -> tableName, array('user' => $email, 'user_followed' => $user_followed));
+				if ($this -> db -> affected_rows() > 0) {
+					return TRUE;
+				} else {
+					return $param;
+				}
 			} else {
 				return FALSE;
 			}
