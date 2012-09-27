@@ -30,7 +30,7 @@ font-weight:300;
 function addPeopleToList(listOfPeople)
 {
 	$('#listOfNearbyPeople').empty();
-	$('#listOfNearbyPeople').append('<li data-corners="false" data-shadow="false"  data-wrapperels="div" data-icon="false"  data-theme="b" class="ui-btn ui-li ui-btn-up-c ul-li-last"><div class="ui-btn-inner ui-li">Nearby</div></li>');
+	$('#listOfNearbyPeople').append('<li data-corners="false" data-shadow="false"  data-wrapperels="div" data-icon="false"  data-theme="b" class="ui-btn ui-li ui-btn-up-c ul-li-last"><div class="ui-btn-inner ui-li" style="text-align:center;font-size:x-large">Nearby</div><br/></li>');
 	var name;
 	var gender;
 	for(var i = 0; listOfPeople[i]; i++)
@@ -51,7 +51,7 @@ function addPeopleToList(listOfPeople)
 
 function addPerson(name, gender)
 {
-	$('#listOfNearbyPeople').append('<li data-corners="false" data-shadow="false"  data-wrapperels="div" data-icon="false"  data-theme="c" class="ui-btn ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a class="'+gender+'">'+name+'</a></div></div></li>');
+	$('#listOfNearbyPeople').append('<li data-corners="false" data-shadow="false"  data-wrapperels="div" data-icon="false"  data-theme="c" class="ui-btn ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text" style="text-align:center;"><a class="center '+gender+'">'+name+'</a></div></div><br/></li>');
 	
 	$('#slideOutDiv').animate({
 				'min-height' : '+=50px',
