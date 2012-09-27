@@ -29,6 +29,8 @@ font-weight:300;
 <script>
 function addPeopleToList(listOfPeople)
 {
+	$('#listOfNearbyPeople').empty();
+	$('#listOfNearbyPeople').append('<li data-corners="false" data-shadow="false"  data-wrapperels="div" data-icon="false"  data-theme="b" class="ui-btn ui-li ui-btn-up-c ul-li-last"><div class="ui-btn-inner ui-li">Nearby</div></li>');
 	var name;
 	var gender;
 	for(var i = 0; listOfPeople[i]; i++)
@@ -44,19 +46,19 @@ function addPeopleToList(listOfPeople)
 		}
 		addPerson(name, gender);
 	}
+	//$('#listOfNearbyPeople').append('<li data-corners="false" data-shadow="false"  data-wrapperels="div" data-icon="false"  data-theme="c" class="ui-btn ui-li ui-btn-up-c ul-li-last"><div class="ui-btn-inner ui-li"></div></li>');
 }
 
 function addPerson(name, gender)
 {
-	alert(name + gender);
+	$('#listOfNearbyPeople').append('<li data-corners="false" data-shadow="false"  data-wrapperels="div" data-icon="false"  data-theme="c" class="ui-btn ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a class="'+gender+'">'+name+'</a></div></div></li>');
+	
+	$('#slideOutDiv').animate({
+				'min-height' : '+=50px',
+			},'slow');
 }
 </script>
 <div id="slideOutDiv" style="overflow-y: scroll;overflow-x:hidden;">
 <ul id="listOfNearbyPeople" data-role="listview" class="ui-listview">
-				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">Acura</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
-				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">Audi</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
-				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">BMW</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
-				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">Cadillac</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
-				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-right ui-li-has-arrow ui-li ui-li-last"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">Volvo</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
-			</ul>
+</ul>
 </div>
