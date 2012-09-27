@@ -18,7 +18,7 @@ function chatConnection(channel_name){
         },
  
         reconnect  : function() {        // CONNECTION RESTORED.
-            $("#enterButton").prop('value', 'Send');
+            $("#enterButton").prop('value', 'Go');
 			$('#enterButton').removeAttr('disabled');
         },
  
@@ -32,5 +32,7 @@ function sendChat(channelName, messageVal)
 {
     //console.log(channelName);
 	//$('#sendBtn').css({background: white url(‘images/imagebutton.gif’) no-repeat top;});
+	messageVal = ($("#profile_name").html() + ': ' + messageVal);
 	PUBNUB.publish({channel : channelName, message : messageVal});
+	//alert('hi');
 }

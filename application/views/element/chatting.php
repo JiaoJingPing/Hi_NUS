@@ -11,7 +11,7 @@
 				$('#slideOutDiv').animate({
 					width : 250
 				}, 'slow');
-				$('#hidePeopleBtn').html('<< Hide')
+				//$('#hidePeopleBtn').html('<< Hide')
 				$('#hidePeopleBtn').animate({
 					'left' : '-=50px'
 				}, 'slow');
@@ -56,7 +56,7 @@
 				$('#hidePeopleBtn').animate({
 					'left' : '+=50px'
 				}, 'slow');
-				$('#showPeopleBtn').show();
+				$('#showPeopleBtn').fadeIn(3000);
 				$('#hidePeopleBtn').hide();
 				$('#hidePeopleBtn').css({
 					'visibility' : 'collapse'
@@ -205,10 +205,10 @@
 			}, 'slow');
 		
 		  
-		  $('#contentBox').watermark('Type to chat!');
+		  $('#contentBox').watermark('Type to chat, hit return to send!');
 		  $('#sendBtn').animate({width:  $(window).width()*.2},'slow');
-		  $('.recvMsg').animate({width:  $(window).width()*.25},'slow');
-		  $('.sendMsg').animate({width:  $(window).width()*.25},'slow');
+		  //$('.recvMsg').animate({width:  $(window).width()*.25},'slow');
+		  //$('.sendMsg').animate({width:  $(window).width()*.25},'slow');
 		  //alert( $(window).width()*.25);
 		  //sendBtn').animate({height:  $('#contentBox').height()},'slow');
 		  //$('#msgRcv').animate({height: $(window).height() - heightToSubtract}, 'slow');
@@ -323,8 +323,8 @@
 </style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
-		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="showDiv()" id="showPeopleBtn"> Show People </a>
-		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="hideDiv()" id="hidePeopleBtn" style="visibility: hidden;"> Hide People </a>
+		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="showDiv()" id="showPeopleBtn"> People </a>
+		<a data-role="button" data-transition="fade" href="#" class="ui-btn-left" onClick="hideDiv()" id="hidePeopleBtn" style="visibility: hidden;"> << Hide </a>
 		<a data-role="button" data-transition="flip" href="#page1" onClick="switchToChat();" class="ui-btn-right" id="goToMap">
 			Map
 		</a>

@@ -38,7 +38,6 @@ $this -> load -> view('util.php');
 			var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
 			window.addEventListener(orientationEvent, function() {// for android
-				//alert('hi');
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract
 				}, 1500);
