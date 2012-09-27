@@ -138,6 +138,7 @@ $this -> load -> view('util.php');
 			$('#contentBox').watermark('Type to chat, hit return to send!');
 			$('#sendBtn').animate({width:  $(window).width()*.2},'slow');
 			$("#sendBtn").click(function() {
+				startSending();
 			  $('#enterButton').click();
 			});
 		</script>

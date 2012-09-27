@@ -355,7 +355,6 @@
 #sendBtn
 {
 	position: absolute;
-    
     right: 0px;
 	width: 10%;
 	
