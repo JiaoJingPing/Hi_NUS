@@ -106,3 +106,86 @@ div.hidden{
 }
 
 
+
+.timeStyle
+{
+	font-size: 0.7em;
+	
+}
+.recvMsg
+{
+	
+	!position: absolute;
+	background: url('../images/chatrecv.png');
+	padding:20px; 
+	height: auto;
+	width: auto;
+	font-size: 1em;
+	text-align: right;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	font-family:arial; 
+	overflow: auto;
+	word-wrap: break-word;
+	max-width:250px;
+	padding-top: 10px;
+	
+}
+.sendMsg
+{
+	
+	!position: absolute;
+	background: url('../images/chatsend.png');
+	padding:20px; 
+	height: auto;
+	width: auto;
+	font-size: 1em;
+	text-align: left;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	float: right;
+	color: #FFFFFF;
+	font-family:arial; 
+	overflow: auto;
+	word-wrap: break-word;
+	max-width:250px;
+	padding-top: 10px;
+	
+}
+#contentBox
+{
+	position: absolute;
+    left: 0px;
+	width: 90%;
+	float: left;
+	overflow: scroll;
+	
+}
+#sendBtn
+{
+	position: absolute;
+    right: 0px;
+	width: 10%;
+	
+}
+
+#waitImg
+{
+	position: absolute;
+	visibility: collapse;
+	padding-bottom: 20px;
+}
+
+#conversation
+{
+	height: 400px; 
+	overflow-y: scroll;
+}
+
+#enterButton
+{
+	height: 9%;
+	min-height:9%;
+	max-height:9%;
+	font-size: 0.5em;
+}

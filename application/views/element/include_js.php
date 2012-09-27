@@ -5,7 +5,8 @@ if (!$js_includes)
 	$js_includes = array();
 
 $js_includes = array_merge(
-	array('js/jquery-1.8.0.min.js', 
+	array('js/jquery-1.8.0.min.js',
+		  'js/chat.js',	
 		  'js/base.js',
 		  'js/google_analytics.js',
 		  'js/jquery.placeholder.min.js',
@@ -16,7 +17,6 @@ $js_includes = array_merge(
 		  'js/geolocation.js', 
 		  'js/profile.js',
 		  'js/other_profile.js',
-		  'js/chat.js',
 		  'js/nearby.js',
 		  'js/friends.js',
 		  'js/jquery.watermark.min.js',

@@ -59,7 +59,7 @@ $this -> load -> view('util.php');
 
 		 </script>
 
-		<title>Mobile App</title>
+		<title>Hi NUS!</title>
 
 		<!-- Google Analytics -->
 		<script type="text/javascript">
