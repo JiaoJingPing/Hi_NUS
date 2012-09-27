@@ -211,8 +211,8 @@
 		  //$('.sendMsg').animate({width:  $(window).width()*.25},'slow');
 		  //alert( $(window).width()*.25);
 		  //sendBtn').animate({height:  $('#contentBox').height()},'slow');
-		  //$('#msgRcv').animate({height: $(window).height() - heightToSubtract}, 'slow');
-		  $('#chatTable').animate({height: $(window).height() - heightToSubtract}, 'slow');
+		  $('.middlecontent').animate({height: $(window).height() - heightToSubtract}, 'slow');
+		 
 		  
 		
 	}
@@ -240,8 +240,11 @@
 	}
 	function gotMessage(msg)
 	{
+		  
 		  $('.sendMsg').css('max-width',$(window).width()*.3);
 		  $('.recvMsg').css('max-width',$(window).width()*.3);
+		  
+		  
 		if(msg == $('#profile_name').html() + ': ' + $('#contentBox').val())
 			appendSend("<b>You: </b>" + removeName(msg));
 		else
@@ -270,14 +273,14 @@
 	function appendRecv(msg)
 	{
 			//$('#msgRcv').append('<div class="recvMsg">'+msg+'</div><br>');
-			msg += ("<p class='timeStyle'><i>Recd At: </i>" + getTime() + "</p>");
+			msg = ("<div class='timeStyle'><i>Recd At: </i>" + getTime() + "</div><br>") + msg;
 			$('#chatTable').append('<tr><td class="recvMsg" colspan=1 rowspan=1>'+msg+'</td></tr>');
 	}
 	function appendSend(msg)
 	{
 		
 		$('#contentBox').val('');
-		msg += ("<p class='timeStyle'><i>Sent At: </i>" + getTime() + "</p>");
+		msg = ("<div class='timeStyle'><i>Sent At: </i>" + getTime() + "</div><br>") + msg;
 		//$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
 		$('#chatTable').append('<tr><td class="sendMsg" colspan=1 rowspan=1>'+msg+'</td></tr>');
 		
@@ -300,7 +303,8 @@
 <style>
 .timeStyle
 {
-	font-size: 0.8em;
+	font-size: 0.7em;
+	margin-bottom: -18px;
 }
 .recvMsg
 {
@@ -317,6 +321,7 @@
 	overflow: auto;
 	word-wrap: break-word;
 	max-width:250px;
+	padding-top: 10px;
 }
 .sendMsg
 {
@@ -335,6 +340,7 @@
 	overflow: auto;
 	word-wrap: break-word;
 	max-width:250px;
+	padding-top: 10px;
 }
 #contentBox
 {
@@ -370,9 +376,16 @@
 #chatTable
 {
 	position: absolute;
-	right: 0px;
+	right: 15px;
+	width: 100%;
+	height: 750px;
+	
 }
-
+.chatmiddletable
+{
+	overflow-y: scroll;
+	
+}
 </style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
@@ -383,20 +396,21 @@
 		</a>
 		<h3 id="location_title"> Header </h3>
 	</div>
-	<div data-role="content" id="chatmiddle" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
+	<div id="profile_name" style="visibility:collapse"></div>
+	<div data-role="content" id="chatmiddle" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;overflow-y:scroll"}>
 	
 	
 	<div class="chatmiddletable">
 		<table id="chatTable">
 		
 		</table>
-		<div id="profile_name" style="visibility:collapse"></div>
+		
 	</div>
 	<input type="text" id="contentBox" style="max-height: 9%;height: 9%;overflow: auto"/>
-		<img src="../application/views/images/spinner.gif" id="waitImg"/>
-		<div id="sendBtn" valign="middle">
+	<img src="../application/views/images/spinner.gif" id="waitImg"/>
+	<div id="sendBtn" valign="middle">
 		<input type="button" onClick="startSending();"  style="height: 9%;min-height:9%;max-height:9%;" id="enterButton" style="font-size: 0.5em" value="Go" disabled='true'/>
-		</div>
+	</div>
 	
 	</div>
 	<div data-role="footer">
