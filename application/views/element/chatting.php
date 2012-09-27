@@ -58,7 +58,7 @@
 				}, 'slow');
 				$('#contentBox').animate({
 					'left' : '+=300px',
-					width: $(window).width()*.9 - 300
+					width: $(window).width()*.8 - 300
 				},'slow');
 				/*$('#msgRcv').animate({
 					width :  $(window).width() - 300
@@ -95,7 +95,7 @@
 				});
 				$('#contentBox').animate({
 					'left' : '-=300px',
-					width: $(window).width()*.9
+					width: $(window).width()*.8
 				},'slow');
 				/*$('#msgRcv').animate({
 					width :  $(window).width()
@@ -135,7 +135,7 @@
 				hideDiv();
 			}
 			$('#contentBox').animate({
-				width: $(window).width()*.9 - (divShown * 300)
+				width: $(window).width()*.8 - (divShown * 300)
 			},'slow');
 			$('#slideOutDiv').animate({
 					height : $(window).height() - heightToSubtract/2
@@ -148,12 +148,15 @@
 			}, 'slow');
 			$('#waitImg').animate({
 				'bottom' : heightToSubtract/2,
-				'right': $(window).width()*.11,
+				'right': $(window).width()*.22,
 			}, 'slow');
 		
 		  
 		  $('#contentBox').watermark('Type to chat!');
-		  $('#sendBtn').animate({width:  $(window).width()*.1},'slow');
+		  $('#sendBtn').animate({width:  $(window).width()*.2},'slow');
+		  $('.recvMsg').animate({width:  $(window).width()*.25},'slow');
+		  $('.sendMsg').animate({width:  $(window).width()*.25},'slow');
+		  //alert( $(window).width()*.25);
 		  //sendBtn').animate({height:  $('#contentBox').height()},'slow');
 		  //$('#msgRcv').animate({height: $(window).height() - heightToSubtract}, 'slow');
 		  $('#chatTable').animate({height: $(window).height() - heightToSubtract}, 'slow');
@@ -198,21 +201,24 @@
 	position: absolute;
 	background: url('../application/views/images/chatrecv.png');
 	padding:20px; 
-	height: 40px;
-	width: 300px;
+	height: auto;
+	width: auto;
 	font-size: 1em;
 	text-align: right;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	font-family:arial; 
+	overflow: auto;
+	word-wrap: break-word;
+	max-width:250px;
 }
 .sendMsg
 {
 	position: absolute;
 	background: url('../application/views/images/chatsend.png');
 	padding:20px; 
-	height: 40px;
-	width: 300px;
+	height: auto;
+	width: auto;
 	font-size: 1em;
 	text-align: left;
 	background-repeat: no-repeat;
@@ -220,6 +226,9 @@
 	right: 0px;
 	color: #FFFFFF;
 	font-family:arial; 
+	overflow: auto;
+	word-wrap: break-word;
+	max-width:250px;
 }
 #contentBox
 {
@@ -228,6 +237,7 @@
 	width: 90%;
 	float: left;
 	overflow: scroll;
+	
 }
 #sendBtn
 {
@@ -256,18 +266,7 @@
 	position: absolute;
 	right: 0px;
 }
-.outerDiv
-{
-	 max-height: 500px; 
-	 overflow-y: scroll;
-     display: inline-block;
-	 margin-right: 10px;
-}
-.innerDiv
-{
-	 width: 100%; 
-	 margin-right: 20px; 
-}
+
 </style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
@@ -281,18 +280,18 @@
 	<div data-role="content" id="chatmiddle" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
 	
 	
-	<div class="outerDiv">
-	<div class="innerDiv">
+	<div class="chatmiddletable">
 		<table id="chatTable">
 		
 		</table>
+		<div id="profile_name" style="visibility:collapse"></div>
 	</div>
-	</div>
-	<input type="text" id="contentBox"/>
+	<input type="text" id="contentBox" style="max-height: 9%;height: 9%;overflow: auto"/>
 		<img src="../application/views/images/spinner.gif" id="waitImg"/>
 		<div id="sendBtn" valign="middle">
-		<input type="button" onClick="startSending();" id="enterButton" value="Go!" disabled='true'/>
+		<input type="button" onClick="startSending();"  style="height: 9%;min-height:9%;max-height:9%;" id="enterButton" style="font-size: 0.5em" value="Go" disabled='true'/>
 		</div>
+	
 	</div>
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
