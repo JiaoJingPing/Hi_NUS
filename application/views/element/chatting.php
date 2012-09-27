@@ -240,8 +240,8 @@
 	}
 	function gotMessage(msg)
 	{
-		  $('.sendMsg').css({'max-width' : $(window).width()*.3});
-		  $('.recvMsg').css({'max-width' : $(window).width()*.3});
+		  $('.sendMsg').css('max-width',$(window).width()*.3);
+		  $('.recvMsg').css('max-width',$(window).width()*.3);
 		if(msg == $('#profile_name').html() + ': ' + $('#contentBox').val())
 			appendSend("<b>You: </b>" + removeName(msg));
 		else
