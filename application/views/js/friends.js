@@ -57,6 +57,10 @@
 							        success : function(response) {
 							            var result = jQuery.parseJSON(response);
 							            var data = result[0];
+							            var last_loc = get_location(data.geometry.x,data.geometry.y).name;
+										$('#other_profile_last_location').html(last_loc);
+										$('#other_profile_last_location').addClass(data.gender);
+							            $('#other_profile').attr('src',data.profile);
 							            $('#other_profile_email').text(data.email);
 										$('#other_profile_name').html(data.name);
 										$('#other_profile_name').addClass(data.gender);
