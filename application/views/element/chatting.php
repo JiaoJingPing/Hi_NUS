@@ -273,8 +273,8 @@
 		var temp = ""
 		temp += d;
 		var fulltime=temp.split(" ");
-		var day = fulltime[0];
-		var time = fulltime[4];
+		var day = fulltime[0];// day is 1st
+		var time = fulltime[4];// time is 4th
 		return day + ", " + time;
 	}
 	function appendRecv(msg)
@@ -380,19 +380,13 @@
 	padding-bottom: 20px;
 }
 #chatTable
-{
-	position: absolute;
+{	
+	
+	width: 100%;
 	right: 0px;
 	
 }
-#chatpleasework {
-    border-right: 2px solid red;
-  
-  }
 
-  #chatpleasework table {
-    width: 100% !important;
-  }
 </style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
@@ -404,23 +398,24 @@
 		<h3 id="location_title"> Header </h3>
 	</div>
 	
-	<div data-role="content" id="chatmiddle" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
+	<div data-role="content" class="middlecontent">
 	
-	<div style="zoom: 1; overflow: auto;">
-	<div class="chatmiddletable" id="chatpleasework" style="height: 400px; overflow: scroll;">
-		<table style="width: 100%" id="chatTable">
+	
+	<div style="height: 400px; overflow-y: scroll;">
+		<table id="chatTable">
 		
 		</table>
 		
-	</div>
-	</div>
 	
+	</div>
+	<div>
 	<input type="text" id="contentBox" style="max-height: 9%;height: 9%;overflow: auto"/>
 	<img src="../application/views/images/spinner.gif" id="waitImg"/>
 	<div id="sendBtn" valign="middle">
 		<input type="button" onClick="startSending();"  style="height: 9%;min-height:9%;max-height:9%;" id="enterButton" style="font-size: 0.5em" value="Go" disabled='true'/>
 	</div>
 	
+	</div>
 	</div>
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
