@@ -26,130 +26,37 @@ font-weight:300;
 }
 
 </style>
+<script>
+function addPeopleToList(listOfPeople)
+{
+	var name;
+	var gender;
+	for(var i = 0; listOfPeople[i]; i++)
+	{
+		name = "";
+		gender = "";
+		for (x in listOfPeople[i])
+		{
+			if(x == "name")
+				name = listOfPeople[i][x];
+			if(x == "gender")
+				gender = listOfPeople[i][x];
+		}
+		addPerson(name, gender);
+	}
+}
 
-
-
+function addPerson(name, gender)
+{
+	alert(name + gender);
+}
+</script>
 <div id="slideOutDiv" style="overflow-y: scroll;overflow-x:hidden;">
-<table id="chatTable" class="chatdiv" >
-	<tr>
-		
-		<td colspan=3 align=center><b>Nearby People</b></td>
-		
-	</tr>
-	<tr>
-		<td>Han Yu</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Murali</td>
-		<td>Male</td>
-		<td>50m</td>
-	</tr>
-	<tr>
-		<td>Jim</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Peggy</td>
-		<td>Female</td>
-		<td>50m</td>
-	</tr>	<tr>
-		<td>Han Yu</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Murali</td>
-		<td>Male</td>
-		<td>50m</td>
-	</tr>
-	<tr>
-		<td>Jim</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Peggy</td>
-		<td>Female</td>
-		<td>50m</td>
-	</tr>	<tr>
-		<td>Han Yu</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Murali</td>
-		<td>Male</td>
-		<td>50m</td>
-	</tr>
-	<tr>
-		<td>Jim</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Peggy</td>
-		<td>Female</td>
-		<td>50m</td>
-	</tr>	<tr>
-		<td>Han Yu</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Murali</td>
-		<td>Male</td>
-		<td>50m</td>
-	</tr>
-	<tr>
-		<td>Jim</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Peggy</td>
-		<td>Female</td>
-		<td>50m</td>
-	</tr>	<tr>
-		<td>Han Yu</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Murali</td>
-		<td>Male</td>
-		<td>50m</td>
-	</tr>
-	<tr>
-		<td>Jim</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Peggy</td>
-		<td>Female</td>
-		<td>50m</td>
-	</tr>	<tr>
-		<td>Han Yu</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Murali</td>
-		<td>Male</td>
-		<td>50m</td>
-	</tr>
-	<tr>
-		<td>Jim</td>
-		<td>Male</td>
-		<td>100m</td>
-	</tr>
-	<tr>
-		<td>Peggy</td>
-		<td>Female</td>
-		<td>50m</td>
-	</tr>
-</table>
+<ul id="listOfNearbyPeople" data-role="listview" class="ui-listview">
+				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">Acura</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">Audi</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">BMW</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">Cadillac</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-right ui-li-has-arrow ui-li ui-li-last"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">Volvo</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>
+			</ul>
 </div>
