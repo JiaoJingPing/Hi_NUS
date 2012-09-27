@@ -11,15 +11,15 @@
     	</div>
     	<div class="info-area">
     		<ul id="info"  data-role="listview" data-inset="true">
-    			<li ><a href='#page10' class="edit single-line" data-transition="slide" data-theme="">
+    			<li data-icon="false" ><a href='#page10' class="edit single-line"  data-transition="slide" data-theme="">
     				<div class="single-line-left">Name</div>
     				<div class="single-line-right" id='self_profile_name'></div>
     			</a></li>
-    			<li><a>
+    			<li data-icon="false"><a>
     				<div>Last Location</div>
     				<div id="profile_last_location"></div>
     			</a></li>
-    			<li><a href='#page10' class='edit'>
+    			<li data-icon="false"><a href='#page10' class='edit'>
     				<div>Status</div>
     				<div id="profile_status"></div>
     			</a></li>
@@ -27,19 +27,19 @@
     		<br/>
     		<ul id='info' data-role="listview" data-inset="true" data-divider-theme="a" >
     			<li data-role="list-divider">Basic Info</li>
-    			<li ><a class="single-line" >
+    			<li data-icon="false"><a class="single-line" >
     				<div class="single-line-left">Gender</div>
     				<div class="single-line-right" id="profile_gender"></div>
     			</a></li>
-    			<li><a href='#page10' class='edit'>
+    			<li data-icon="false"><a href='#page10' class='edit'>
     				<div>Faculty</div>
     				<div id="profile_faculty"></div>
     			</a></li>
-                <li><a href='#page10' class='edit'>
+                <li data-icon="false"><a href='#page10' class='edit'>
                     <div>Major</div>
                     <div id="profile_major"></div>
                 </a></li>	        		
-    			<li><a href='#page10' class='edit'> 
+    			<li data-icon="false"><a href='#page10' class='edit'> 
     				<div>Hobbies</div>
     				<div id="profile_hobbies"></div>
     			</a></li>

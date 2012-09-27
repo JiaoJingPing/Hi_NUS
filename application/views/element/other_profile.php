@@ -19,16 +19,16 @@
     	</div>
     	<div class="info-area">
     		<ul id="info" data-role="listview" data-inset="true">
-    			<li ><a href='#' class="single-line" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="arrow-r">
+    			<li data-icon="false"><a href='#' class="single-line" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="arrow-r">
     				<div class="hidden" id="other_profile_email"></div>
                     <div class="single-line-left">Name</div>
     				<div class="single-line-right" id='other_profile_name'></div>
     			</a></li>
-    			<li><a href='#'>
+    			<li data-icon="false"><a href='#'>
     				<div>Last Location</div>
     				<div id="other_profile_last_location"></div>
     			</a></li><a href='#'>
-    			<li>
+    			<li data-icon="false">
     				<div>Status</div>
     				<div id="other_profile_status"></div>
     			</a></li>
@@ -36,19 +36,19 @@
     		<br/>
     		<ul id='info' data-role="listview" data-inset="true" data-divider-theme="a" >
     			<li data-role="list-divider">Basic Info</li>
-    			<li ><a class="single-line" href='#'>
+    			<li data-icon="false"><a class="single-line" href='#'>
     				<div class="single-line-left">Gender</div>
     				<div class="single-line-right" id="other_profile_gender"></div>
     			</a></li>
-    			<li><a href='#'>
+    			<li data-icon="false"><a href='#'>
                     <div>Faculty</div>
                     <div id="other_profile_faculty"> </div>
                 </a></li>
-                <li><a href='#'>
+                <li data-icon="false"> <a href='#'>
                     <div>Major</div>
                     <div id="other_profile_major"> </div>
                 </a></li>   	        		
-    			<li><a href='#'> 
+    			<li data-icon="false"><a href='#'> 
     				<div>Hobbies</div>
     				<div id="other_profile_hobbies"></div>
     			</a></li>
