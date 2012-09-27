@@ -5,34 +5,34 @@
 		
 		var title = $('#edit_header').html().toString();
 		var raw_value = $("#edit_input").attr('value').toString();
-		
 		//validate info
 		//name
 		title = $.trim(title.toLowerCase());
-		value = $.trim(raw_value.toLowerCase());
+		raw_value = $.trim(raw_value);
 
 		var edit_data;
 		switch(title){
 			case 'name':
-			edit_data = {'name':value};
+			edit_data = {'name':raw_value};
 			break;
 			case 'status':
-			edit_data = {'status':value};
+			edit_data = {'status':raw_value};
 			break;
 			case 'faculty':
-			edit_data = {'faculty':value};
+			edit_data = {'faculty':raw_value};
 			break;
 			case 'major':
-			edit_data = {'major':value};
+			edit_data = {'major':raw_value};
 			break;
 			case 'hobbies':
-			edit_data = {'hobbies':value};
+			edit_data = {'hobbies':raw_value};
 			break;
 		}
 
-		if(title=='name' && value==''){
+		if(title=='name' && raw_value==''){
 			event.preventDefault();
 			event.stopImmediatePropagation();
+
 			$('#edit_msg').html('Name can not be empty');
 		}
 		else{
@@ -44,11 +44,11 @@
 		        },
 		        data : edit_data,
 		        success : function(response){
-		        	console.log(title);
-		        	console.log(value);
+
 		        	switch(title){
 						case 'name':
-						$('#profile_name').html(raw_value);
+						console.log(raw_value);
+						$('#self_profile_name').html(raw_value);
 						break;
 						case 'status':
 						$('#profile_status').html(raw_value);
@@ -67,7 +67,7 @@
 		        	console.log('success');
 		        } ,
 		        error : function(response) {
-		        	console.log(response);
+
 		            console.log('Cannot to login');
 		            //direct to login
 		        }

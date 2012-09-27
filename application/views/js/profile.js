@@ -15,11 +15,12 @@
 				var result = jQuery.parseJSON(response);
 				var data = result[0];
 				var last_loc = get_location(data.geometry.x,data.geometry.y).name;
+				console.log(data.name);
 				$('#profile_last_location').html(last_loc);
 				$('#profile_last_location').addClass(data.gender);
 				$('#profile_pic').attr("src",data.profile);
-				$('#profile_name').html(data.name);
-				$('#profile_name').addClass(data.gender);
+				$('#self_profile_name').html(data.name);
+				$('#self_profile_name').addClass(data.gender);
 				$('#profile_gender').html(data.gender.capitalize());
 				$('#profile_gender').addClass(data.gender);
 				$('#profile_status').html(data.status);

@@ -13,7 +13,7 @@
     		<ul id="info"  data-role="listview" data-inset="true">
     			<li ><a href='#page10' class="edit single-line" data-transition="slide" data-theme="">
     				<div class="single-line-left">Name</div>
-    				<div class="single-line-right" id='profile_name'></div>
+    				<div class="single-line-right" id='self_profile_name'></div>
     			</a></li>
     			<li><a>
     				<div>Last Location</div>
