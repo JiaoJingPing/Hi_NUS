@@ -32,7 +32,11 @@ function sendChat(channelName, messageVal)
 {
     //console.log(channelName);
 	//$('#sendBtn').css({background: white url(‘images/imagebutton.gif’) no-repeat top;});
+
+    
+    
 	messageVal = ($("#self_profile_name").html() + ': ' + messageVal);
+
 	PUBNUB.publish({channel : channelName, message : messageVal});
 	//alert('hi');
 }

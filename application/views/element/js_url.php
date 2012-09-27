@@ -7,6 +7,7 @@ $urls = array('location' => 'location/info',
 			  'new_user'=>'user/',
 			  'home' => 'member',
 			  'login' => 'rest',
+			  'location_msg'=>'location/msg',
 			  );
 ?>
 <script type="text/javascript">
@@ -20,5 +21,6 @@ urlConfig = {
 	echo 'new_user' . ':  "' . WEBSITE_URL . $urls['new_user'] . '",';
 	echo 'home' . ':  "' . WEBSITE_URL . $urls['home'] . '",';
 	echo 'login' . ':  "' . WEBSITE_URL . $urls['login'] . '",';
+	echo 'location_msg' . ':  "' . WEBSITE_URL . $urls['location_msg'] . '",';
 ?>};
 </script>

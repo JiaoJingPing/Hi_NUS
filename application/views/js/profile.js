@@ -14,7 +14,9 @@
 			success : function(response) {
 				var result = jQuery.parseJSON(response);
 				var data = result[0];
-				var last_loc = get_location(data.geometry.x,data.geometry.y).name;
+				var last_loc = 'undefined';
+				if(data.geometry)
+					last_loc = get_location(data.geometry.x,data.geometry.y).name;
 				console.log(data.name);
 				$('#profile_last_location').html(last_loc);
 				$('#profile_last_location').addClass(data.gender);
