@@ -253,8 +253,7 @@
 	function gotMessage(msg)
 	{
 		  
-		  $('.sendMsg').css('max-width',$(window).width()*.3);
-		  $('.recvMsg').css('max-width',$(window).width()*.3);
+		  
 		  
 		 
 		if(msg == $('#self_profile_name').html() + ': ' + $('#contentBox').val())
