@@ -112,6 +112,9 @@ function showDiv() {
 			$('#hidePeopleBtn').animate({
 				'left' : '+=300px'
 			}, 'slow');
+			$('#conversation').animate({
+				'left' : '+=300px'
+			}, 'slow');
 			$('#slideOutDiv').animate({
 				'left' : '+=500px'
 			}, 'slow');
@@ -156,6 +159,9 @@ function hideDiv() {
 				$('#hidePeopleBtn').hide();
 				$('#showPeopleBtn').show();
 			});
+			$('#conversation').animate({
+				'left' : '-=300px'
+			}, 'slow');
 			$('#contentBox').animate({
 				'left' : '-=300px',
 				width: $(window).width()*.8
