@@ -134,6 +134,13 @@ $this -> load -> view('util.php');
 			$('#contentBox').focus(function() {
 				hideDiv();
 			});
+			// binding every thing and setting up links!
+			$('#contentBox').watermark('Type to chat, hit return to send!');
+			$('#sendBtn').animate({width:  $(window).width()*.2},'slow');
+			$("#sendBtn").click(function() {
+				startSending();
+			  $('#enterButton').click();
+			});
 		</script>
 		
 	</body>

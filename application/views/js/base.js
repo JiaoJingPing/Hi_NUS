@@ -290,4 +290,81 @@
 			return false;
 		}
 	}
+
+	window.getPlace = function() {
+		var state_name='place';
+		var state = localStorage.getItem(state_name);
+		if (state) {
+			state = jQuery.parseJSON(state);
+			if (state.exp < new Date().getTime()) {
+				//if expired
+				localStorage.removeItem(state_name);
+				return false;
+			} else {
+				return state.place;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	window.setPlace = function(place) {
+		var hours=7;
+		var state_name='place';
+		var values = new Array();
+		var oneday = new Date();
+		oneday.setHours(oneday.getHours() + hours);
+		//one day from now
+		var newState = {
+			place : place,
+			exp : oneday.getTime()
+		};
+
+		localStorage.setItem(state_name, JSON.stringify(newState));
+	}
+
+	window.isPlaceSet = function() {
+		var state_name = 'place';
+		var state = localStorage.getItem(state_name);
+		if (state) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	window.get_near_peope = function() {
+		var state_name='near';
+		var state = localStorage.getItem(state_name);
+		if (state) {
+			state = jQuery.parseJSON(state);
+			if (state.exp < new Date().getTime()) {
+				//if expired
+				localStorage.removeItem(state_name);
+				return false;
+			} else {
+				return state.people;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	window.set_near_peope = function(people) {
+		var hours=7;
+		var state_name='near';
+		var values = new Array();
+		var oneday = new Date();
+		oneday.setHours(oneday.getHours() + hours);
+		//one day from now
+		var newState = {
+			people : people,
+			exp : oneday.getTime()
+		};
+
+		localStorage.setItem(state_name, JSON.stringify(newState));
+	}
+
+
 })();

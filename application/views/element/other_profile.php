@@ -1,12 +1,3 @@
-<?php
-$name = "Bei Chuan";
-$last_location = "National University of Singapore SOC";
-$status = "CSS is really a shit stuff";
-$gender = "female";
-$education = "National University of Singapore SOC";
-$hobbies = "Reading, Swimming, Playing games";
-?>
-
 <!-- Other Profile -->
 		<div data-role="page" id="page8">
 		     <div id='profile_header' data-theme="a" data-role="header">
@@ -15,7 +6,7 @@ $hobbies = "Reading, Swimming, Playing games";
     <div data-role="content" class="middlecontent ceil-text">
     	<div class="photo-area">
     		<fieldset class="ui-grid-a">
-			<div class="ui-block-a"><img class="photo" style="" src="http://assets.codiqa.com/ps/33214/5f4d06279d261a441-1111051TA1.jpg"></div>
+			<div class="ui-block-a"><img id="other_profile" class="my_photo" width="100" height="100" src=""></div>
 			<div class="ui-block-d"><!--<button id="change_photo" data-inline="true" data-theme="e">Change</button>-->
     		<div>
                 <a id='follow_btn'data-theme='b' style="float:right" data-iconpos="right" data-role='button' data-inline="true">Follow</a>
@@ -35,7 +26,7 @@ $hobbies = "Reading, Swimming, Playing games";
     			</a></li>
     			<li><a href='#'>
     				<div>Last Location</div>
-    				<div class=<?php echo($gender); ?>><?php echo($last_location); ?></div>
+    				<div id="other_profile_last_location"></div>
     			</a></li><a href='#'>
     			<li>
     				<div>Status</div>
@@ -51,15 +42,15 @@ $hobbies = "Reading, Swimming, Playing games";
     			</a></li>
     			<li><a href='#'>
                     <div>Faculty</div>
-                    <div id="profile_faculty"> </div>
+                    <div id="other_profile_faculty"> </div>
                 </a></li>
                 <li><a href='#'>
                     <div>Major</div>
-                    <div id="profile_major"> </div>
+                    <div id="other_profile_major"> </div>
                 </a></li>   	        		
     			<li><a href='#'> 
     				<div>Hobbies</div>
-    				<div class = <?php echo($gender); ?> > <?php echo($hobbies); ?></div>
+    				<div id="other_profile_hobbies"></div>
     			</a></li>
     			
     		</ul>
