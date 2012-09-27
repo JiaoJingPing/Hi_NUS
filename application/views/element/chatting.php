@@ -379,7 +379,15 @@
 	right: 0px;
 	
 }
+#chatpleasework1 {
+    border-right: 2px solid red;
+  
+  }
 
+  #chatpleasework1 table {
+    max-width: 400px;
+    width: 100% !important;
+  }
 </style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
@@ -393,12 +401,13 @@
 	
 	<div data-role="content" id="chatmiddle" class="middlecontent" style={"background-image:url('css/images/chatbg.png');background-repeat:repeat;"}>
 	
-	
-	<div class="chatmiddletable">
-		<table id="chatTable">
+	<div style="zoom: 1; overflow: auto;">
+	<div class="chatmiddletable" id="chatpleasework" style="height: 400px; overflow: scroll;">
+		<table style="width: 100%" id="chatTable">
 		
 		</table>
 		
+	</div>
 	</div>
 	<div id="profile_name" style="visibility:collapse"></div>
 	<input type="text" id="contentBox" style="max-height: 9%;height: 9%;overflow: auto"/>
