@@ -377,27 +377,14 @@
 	width: 10%;
 	
 }
-#msgRcv
-{
-	position: absolute;
-	background: url('../application/views/css/images/chatbg.png');
-	background-repeat: repeat;
-	height: 700px;
-	right: 0px;
-}
+
 #waitImg
 {
 	position: absolute;
 	visibility: collapse;
 	padding-bottom: 20px;
 }
-#chatTable
-{	
-	
-	width: 100%;
-	right: 0px;
-	
-}
+
 #conversation
 {
 	height: 400px; 
