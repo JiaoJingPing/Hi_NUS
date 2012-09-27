@@ -7,8 +7,12 @@ URL: http://hi-nus.com
 ==========
 MEMBERS:
 
-Murali Ramanujam	A0074635B	Front-end coding
-Han Yu					A0077864M 	Front-end coding
-Jiao Jing Ping			A0077842W	Back-end coding
-Wang Pei Peggy		A0071145N	Business Development
+1. Murali Ramanujam - A0074635B
+Frontend programming
+2. Han Yu - A0077864M
+Frontend programming
+3. Jiao Jing Ping - A0077842W
+Backend programming 
+4. Wang Pei Peggy - A0071145N
+Business Development
 
