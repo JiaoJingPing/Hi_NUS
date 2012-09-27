@@ -29,9 +29,9 @@
 				$('#contentBox').css({
 					'visibility' : 'collapse'
 				});;
-				$('#chatTable').css({
+				/*$('#chatTable').css({
 					'visibility' : 'collapse'
-				});;
+				});;*/
 				$('#goToMap').css({
 					'visibility' : 'collapse'
 				});;
@@ -70,9 +70,9 @@
 				$('#contentBox').css({
 					'visibility' : 'visible'
 				});;
-				$('#chatTable').css({
+				/*$('#chatTable').css({
 					'visibility' : 'visible'
-				});;
+				});;*/
 				$('#goToMap').css({
 					'visibility' : 'visible'
 				});;
@@ -112,11 +112,14 @@
 				},'slow');
 				/*$('#msgRcv').animate({
 					width :  $(window).width() - 300
-				}, 'slow');*/
+				}, 'slow');
 				
 				$('#chatTable').animate({
 					'left' : '+=300px',
 					width :  $(window).width() - 300
+				},'slow');*/
+				$('#sendBtn').animate({
+					width: $(window).width()*.2
 				},'slow');
 			}
 		}
@@ -150,11 +153,14 @@
 				},'slow');
 				/*$('#msgRcv').animate({
 					width :  $(window).width()
-				}, 'slow');*/
+				}, 'slow');
 				$('#chatTable').animate({
 					'left' : '-=300px',
 					width :  $(window).width()
-				}, 'slow');
+				}, 'slow');*/
+				$('#sendBtn').animate({
+					width: $(window).width()*.2
+				},'slow');
 			}
 		}
 		divShown = 0;
@@ -206,12 +212,10 @@
 		
 		  
 		
-		  //$('.recvMsg').animate({width:  $(window).width()*.25},'slow');
-		  //$('.sendMsg').animate({width:  $(window).width()*.25},'slow');
-		  //alert( $(window).width()*.25);
-		  //sendBtn').animate({height:  $('#contentBox').height()},'slow');
-		  $('#chatTable').animate({height: $(window).height() - heightToSubtract}, 'slow');
-		  
+		 
+		  $('#sendBtn').animate({
+					width: $(window).width()*.2
+				},'slow');
 		
 		 
 		  
@@ -281,16 +285,21 @@
 	{
 			//$('#msgRcv').append('<div class="recvMsg">'+msg+'</div><br>');
 			msg = ("<div class='timeStyle'><i>Recd At: </i>" + getTime() + "</div><br>") + msg;
-			$('#chatTable').append('<tr><td class="recvMsg" colspan=1 rowspan=1>'+msg+'</td></tr>');
+			$('#conversation').append('<div class="recvMsg">'+msg+'</div>');
+			$('#conversation').append('<br><br><br><br>');
+			for(var i = 2; i < msg.length/50; i++)
+				$('#conversation').append('<br>');
 	}
 	function appendSend(msg)
 	{
 		
 		$('#contentBox').val('');
-		msg = ("<div class='timeStyle'><i>Sent At: </i>" + getTime() + "</div><br>") + msg;
+		msg = ("<div class='timeStyle'><i>Sent At: </i>" + getTime() + "</div>") + msg;
 		//$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
-		$('#chatTable').append('<tr><td class="sendMsg" colspan=1 rowspan=1>'+msg+'</td></tr>');
-		
+		$('#conversation').append('<div class="sendMsg">'+msg+'</div>');
+		$('#conversation').append('<br><br><br><br>');
+		for(var i = 2; i < msg.length/50; i++)
+			$('#conversation').append('<br>');
 		endSending();
 	}
 
@@ -308,13 +317,15 @@
 	}
 </script>
 <style>
+
 .timeStyle
 {
 	font-size: 0.7em;
-	margin-bottom: -18px;
+	
 }
 .recvMsg
 {
+	
 	position: absolute;
 	background: url('../application/views/images/chatrecv.png');
 	padding:20px; 
@@ -332,6 +343,7 @@
 }
 .sendMsg
 {
+	
 	position: absolute;
 	background: url('../application/views/images/chatsend.png');
 	padding:20px; 
@@ -386,7 +398,11 @@
 	right: 0px;
 	
 }
-
+#conversation
+{
+	height: 400px; 
+	overflow-y: scroll;
+}
 </style>
 <div data-role="page" id="page4" height="350px">
 	<div data-theme="a" data-role="header">
@@ -401,12 +417,7 @@
 	<div data-role="content" class="middlecontent">
 	
 	
-	<div style="height: 400px; overflow-y: scroll;">
-		<table id="chatTable">
-		
-		</table>
-		
-	
+	<div id="conversation">
 	</div>
 	<div>
 	<input type="text" id="contentBox" style="max-height: 9%;height: 9%;overflow: auto"/>
