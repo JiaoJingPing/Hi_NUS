@@ -6,13 +6,13 @@ URL: http://hi-nus.com
 
 ==========
 MEMBERS:
-
-1. Murali Ramanujam - A0074635B
-Frontend programming
-2. Han Yu - A0077864M
-Frontend programming
-3. Jiao Jing Ping - A0077842W
-Backend programming 
-4. Wang Pei Peggy - A0071145N
-Business Development
+<ul>
+<li>1. Murali Ramanujam - A0074635B </li>
+<li>Frontend programming</li>
+<li>2. Han Yu - A0077864M</li>
+<li>Frontend programming</li>
+<li>3. Jiao Jing Ping - A0077842W</li>
+<li>Backend programming </li>
+<li>4. Wang Pei Peggy - A0071145N</li>
+<li>Business Development</li>
 
