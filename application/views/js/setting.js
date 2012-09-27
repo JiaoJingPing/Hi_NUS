@@ -33,8 +33,10 @@
 
 	
 	function convertTimeStamp(str){
-		var timestamp = Date.parse(str);
-		var date=new Date(timestamp);
+		var a = str.split(/[^0-9]/)
+                    //var mydate = Date.parse(value.last_location_timestamp);
+        var date=new Date (a[0],a[1]-1,a[2],a[3],a[4],a[5] );
+		//var date=new Date(timestamp);
 		return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
 	}
 	function buildLocationMsgList(data) {

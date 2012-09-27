@@ -137,9 +137,12 @@
                 var near_people=[];
                 $.each(data, function(index,value){
                     var now = new Date().getTime();
-                    var mydate = Date.parse(value.last_location_timestamp);
-                    if(value.geometry!=null && mydate>0 && now-mydate<90 ){
-                        
+                    var a = value.last_location_timestamp.split(/[^0-9]/)
+                    //var mydate = Date.parse(value.last_location_timestamp);
+                    var mydate=new Date (a[0],a[1]-1,a[2],a[3],a[4],a[5] ).getTime();
+                   
+                    if(value.geometry!=null&& mydate>0 && now-mydate<90){// && mydate>0 && now-mydate<90 ){
+                    
                         var image = new google.maps.MarkerImage(value.profile,null,null,null,
                                     new google.maps.Size(30, 30));
                         var marker = new google.maps.Marker({
