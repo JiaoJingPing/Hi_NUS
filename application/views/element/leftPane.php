@@ -26,6 +26,31 @@ font-weight:300;
 }
 
 </style>
+<script>
+function addPeopleToList(listOfPeople)
+{
+	var name;
+	var gender;
+	for(var i = 0; listOfPeople[i]; i++)
+	{
+		name = "";
+		gender = "";
+		for (x in listOfPeople[i])
+		{
+			if(x == "name")
+				name = listOfPeople[i][x];
+			if(x == "gender")
+				gender = listOfPeople[i][x];
+		}
+		addPerson(name, gender);
+	}
+}
+
+function addPerson(name, gender)
+{
+	alert(name + gender);
+}
+</script>
 <div id="slideOutDiv" style="overflow-y: scroll;overflow-x:hidden;">
 <ul id="listOfNearbyPeople" data-role="listview" class="ui-listview">
 				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="index.html" class="ui-link-inherit">Acura</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>

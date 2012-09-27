@@ -121,7 +121,7 @@
 			}
 		}
 		divShown = 1;
-		console.log(window.get_near_peope());
+		addPeopleToList(window.get_near_peope());
 	}
 
 	function hideDiv() {
