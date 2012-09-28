@@ -9,7 +9,7 @@
 		//name
 		title = $.trim(title.toLowerCase());
 		raw_value = $.trim(raw_value);
-
+		raw_value = raw_value.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g,""); 
 		var edit_data;
 		switch(title){
 			case 'name':

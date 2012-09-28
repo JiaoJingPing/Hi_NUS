@@ -14,6 +14,7 @@
 			success : function(response) {
 				var result = jQuery.parseJSON(response);
 				var data = result[0];
+
 				var last_loc = 'undefined';
 				if(data.geometry)
 					last_loc = get_location(data.geometry.x,data.geometry.y).name;
@@ -32,6 +33,8 @@
 				$('#profile_major').addClass(data.gender);
 				$('#profile_hobbies').html(data.hobbies);
 				$('#profile_hobbies').addClass(data.gender);
+
+				window.set_profile(data);
 			},
 			error : function(response) {
 				console.log('Cannot to login');
@@ -48,6 +51,44 @@
 
 	}
 
+	
+	$('.page').live('pageshow', function() {
+
+		if(navigator.onLine){
+			console.log('online');
+			init_profile();
+		}else{
+			console.log('offline');
+			var data = window.get_profile();
+			if(data)
+				init_profile_offline(data);
+		}
+
+
+		
+	});
+	
+	function init_profile_offline(data) {
+
+		var last_loc = 'undefined';
+		if(data.geometry)
+			last_loc = get_location(data.geometry.x,data.geometry.y).name;
+		$('#profile_last_location').html(last_loc);
+		$('#profile_last_location').addClass(data.gender);
+		//$('#profile_pic').attr("src",data.profile);
+		$('#self_profile_name').html(data.name);
+		$('#self_profile_name').addClass(data.gender);
+		$('#profile_gender').html(data.gender.capitalize());
+		$('#profile_gender').addClass(data.gender);
+		$('#profile_status').html(data.status);
+		$('#profile_status').addClass(data.gender);
+		$('#profile_faculty').html(data.faculty);
+		$('#profile_faculty').addClass(data.gender);
+		$('#profile_major').html(data.major);
+		$('#profile_major').addClass(data.gender);
+		$('#profile_hobbies').html(data.hobbies);
+		$('#profile_hobbies').addClass(data.gender);
+	}
 	init_profile();
 
 })()

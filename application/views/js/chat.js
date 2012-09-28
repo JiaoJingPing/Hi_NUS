@@ -277,17 +277,18 @@ function removeName(str)
 function gotMessage(msg)
 {
 	  
-		if($(window).width()*.3 < 250) // for smaller screens
-		{
-			$('.sendMsg').css('max-width',$(window).width()*.3);
-			$('.recvMsg').css('max-width',$(window).width()*.3);
-		}
-	  
+	msg = msg.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g,""); 
+	if($(window).width()*.3 < 250) // for smaller screens
+	{
+		$('.sendMsg').css('max-width',$(window).width()*.3);
+		$('.recvMsg').css('max-width',$(window).width()*.3);
+	}  
 	 
 	if(msg == $('#self_profile_name').html() + ': ' + $('#contentBox').val())
 		appendSend("<b>You: </b>" + removeName(msg));
 	else
 		appendRecv(makeNameBold(msg));
+	endSending();
 }
 function getTime()
 {
@@ -337,10 +338,9 @@ function appendSend(msg)
 
 function startSending()
 {
-	console.log('asdf');
-		$('#enterButton').button('disable');
-		$('#contentBox').attr('disabled',true);
-		$('#waitImg').css('visibility', 'visible');
+	$('#enterButton').button('disable');
+	$('#contentBox').attr('disabled',true);
+	$('#waitImg').css('visibility', 'visible');
 }
 function endSending()
 {

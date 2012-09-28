@@ -1,3 +1,4 @@
+
 (function() {
 
 	$('#logout').click(function() {
@@ -51,17 +52,14 @@
 	}
 	function buildLocationMsgList(data) {
 		$('#history-list').empty();
+		console.log(data);
 		$.each(data, function(index, value) {
-			
-
 			var timestamp=value.timestamp;
 			var location_name=value.location_name;
 			var user_name = value.username;
 			var content=value.content;
 			var time=convertTimeStamp(timestamp);
-
-			var loc_info;
-		
+		    var loc_info;
 			if(value.email==getState('member').user){
 			loc_info='\
 		     <ul  data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">\
@@ -139,4 +137,4 @@
 		});
 	}
 
-})();
+})()
