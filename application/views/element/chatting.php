@@ -25,24 +25,24 @@
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
 			<ul>
-				<li>
-					<a href="#page1" data-theme="" onClick="switchToChat();" data-icon="home">
-						Nearby
+				<li >
+					<a href="#page1" data-theme="" onClick="switchToChat();"  data-icon="home">
+						<div class="linktohome">Nearby</div>
 					</a>
 				</li>
 				<li>
-					<a href="#page5" data-theme="" onClick="switchToChat();" data-icon="plus">
-						Friends
+					<a href="#page5" data-theme="" onClick="switchToChat();"  data-icon="plus">
+						<div class="linktofriends">Friends</div>
 					</a>
 				</li>
 				<li>
 					<a href="#page6" data-theme="" onClick="switchToChat();" data-icon="info">
-						Profile
+						<div class="linktoprofile">Profile</div>
 					</a>
 				</li>
 				<li>
 					<a href="#page7" data-theme="" onClick="switchToChat();" data-icon="gear">
-						Logs
+						<div class="linktologs">Logs</div>
 					</a>
 				</li>
 			</ul>

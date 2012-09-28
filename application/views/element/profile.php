@@ -54,22 +54,22 @@
 	        <ul>
 	            <li>
 	                <a href="#page1" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="home">
-	                    Nearby
+	                    <div class="linktohome">Nearby</div>
 	                </a>
 	            </li>
 	            <li>
 	                <a href="#page5" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="plus">
-	                    Friends
+	                      <div class="linktofriends">Friends</div> 
 	                </a>
 	            </li>
 	            <li>
 	                <a data-theme="b" data-icon="info">
-	                    Profile
+	                    <div class="linktoprofile">Profile</div>
 	                </a>
 	            </li>
 	            <li>
 	                <a href="#page7" data-transition="slide" data-theme="" data-icon="gear">
-	                    Logs
+	                     <div class="linktologs">Logs</div>
 	                </a>
 	            </li>
 	        </ul>
