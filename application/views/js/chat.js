@@ -243,8 +243,7 @@ function autoChangeDiv() {
 				width: $(window).width()*.2
 			},'slow');
 	
-	 
-	  
+	
 	
 }
 function makeNameBold(str)
@@ -349,3 +348,4 @@ function endSending()
 		$("#contentBox").removeAttr('disabled');
 		$('#waitImg').css('visibility', 'collapse');
 }
+

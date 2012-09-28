@@ -431,3 +431,29 @@
 	}
 
 })();
+function shrinkFooter()
+{
+	
+
+	$('.linktohome').html('<br>');
+	$('.linktohome').css('max-width',0);
+	$('.linktofriends').html('<br>');
+	$('.linktofriends').css('max-width',0);
+	$('.linktoprofile').html('<br>');
+	$('.linktoprofile').css('max-width',0);
+	$('.linktologs').html('<br>');
+	$('.linktologs').css('max-width',0);
+}
+
+function expandFooter()
+{
+	
+	$('.linktohome').html('Nearby<br>');
+	$('.linktohome').css('max-width',$(window).width()*.25);
+	$('.linktofriends').html('Friends<br>');
+	$('.linktofriends').css('max-width',$(window).width()*.25);
+	$('.linktoprofile').html('Profile<br>');
+	$('.linktoprofile').css('max-width',$(window).width()*.25);
+	$('.linktologs').html('Logs<br>');
+	$('.linktologs').css('max-width',$(window).width()*.25);
+}

@@ -102,16 +102,16 @@ $this -> load -> view('util.php');
 				<div data-role="navbar" data-iconpos="left" data-theme="a">
 					<ul>
 						<li>
-							<a data-icon="home" data-theme="b"> Nearby </a>
+							<a data-icon="home" data-theme="b"> 	<div class="linktohome">Nearby</div>  </a>
 						</li>
 						<li>
-							<a data-transition="slide" href="#page5" data-theme="" data-icon="plus"> Friends </a>
+							<a data-transition="slide" href="#page5" data-theme="" data-icon="plus"> 	<div class="linktofriends">Friends</div> </a>
 						</li>
 						<li>
-							<a data-transition="slide" href="#page6" data-theme="" data-icon="info"> Profile </a>
+							<a data-transition="slide" href="#page6" data-theme="" data-icon="info"> <div class="linktoprofile">Profile</div> </a>
 						</li>
 						<li>
-							<a data-transition="slide" href="#page7" data-theme="" data-icon="gear"> Logs </a>
+							<a data-transition="slide" href="#page7" data-theme="" data-icon="gear"> 	<div class="linktologs">Logs</div> </a>
 						</li>
 					</ul>
 				</div>
@@ -125,6 +125,11 @@ $this -> load -> view('util.php');
 		<script>
 			$(window).resize(function() {
 				autoChangeDiv();
+					if($(window).width() < 400)
+						shrinkFooter();
+					else
+						expandFooter();
+				  
 			});
 			// $(window).bind('keypress', function(e) {
 			// 	if (e.keyCode == 13) {

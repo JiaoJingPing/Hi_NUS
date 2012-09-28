@@ -33,16 +33,16 @@
 		<div data-role="navbar" data-iconpos="left" data-theme="a">
 			<ul>
 				<li>
-					<a href="#page1" data-transition="slide" data-direction="reverse" data-theme="" data-icon="home"> Nearby </a>
+					<a href="#page1" data-transition="slide" data-direction="reverse" data-theme="" data-icon="home"> 	<div class="linktohome">Nearby</div> </a>
 				</li>
 				<li>
-					<a href="#page5" data-transition="slide" data-direction="reverse"  data-theme="" data-icon="plus"> Friends </a>
+					<a href="#page5" data-transition="slide" data-direction="reverse" data-theme="" data-icon="plus"> <div class="linktofriends">Friends</div> </a>
 				</li>
 				<li>
-					<a href="#page6" data-transition="slide" data-direction="reverse" data-theme="" data-icon="info"> Profile </a>
+					<a href="#page6" data-transition="slide" data-direction="reverse" data-theme="" data-icon="info" > <div class="linktoprofile">Logs</div> </a>
 				</li>
 				<li>
-					<a data-theme="b" data-icon="gear"> Logs </a>
+					<a data-theme="b" data-icon="gear"> 	<div class="linktologs">Logs</div> </a>
 				</li>
 			</ul>
 		</div>
