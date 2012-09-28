@@ -268,12 +268,12 @@ function removeName(str)
 function gotMessage(msg)
 {
 	  
-		if($(window).width()*.3 < 250) // for smaller screens
-		{
-			$('.sendMsg').css('max-width',$(window).width()*.3);
-			$('.recvMsg').css('max-width',$(window).width()*.3);
-		}
-	  
+	msg = msg.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g,""); 
+	if($(window).width()*.3 < 250) // for smaller screens
+	{
+		$('.sendMsg').css('max-width',$(window).width()*.3);
+		$('.recvMsg').css('max-width',$(window).width()*.3);
+	}  
 	 
 	if(msg == $('#self_profile_name').html() + ': ' + $('#contentBox').val())
 		appendSend("<b>You: </b>" + removeName(msg));
@@ -306,11 +306,11 @@ function appendRecv(msg)
 		//$('#msgRcv').append('<div class="recvMsg">'+msg+'</div><br>');
 		msg = ("<div class='timeStyle'><i>Recd At: </i>" + getTime() + "</div><br>") + msg;
 		$('#conversation').append('<div class="recvMsg">'+msg+'</div>');
-		$('#conversation').append('<br><br><br><br>');
+		//$('#conversation').append('<br><br><br><br>');
 		for(var i = 2; i < msg.length/50; i++)
 			$('#conversation').append('<br>');
 		
-		$("#conversation").scrollTop(1000);
+		$("#conversation").scrollTop($("#conversation").prop("scrollHeight"));
 		
 }
 function appendSend(msg)
@@ -324,7 +324,7 @@ function appendSend(msg)
 	for(var i = 2; i < msg.length/50; i++)
 		$('#conversation').append('<br>');
 	endSending();
-	$("#conversation").scrollTop(1000);
+	$("#conversation").scrollTop($("#conversation").prop("scrollHeight"));
 }
 
 function startSending()

@@ -1,3 +1,4 @@
+
 (function() {
 
 	$('#logout').click(function() {
@@ -51,6 +52,7 @@
 	}
 	function buildLocationMsgList(data) {
 		$('#history-list').empty();
+		console.log(data);
 		$.each(data, function(index, value) {
 			var timestamp=value.timestamp;
 			var location_name=value.location_name;
@@ -135,4 +137,4 @@
 		});
 	}
 
-})();
+})()
