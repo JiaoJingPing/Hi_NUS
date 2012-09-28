@@ -32,7 +32,7 @@ $this -> load -> view('util.php');
 				$('#map_container').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500).trigger('fixed');
-
+				
 			};
 			window.addEventListener('orientationchange', handleOrientation, false);
 			var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";

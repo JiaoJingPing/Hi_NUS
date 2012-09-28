@@ -197,6 +197,8 @@ function switchToChat() {
 }
 
 function autoChangeDiv() {
+		if(heightToSubtract == 0)
+			heightToSubtract = 82;
 		if(chatScreen == 0)
 			return;
 		pageWidth = $(window).width();
@@ -306,7 +308,7 @@ function appendRecv(msg)
 		msg = ("<div class='timeStyle'><i>Recd At: </i>" + getTime() + "</div><br>") + msg;
 		$('#conversation').append('<div class="recvMsg">'+msg+'</div>');
 		//$('#conversation').append('<br><br><br><br>');
-		for(var i = 2; i < msg.length/50; i++)
+		for(var i = 0; i < msg.length/60; i++)
 			$('#conversation').append('<br>');
 		
 		$("#conversation").scrollTop($("#conversation").prop("scrollHeight"));
@@ -320,7 +322,7 @@ function appendSend(msg)
 	//$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
 	$('#conversation').append('<div class="sendMsg">'+msg+'</div>');
 	$('#conversation').append('<br><br><br><br>');
-	for(var i = 2; i < msg.length/50; i++)
+	for(var i = 0; i < msg.length/60; i++)
 		$('#conversation').append('<br>');
 	endSending();
 	$("#conversation").scrollTop($("#conversation").prop("scrollHeight"));
