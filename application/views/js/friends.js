@@ -35,7 +35,9 @@
 										<td class="right" >\
 											<div id="name" class='+data.gender+'>' + data.name + '\
 											</div>\
+
 											<div id="other">' + geoname + ' '+ data.last_location_timestamp + '\
+
 											</div>\
 											<div id="other">' + data.status + '\
 											</div>\

@@ -431,7 +431,9 @@
 	}
 
 	window.get_profile = function() {
-		var state_name = 'profile';
+
+		var state_name='profile';
+
 		var state = localStorage.getItem(state_name);
 		if (state) {
 			state = jQuery.parseJSON(state);
@@ -448,8 +450,10 @@
 	}
 
 	window.set_profile = function(profile) {
+
 		var hours = 7;
 		var state_name = 'profile';
+
 		var values = new Array();
 		var oneday = new Date();
 		oneday.setHours(oneday.getHours() + hours);
@@ -461,6 +465,7 @@
 
 		localStorage.setItem(state_name, JSON.stringify(newState));
 	}
+
 
 	window.get_friend = function() {
 		var state_name = 'friend';
