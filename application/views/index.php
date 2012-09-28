@@ -20,10 +20,12 @@ $this -> load -> view('util.php');
 			var divShown;
 			var chatScreen;
 			window.onload = function() {
-				heightToSubtract = $('#topbar').height() * 2;
-				pageWidth = $(window).width();
 				divShown = 0;
 				chatScreen = 0;
+				heightToSubtract = $('#topbar').height() * 2;
+				autoChangeDiv();
+				pageWidth = $(window).width();
+				
 				// setup chat connection as soon as user open home page so that he dont have to wait later
 				$('.middlecontent').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
@@ -32,29 +34,31 @@ $this -> load -> view('util.php');
 				$('#map_container').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500).trigger('fixed');
-
+				
 			};
 			window.addEventListener('orientationchange', handleOrientation, false);
 			var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
 			window.addEventListener(orientationEvent, function() {// for android
-				//alert('hi');
+				
+				
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract
 				}, 1500);
 				$('#map_container').animate({
 					height : $(window).height() - heightToSubtract
-				}, 1500);
+				}, 1500);autoChangeDiv();
 			}, false);
 
 			function handleOrientation() {// for ios
-
+				
 				$('.middlecontent').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500);
 				$('#map_container').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500);
+				autoChangeDiv();
 			}
 
 		 </script>
