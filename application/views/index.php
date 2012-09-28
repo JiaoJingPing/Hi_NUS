@@ -84,10 +84,10 @@ $this -> load -> view('util.php');
 
 			<div data-theme="a" data-role="header" id="topbar">
 				<button  data-mini="true" class="ui-btn-left" id="show_me" style="width:50px" >
-					Show Me
+					Find me
 				</button>
 				<h3 id="location_title"> Header </h3>
-				<a data-role="button" data-transition="flip" href="#page4" onClick="switchToChat();" class="ui-btn-right"> Chat </a>
+				<a data-role="button" data-theme='c' data-transition="flip" href="#page4" onClick="switchToChat();" class="ui-btn-right"> Chat </a>
 			</div>
 			<div data-role="content" class="middlecontent">
 				<div id="map_container" data-role="content" style="height:600px">
@@ -122,15 +122,15 @@ $this -> load -> view('util.php');
 			$(window).resize(function() {
 				autoChangeDiv();
 			});
-			$(window).bind('keypress', function(e) {
-				if (e.keyCode == 13) {
+			// $(window).bind('keypress', function(e) {
+			// 	if (e.keyCode == 13) {
 
-					if ($('#contentBox').val().length > 0)
-						var curElement = document.activeElement;
-					if (curElement.nodeName == "INPUT")
-						$('#enterButton').click();
-				}
-			});
+			// 		if ($('#contentBox').val().length > 0)
+			// 			var curElement = document.activeElement;
+			// 		if (curElement.nodeName == "INPUT")
+			// 			$('#enterButton').trigger('click');
+			// 	}
+			// });
 			$('#contentBox').focus(function() {
 				hideDiv();
 			});
