@@ -3,6 +3,8 @@
     <div id='profile_header' data-theme="a" data-role="header">
         
         <h3>Profile</h3>
+        <a id="logout" data-role="button" class="ui-btn-right" style="width:70px"> Logout </a>
+
     </div>
     <div data-role="content" class="middlecontent ceil-text">
     	<div class="photo-area">
@@ -67,7 +69,7 @@
 	            </li>
 	            <li>
 	                <a href="#page7" data-transition="slide" data-theme="" data-icon="gear">
-	                    Setting
+	                    Logs
 	                </a>
 	            </li>
 	        </ul>

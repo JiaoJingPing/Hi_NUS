@@ -50,7 +50,7 @@
 			            </li>
 			            <li>
 			                <a href="#page7" data-theme="" data-icon="gear">
-			                    Setting
+			                    Logs
 			                </a>
 			            </li>
 			        </ul>
