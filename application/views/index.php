@@ -20,10 +20,12 @@ $this -> load -> view('util.php');
 			var divShown;
 			var chatScreen;
 			window.onload = function() {
-				heightToSubtract = $('#topbar').height() * 2;
-				pageWidth = $(window).width();
 				divShown = 0;
 				chatScreen = 0;
+				heightToSubtract = $('#topbar').height() * 2;
+				autoChangeDiv();
+				pageWidth = $(window).width();
+				
 				// setup chat connection as soon as user open home page so that he dont have to wait later
 				$('.middlecontent').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract

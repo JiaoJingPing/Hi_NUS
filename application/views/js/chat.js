@@ -197,10 +197,17 @@ function switchToChat() {
 }
 
 function autoChangeDiv() {
+		
 		if(heightToSubtract == 0)
+		{
 			heightToSubtract = 82;
+			chatScreen = 1;
+			divShown = 0;
+		}
 		if(chatScreen == 0)
+		{
 			return;
+		}
 		pageWidth = $(window).width();
 		if (pageWidth > 900 && $(window).height() > 600) {
 			if(navigator.platform == 'Win32' || navigator.platform == 'MacIntel')
@@ -221,6 +228,7 @@ function autoChangeDiv() {
 		}, 'slow');
 		$('#sendBtn').animate({
 			'bottom' : heightToSubtract/2,
+			
 		}, 'slow');
 		$('#waitImg').animate({
 			'bottom' : heightToSubtract/2,
