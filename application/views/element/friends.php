@@ -45,7 +45,7 @@
 					<a href="#page6" data-transition="slide" data-theme="" data-icon="info"> Profile </a>
 				</li>
 				<li>
-					<a href="#page7" data-transition="slide" data-theme="" data-icon="gear"> Setting </a>
+					<a href="#page7" data-transition="slide" data-theme="" data-icon="gear"> Logs </a>
 				</li>
 			</ul>
 		</div>

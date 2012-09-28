@@ -34,7 +34,7 @@
 	            </li>
 	            <li>
 	                <a href="#page7" data-transition="slide" data-theme="" data-icon="gear">
-	                    Setting
+	                    Logs
 	                </a>
 	            </li>
 	        </ul>
