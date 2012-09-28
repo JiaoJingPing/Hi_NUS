@@ -52,19 +52,15 @@
 	function buildLocationMsgList(data) {
 		$('#history-list').empty();
 		$.each(data, function(index, value) {
-<<<<<<< HEAD
-=======
-			//console.log(value);
->>>>>>> 0da98b283360687e8f1c23c4f85a23157ca7b8de
+			
+
 			var timestamp=value.timestamp;
 			var location_name=value.location_name;
 			var user_name = value.username;
 			var content=value.content;
 			var time=convertTimeStamp(timestamp);
-<<<<<<< HEAD
-		    var loc_info='\
-=======
-			var loc_info
+
+			var loc_info;
 		
 			if(value.email==getState('member').user){
 			loc_info='\
@@ -89,7 +85,6 @@
 			</ul>';
 			}else{
 		    loc_info='\
->>>>>>> 0da98b283360687e8f1c23c4f85a23157ca7b8de
 		     <ul data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">\
 				<li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-li-has-count">\
 					'+time+'<span class="ui-li-count ui-btn-up-c ui-btn-corner-all"></span>\
@@ -109,10 +104,7 @@
 					</div>\
 				</li>\
 			</ul>';
-<<<<<<< HEAD
-=======
 			}
->>>>>>> 0da98b283360687e8f1c23c4f85a23157ca7b8de
 			$('#history-list').append(loc_info);
 		});
 	} 
