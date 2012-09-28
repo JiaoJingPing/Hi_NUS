@@ -122,14 +122,14 @@
         chatConnection(chatroom);
         
         $('#chatBtn').click(function(){
-            startSending();
+            
             if($.trim($("#contentBox").val())){
                 var state = getState('member');
                 if (!state) {
                     logout();
                 }
-                console.log(12321);
-                
+
+                startSending();
                 var msg = $("#contentBox").val();
                 msg = msg.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g,""); 
                 $("#contentBox").val(msg);

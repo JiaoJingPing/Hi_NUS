@@ -8,9 +8,8 @@
 			//get button val
 			var flag = $(this).children('span').children('span').text();
 			var friend_email = $('#other_profile_email').text();
-			console.log(friend_email);
 			if (flag == 'Follow') {
-				console.log(1);
+				//console.log(1);
 				$.ajax({
 					type : 'POST',
 					url : urlConfig.follow,
@@ -22,7 +21,7 @@
 					},
 					success : function(response) {
 						var result = jQuery.parseJSON(response);
-						console.log(result);
+						//console.log(result);
 						if (result)
 							$('#follow_btn').children('span').children('span').text('Unfollow');
 						$('#friend-list').find('li').remove();
@@ -33,7 +32,7 @@
 					}
 				});
 			} else {
-				console.log(2);
+				//console.log(2);
 				$.ajax({
 					type : 'DELETE',
 					url : urlConfig.follow,
@@ -45,7 +44,7 @@
 					},
 					success : function(response) {
 						var result = jQuery.parseJSON(response);
-						console.log(result);
+						//console.log(result);
 						if (result)
 							$('#follow_btn').children('span').children('span').text('Follow');
 						$('#friend-list').find('li').remove();

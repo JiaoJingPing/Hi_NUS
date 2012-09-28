@@ -10,7 +10,7 @@
 			<div class="ui-block-d"><!--<button id="change_photo" data-inline="true" data-theme="e">Change</button>-->
     		<div>
                 <a id='follow_btn'data-theme='b' style="float:right" data-iconpos="right" data-role='button' data-inline="true">Follow</a>
-                <a id='chat_btn' data-theme='b' style="float:right" data-iconpos="right" data-role='button' data-inline="true">Chat</a>
+              
             </div>
             </div>	   
 			</fieldset>

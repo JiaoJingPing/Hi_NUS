@@ -10,15 +10,12 @@ $this -> load -> view('util.php');
 		<link rel="apple-touch-icon" href="<?php echo VIEW_URL?>images/touch-icon-iphone.png" />
 		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo VIEW_URL?>images/touch-icon-ipad.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="<?php echo VIEW_URL?>images/touch-icon-iphone4.png" />
-		<link rel="apple-touch-startup-image" href="<?php echo VIEW_URL?>images/splash.png" />
-		<!-- iOS Device Startup Images -->
-		<!-- iPhone/iPod Touch Portrait – 320 x 460 (standard resolution) -->
+		<link rel="apple-touch-startup-image" href="<?php echo VIEW_URL?>images/splash.png" >
 		<!-- iPad Landscape 1024x748 -->
 		<link rel="apple-touch-startup-image" sizes="1024x748" href="<?php echo VIEW_URL?>images/ipad-startup-1024-748.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 1)" />
 
 		<!-- iPad Portrait 768x1004 -->
 		<link rel="apple-touch-startup-image" sizes="768x1004" href="<?php echo VIEW_URL?>images/ipad-startup-768-1004.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 1)"/>
-
 		<?php
 		$this -> load -> view('element/include_css.php');
 		?>
@@ -28,10 +25,12 @@ $this -> load -> view('util.php');
 			var divShown;
 			var chatScreen;
 			window.onload = function() {
-				heightToSubtract = $('#topbar').height() * 2;
-				pageWidth = $(window).width();
 				divShown = 0;
 				chatScreen = 0;
+				heightToSubtract = $('#topbar').height() * 2;
+				autoChangeDiv();
+				pageWidth = $(window).width();
+
 				// setup chat connection as soon as user open home page so that he dont have to wait later
 				$('.middlecontent').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
@@ -46,13 +45,14 @@ $this -> load -> view('util.php');
 			var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
 			window.addEventListener(orientationEvent, function() {// for android
-				//alert('hi');
+
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract
 				}, 1500);
 				$('#map_container').animate({
 					height : $(window).height() - heightToSubtract
 				}, 1500);
+				autoChangeDiv();
 			}, false);
 
 			function handleOrientation() {// for ios
@@ -63,6 +63,7 @@ $this -> load -> view('util.php');
 				$('#map_container').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500);
+				autoChangeDiv();
 			}
 
 		</script>
@@ -106,16 +107,28 @@ $this -> load -> view('util.php');
 				<div data-role="navbar" data-iconpos="left" data-theme="a">
 					<ul>
 						<li>
-							<a data-icon="home" data-theme="b"> Nearby </a>
+							<a data-icon="home" data-theme="b">
+							<div class="linktohome">
+								Nearby
+							</div> </a>
 						</li>
 						<li>
-							<a data-transition="slide" href="#page5" data-theme="" data-icon="plus"> Friends </a>
+							<a data-transition="slide" href="#page5" data-theme="" data-icon="plus">
+							<div class="linktofriends">
+								Friends
+							</div> </a>
 						</li>
 						<li>
-							<a data-transition="slide" href="#page6" data-theme="" data-icon="info"> Profile </a>
+							<a data-transition="slide" href="#page6" data-theme="" data-icon="info">
+							<div class="linktoprofile">
+								Profile
+							</div> </a>
 						</li>
 						<li>
-							<a data-transition="slide" href="#page7" data-theme="" data-icon="gear"> Logs </a>
+							<a data-transition="slide" href="#page7" data-theme="" data-icon="gear">
+							<div class="linktologs">
+								Logs
+							</div> </a>
 						</li>
 					</ul>
 				</div>
@@ -129,6 +142,11 @@ $this -> load -> view('util.php');
 		<script>
 			$(window).resize(function() {
 				autoChangeDiv();
+				if ($(window).width() < 400)
+					shrinkFooter();
+				else
+					expandFooter();
+
 			});
 			// $(window).bind('keypress', function(e) {
 			// 	if (e.keyCode == 13) {

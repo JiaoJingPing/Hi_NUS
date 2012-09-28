@@ -292,7 +292,7 @@
 	}
 
 	window.getPlace = function() {
-		var state_name='place';
+		var state_name = 'place';
 		var state = localStorage.getItem(state_name);
 		if (state) {
 			state = jQuery.parseJSON(state);
@@ -309,8 +309,8 @@
 	}
 
 	window.setPlace = function(place) {
-		var hours=7;
-		var state_name='place';
+		var hours = 7;
+		var state_name = 'place';
 		var values = new Array();
 		var oneday = new Date();
 		oneday.setHours(oneday.getHours() + hours);
@@ -335,7 +335,7 @@
 	}
 
 	window.get_near_peope = function() {
-		var state_name='near';
+		var state_name = 'near';
 		var state = localStorage.getItem(state_name);
 		if (state) {
 			state = jQuery.parseJSON(state);
@@ -352,8 +352,8 @@
 	}
 
 	window.set_near_peope = function(people) {
-		var hours=7;
-		var state_name='near';
+		var hours = 7;
+		var state_name = 'near';
 		var values = new Array();
 		var oneday = new Date();
 		oneday.setHours(oneday.getHours() + hours);
@@ -367,7 +367,7 @@
 	}
 
 	window.get_loc_id = function() {
-		var state_name='loc_id';
+		var state_name = 'loc_id';
 		var state = localStorage.getItem(state_name);
 		if (state) {
 			state = jQuery.parseJSON(state);
@@ -384,8 +384,8 @@
 	}
 
 	window.set_loc_id = function(loc_id) {
-		var hours=7;
-		var state_name='loc_id';
+		var hours = 7;
+		var state_name = 'loc_id';
 		var values = new Array();
 		var oneday = new Date();
 		oneday.setHours(oneday.getHours() + hours);
@@ -399,7 +399,7 @@
 	}
 
 	window.get_loc_msg = function() {
-		var state_name='loc_msg';
+		var state_name = 'loc_msg';
 		var state = localStorage.getItem(state_name);
 		if (state) {
 			state = jQuery.parseJSON(state);
@@ -416,8 +416,8 @@
 	}
 
 	window.set_loc_msg = function(loc_msg) {
-		var hours=7;
-		var state_name='loc_msg';
+		var hours = 7;
+		var state_name = 'loc_msg';
 		var values = new Array();
 		var oneday = new Date();
 		oneday.setHours(oneday.getHours() + hours);
@@ -430,10 +430,8 @@
 		localStorage.setItem(state_name, JSON.stringify(newState));
 	}
 
-
-
 	window.get_profile = function() {
-		var state_name='profile';
+		var state_name = 'profile';
 		var state = localStorage.getItem(state_name);
 		if (state) {
 			state = jQuery.parseJSON(state);
@@ -450,8 +448,8 @@
 	}
 
 	window.set_profile = function(profile) {
-		var hours=7;
-		var state_name='profile';
+		var hours = 7;
+		var state_name = 'profile';
 		var values = new Array();
 		var oneday = new Date();
 		oneday.setHours(oneday.getHours() + hours);
@@ -464,4 +462,44 @@
 		localStorage.setItem(state_name, JSON.stringify(newState));
 	}
 
+	window.get_friend = function() {
+		var state_name = 'friend';
+		var state = localStorage.getItem(state_name);
+		state = jQuery.parseJSON(state);
+		return state.friend;
+	}
+
+	window.set_friend = function(friend) {
+		//console.log(friend);
+		var state_name = 'friend';
+		
+		var newState = {
+			friend : friend,
+		};
+		
+		localStorage.setItem(state_name, JSON.stringify(newState));
+	}
 })();
+function shrinkFooter() {
+
+	$('.linktohome').html('<br>');
+	$('.linktohome').css('max-width', 0);
+	$('.linktofriends').html('<br>');
+	$('.linktofriends').css('max-width', 0);
+	$('.linktoprofile').html('<br>');
+	$('.linktoprofile').css('max-width', 0);
+	$('.linktologs').html('<br>');
+	$('.linktologs').css('max-width', 0);
+}
+
+function expandFooter() {
+
+	$('.linktohome').html('Nearby<br>');
+	$('.linktohome').css('max-width', $(window).width() * .25);
+	$('.linktofriends').html('Friends<br>');
+	$('.linktofriends').css('max-width', $(window).width() * .25);
+	$('.linktoprofile').html('Profile<br>');
+	$('.linktoprofile').css('max-width', $(window).width() * .25);
+	$('.linktologs').html('Logs<br>');
+	$('.linktologs').css('max-width', $(window).width() * .25);
+}

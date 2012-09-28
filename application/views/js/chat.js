@@ -197,8 +197,18 @@ function switchToChat() {
 }
 
 function autoChangeDiv() {
+		
+		$('#contentBox').watermark('Type here and hit return to send!');
+		if(heightToSubtract == 0)
+		{
+			heightToSubtract = 82;
+			chatScreen = 1;
+			divShown = 0;
+		}
 		if(chatScreen == 0)
+		{
 			return;
+		}
 		pageWidth = $(window).width();
 		if (pageWidth > 900 && $(window).height() > 600) {
 			if(navigator.platform == 'Win32' || navigator.platform == 'MacIntel')
@@ -219,6 +229,7 @@ function autoChangeDiv() {
 		}, 'slow');
 		$('#sendBtn').animate({
 			'bottom' : heightToSubtract/2,
+			
 		}, 'slow');
 		$('#waitImg').animate({
 			'bottom' : heightToSubtract/2,
@@ -233,8 +244,7 @@ function autoChangeDiv() {
 				width: $(window).width()*.2
 			},'slow');
 	
-	 
-	  
+	
 	
 }
 function makeNameBold(str)
@@ -276,7 +286,7 @@ function gotMessage(msg)
 	}  
 	 
 	if(msg == $('#self_profile_name').html() + ': ' + $('#contentBox').val())
-		appendSend("<b>You: </b>" + removeName(msg));
+		appendSend(removeName(msg));
 	else
 		appendRecv(makeNameBold(msg));
 	endSending();
@@ -307,7 +317,7 @@ function appendRecv(msg)
 		msg = ("<div class='timeStyle'><i>Recd At: </i>" + getTime() + "</div><br>") + msg;
 		$('#conversation').append('<div class="recvMsg">'+msg+'</div>');
 		//$('#conversation').append('<br><br><br><br>');
-		for(var i = 2; i < msg.length/50; i++)
+		for(var i = 0; i < msg.length/60; i++)
 			$('#conversation').append('<br>');
 		
 		$("#conversation").scrollTop($("#conversation").prop("scrollHeight"));
@@ -321,7 +331,7 @@ function appendSend(msg)
 	//$('#msgRcv').append('<div class="sendMsg">'+msg+'</div><br><br><br>');
 	$('#conversation').append('<div class="sendMsg">'+msg+'</div>');
 	$('#conversation').append('<br><br><br><br>');
-	for(var i = 2; i < msg.length/50; i++)
+	for(var i = 0; i < msg.length/60; i++)
 		$('#conversation').append('<br>');
 	endSending();
 	$("#conversation").scrollTop($("#conversation").prop("scrollHeight"));
@@ -339,3 +349,4 @@ function endSending()
 		$("#contentBox").removeAttr('disabled');
 		$('#waitImg').css('visibility', 'collapse');
 }
+

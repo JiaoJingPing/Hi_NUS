@@ -23,7 +23,6 @@ $js_includes = array_merge(
 		  'js/setting.js',
 		  'js/profile.js',
 		  'js/edit.js',
-		  'js/initialize.js',
     ), $js_includes);
 ?>
 <?php

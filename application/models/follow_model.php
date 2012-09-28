@@ -22,9 +22,15 @@ class follow_model extends CI_Model {
 	}
 
 	function getFollowed($email) {
-		$q = $this -> db -> select('user_followed');
-		$this -> db -> where('user', $email);
+		try{	
+		$this -> db -> select('follow.user_followed as user_followed, user.email as email, user.name as name,user.gender as gender, user.status as status, 
+		user.faculty as faculty, user.major as major, user.hobbies as hobbies, user.profile as profile,user.last_location as last_location,user.last_location_timestamp as last_location_timestamp');
+		$this -> db -> join('user', 'follow.user_followed=user.email');
+		$this -> db -> where('follow.user', $email);
 		$q = $this -> db -> get($this -> tableName);
+		}catch(Exception $e){
+			return $e;
+		}
 		return $this -> prepareResult($q);
 	}
 
