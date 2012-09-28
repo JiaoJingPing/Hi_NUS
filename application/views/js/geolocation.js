@@ -123,8 +123,37 @@
         
         $('#chatBtn').click(function(){
             // startSending();
-            if($.trim($("#contentBox").val()))
+            if($.trim($("#contentBox").val())){
+                var state = getState('member');
+                if (!state) {
+                    logout();
+                }
+                console.log(12321);
                 sendChat(chatroom, $("#contentBox").val());
+                var loc_id = window.get_loc_id();
+                var email = state.user;
+                var pw = state.pw;
+                
+
+                $.ajax({
+                    type : 'POST',
+                    url : urlConfig.location_msg,
+                    headers : {
+                        'Authorization' : 'Basic ' + window.btoa(email + ':' + pw)
+                    },
+                    data:{
+                        location_id : loc_id,
+                        content : $.trim($("#contentBox").val())
+                    },
+                    success : function(response) {
+                        console.log(response);
+                    },
+                    error : function(response) {
+                        console.log(response);
+                    }
+                });    
+            }
+                
         });
         $(window).bind('keypress', function(e) {
             if (e.keyCode == 13) {
