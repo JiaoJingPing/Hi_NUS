@@ -431,6 +431,38 @@
 		localStorage.setItem(state_name, JSON.stringify(newState));
 	}
 
+	window.get_profile = function() {
+		var state_name='profile';
+		var state = localStorage.getItem(state_name);
+		if (state) {
+			state = jQuery.parseJSON(state);
+			if (state.exp < new Date().getTime()) {
+				//if expired
+				localStorage.removeItem(state_name);
+				return false;
+			} else {
+				return state.profile;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	window.set_profile = function(profile) {
+		var hours=7;
+		var state_name='profile';
+		var values = new Array();
+		var oneday = new Date();
+		oneday.setHours(oneday.getHours() + hours);
+		//one day from now
+		var newState = {
+			profile : profile,
+			exp : oneday.getTime()
+		};
+
+		localStorage.setItem(state_name, JSON.stringify(newState));
+	}
+
 })();
 function shrinkFooter()
 {
