@@ -16,7 +16,9 @@ CACHE MANIFEST
 ./application/views/css/friends.css
 ./application/views/css/jquery.mobile-1.1.1.min.css
 ./application/views/css/profile.css
-
+./application/views/images/iphone-startup-640-920.png
+./application/views/images/ipad-startup-768-1004.png
+./application/views/images/ipad-startup-1024-748.png
 ./application/views/images/ajax-loader.gif
 ./application/views/images/chatrecv.png
 ./application/views/images/profile/female.jpg
@@ -36,8 +38,6 @@ CACHE MANIFEST
 ./application/views/images/touch-icon-iphone4.png
 ./application/views/images/icons-36-white.png
 ./application/views/images/splash.png
-./application/views/images/splash-big.png
-./application/views/images/splash-ipad.png
 ./application/views/test.png
 ./application/views/js/setting.js
 ./application/views/js/chatcode.js

@@ -2,7 +2,7 @@
 $this -> load -> view('util.php');
 ?>
 <!DOCTYPE html>
-<html >
+<html manifest="../cache.manifest">
 	<head>
 		<meta charset="utf8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -10,7 +10,15 @@ $this -> load -> view('util.php');
 		<link rel="apple-touch-icon" href="<?php echo VIEW_URL?>images/touch-icon-iphone.png" />
 		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo VIEW_URL?>images/touch-icon-ipad.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="<?php echo VIEW_URL?>images/touch-icon-iphone4.png" />
-			<link rel="apple-touch-startup-image" href="<?php echo VIEW_URL?>images/splash.png" >
+		<link rel="apple-touch-startup-image" href="<?php echo VIEW_URL?>images/splash.png" />
+		<!-- iOS Device Startup Images -->
+		<!-- iPhone/iPod Touch Portrait – 320 x 460 (standard resolution) -->
+		<!-- iPad Landscape 1024x748 -->
+		<link rel="apple-touch-startup-image" sizes="1024x748" href="<?php echo VIEW_URL?>images/ipad-startup-1024-748.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 1)" />
+
+		<!-- iPad Portrait 768x1004 -->
+		<link rel="apple-touch-startup-image" sizes="768x1004" href="<?php echo VIEW_URL?>images/ipad-startup-768-1004.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 1)"/>
+
 		<?php
 		$this -> load -> view('element/include_css.php');
 		?>
@@ -57,7 +65,7 @@ $this -> load -> view('util.php');
 				}, 1500);
 			}
 
-		 </script>
+		</script>
 
 		<title>Hi NUS!</title>
 
@@ -135,6 +143,6 @@ $this -> load -> view('util.php');
 				hideDiv();
 			});
 		</script>
-		
+
 	</body>
 </html>

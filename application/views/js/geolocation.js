@@ -122,14 +122,19 @@
         chatConnection(chatroom);
         
         $('#chatBtn').click(function(){
-            // startSending();
+            startSending();
             if($.trim($("#contentBox").val())){
                 var state = getState('member');
                 if (!state) {
                     logout();
                 }
                 console.log(12321);
-                sendChat(chatroom, $("#contentBox").val());
+                
+                var msg = $("#contentBox").val();
+                msg = msg.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g,""); 
+                $("#contentBox").val(msg);
+                sendChat(chatroom,msg);
+
                 var loc_id = window.get_loc_id();
                 var email = state.user;
                 var pw = state.pw;
@@ -157,7 +162,6 @@
         });
         $(window).bind('keypress', function(e) {
             if (e.keyCode == 13) {
-
                 if ($('#contentBox').val().length > 0)
                     var curElement = document.activeElement;
                 if (curElement.nodeName == "INPUT")
