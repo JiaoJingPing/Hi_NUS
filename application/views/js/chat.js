@@ -198,6 +198,7 @@ function switchToChat() {
 
 function autoChangeDiv() {
 		
+		$('#contentBox').watermark('Type here and hit return to send!');
 		if(heightToSubtract == 0)
 		{
 			heightToSubtract = 82;
