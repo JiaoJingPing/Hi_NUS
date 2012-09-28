@@ -19,7 +19,7 @@
 	<div id="sendBtn" valign="middle">
 		<input id="chatBtn" type="button" value="Go" disabled="true" />
 	</div>
-	<!--onClick="enterButtonClicked(); return false" rel="external"-->
+	
 	</div>
 	</div>
 	<div data-role="footer">
