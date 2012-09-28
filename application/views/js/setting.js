@@ -59,9 +59,8 @@
 			var content=value.content;
 			var time=convertTimeStamp(timestamp);
 			var loc_info
+		
 			if(value.email==getState('member').user){
-				console.log(value);
-				console.log('me');
 			loc_info='\
 		     <ul  data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">\
 				<li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-li-has-count">\
@@ -72,7 +71,7 @@
 						<div class="ui-btn-text">\
 							<a href="#" class="ui-link-inherit">\
 							<p class="ui-li-aside ui-li-desc">\
-							</p> <h3 class="ui-li-heading">'+user_name+'</h3>\
+							</p> <h3 style="color:#A00000"class="ui-li-heading">'+user_name+'</h3>\
 							<p class="ui-li-desc">\
 							</p>\
 							<p class="ui-li-desc">\
@@ -138,4 +137,4 @@
 		});
 	}
 
-})()
+})();
