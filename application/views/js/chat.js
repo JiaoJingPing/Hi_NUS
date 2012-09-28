@@ -279,6 +279,7 @@ function gotMessage(msg)
 		appendSend("<b>You: </b>" + removeName(msg));
 	else
 		appendRecv(makeNameBold(msg));
+	endSending();
 }
 function getTime()
 {
@@ -328,10 +329,9 @@ function appendSend(msg)
 
 function startSending()
 {
-	console.log('asdf');
-		$('#enterButton').button('disable');
-		$('#contentBox').attr('disabled',true);
-		$('#waitImg').css('visibility', 'visible');
+	$('#enterButton').button('disable');
+	$('#contentBox').attr('disabled',true);
+	$('#waitImg').css('visibility', 'visible');
 }
 function endSending()
 {

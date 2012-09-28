@@ -129,7 +129,9 @@
                     logout();
                 }
                 console.log(12321);
+                startSending();
                 sendChat(chatroom, $("#contentBox").val());
+
                 var loc_id = window.get_loc_id();
                 var email = state.user;
                 var pw = state.pw;
