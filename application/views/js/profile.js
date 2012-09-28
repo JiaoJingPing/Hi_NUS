@@ -75,7 +75,7 @@
 			last_loc = get_location(data.geometry.x,data.geometry.y).name;
 		$('#profile_last_location').html(last_loc);
 		$('#profile_last_location').addClass(data.gender);
-		//$('#profile_pic').attr("src",data.profile);
+		$('#profile_pic').attr("src",data.profile);
 		$('#self_profile_name').html(data.name);
 		$('#self_profile_name').addClass(data.gender);
 		$('#profile_gender').html(data.gender.capitalize());
