@@ -122,15 +122,15 @@ $this -> load -> view('util.php');
 			$(window).resize(function() {
 				autoChangeDiv();
 			});
-			$(window).bind('keypress', function(e) {
-				if (e.keyCode == 13) {
+			// $(window).bind('keypress', function(e) {
+			// 	if (e.keyCode == 13) {
 
-					if ($('#contentBox').val().length > 0)
-						var curElement = document.activeElement;
-					if (curElement.nodeName == "INPUT")
-						$('#enterButton').click();
-				}
-			});
+			// 		if ($('#contentBox').val().length > 0)
+			// 			var curElement = document.activeElement;
+			// 		if (curElement.nodeName == "INPUT")
+			// 			$('#enterButton').trigger('click');
+			// 	}
+			// });
 			$('#contentBox').focus(function() {
 				hideDiv();
 			});

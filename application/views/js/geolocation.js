@@ -120,10 +120,22 @@
         var chatroom = $('#location_title').html();
 
         chatConnection(chatroom);
-        $('#enterButton').click(function(){
-            sendChat(chatroom, $("#contentBox").val());
-        });
         
+        $('#chatBtn').click(function(){
+            // startSending();
+            if($.trim($("#contentBox").val()))
+                sendChat(chatroom, $("#contentBox").val());
+        });
+        $(window).bind('keypress', function(e) {
+            if (e.keyCode == 13) {
+
+                if ($('#contentBox').val().length > 0)
+                    var curElement = document.activeElement;
+                if (curElement.nodeName == "INPUT")
+                    $('#chatBtn').trigger('click');
+            }
+        });
+
 
         $.ajax({
             type : 'GET',

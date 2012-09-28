@@ -2,10 +2,10 @@
 
 	$("#contentBox").keyup(function(){
 		if($('#contentBox').val().length>0 )
-			$('#enterButton').button('enable');
+			$('#chatBtn').button('enable');
 		else
-			$('#enterButton').button('disable');
-	})
+			$('#chatBtn').button('disable');
+	});
 	
 })();
 
@@ -328,6 +328,7 @@ function appendSend(msg)
 
 function startSending()
 {
+	console.log('asdf');
 		$('#enterButton').button('disable');
 		$('#contentBox').attr('disabled',true);
 		$('#waitImg').css('visibility', 'visible');

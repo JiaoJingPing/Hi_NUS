@@ -17,9 +17,9 @@
 	<input type="text" id="contentBox" style="max-height: 9%;height: 9%;overflow: auto"/>
 	<img src="../application/views/images/spinner.gif" id="waitImg"/>
 	<div id="sendBtn" valign="middle">
-		<input type="button" onClick="startSending();"  value="Go" disabled='true'/>
+		<input id="chatBtn" type="button" value="Go" disabled="true" />
 	</div>
-	
+	<!--onClick="enterButtonClicked(); return false" rel="external"-->
 	</div>
 	</div>
 	<div data-role="footer">
