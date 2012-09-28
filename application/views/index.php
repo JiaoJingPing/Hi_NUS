@@ -40,23 +40,25 @@ $this -> load -> view('util.php');
 			var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
 			window.addEventListener(orientationEvent, function() {// for android
-				//alert('hi');
+				
+				
 				$('.middlecontent').animate({
 					height : $(window).height() - heightToSubtract
 				}, 1500);
 				$('#map_container').animate({
 					height : $(window).height() - heightToSubtract
-				}, 1500);
+				}, 1500);autoChangeDiv();
 			}, false);
 
 			function handleOrientation() {// for ios
-
+				
 				$('.middlecontent').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500);
 				$('#map_container').animate({
 					height : (window.innerHeight && navigator.platform == 'iPhone' ? window.innerHeight : $(window).height()) - heightToSubtract
 				}, 1500);
+				autoChangeDiv();
 			}
 
 		 </script>
