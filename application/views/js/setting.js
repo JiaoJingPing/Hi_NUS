@@ -9,11 +9,21 @@
 		deleteState('member');
 		window.location = window.location.origin + '/index.php/rest';
 	}
-
+	
+	function getCurrentLocationName(){
+		var places=getPlace();
+		var current_id=get_loc_id();
+		for(var i=0;i<places.length;i++){
+			if(places[i].id==current_id){
+				return places[i].name;
+			}
+		}
+		return false;
+	}
 
 	$('.page').live('pageshow', function() {
 		console.log('show page');
-
+		$('#logs_title').html('Logs of '+getCurrentLocationName());
 		if(navigator.onLine){
 			console.log('online');
 			var msgHitory = getUserMsgHistory();
@@ -42,31 +52,59 @@
 	function buildLocationMsgList(data) {
 		$('#history-list').empty();
 		$.each(data, function(index, value) {
-		var timestamp=value.timestamp;
-		var location_name=value.location_name;
-		var content=value.content;
-		var time=convertTimeStamp(timestamp);
-	    var loc_info='\
-	     <ul data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">\
-			<li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-li-has-count">\
-				'+time+'<span class="ui-li-count ui-btn-up-c ui-btn-corner-all"></span>\
-			</li>\
-			<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"  data-theme="d" class="ui-btn  ui-li ui-btn-up-d">\
-				<div class="ui-btn-inner ui-li">\
-					<div class="ui-btn-text">\
-						<a href="#" class="ui-link-inherit">\
-						<p class="ui-li-aside ui-li-desc">\
-						</p> <h3 class="ui-li-heading">Stephen Weber</h3>\
-						<p class="ui-li-desc">\
-						</p>\
-						<p class="ui-li-desc">\
-							'+ content +'\
-						</p> </a>\
-					</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>\
-				</div>\
-			</li>\
-		</ul>';
-		$('#history-list').append(loc_info);
+			//console.log(value);
+			var timestamp=value.timestamp;
+			var location_name=value.location_name;
+			var user_name = value.username;
+			var content=value.content;
+			var time=convertTimeStamp(timestamp);
+			var loc_info
+			if(value.email==getState('member').user){
+				console.log(value);
+				console.log('me');
+			loc_info='\
+		     <ul  data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">\
+				<li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-li-has-count">\
+					'+time+'<span class="ui-li-count ui-btn-up-c ui-btn-corner-all"></span>\
+				</li>\
+				<li  data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"  data-theme="d" class="ui-btn  ui-li ui-btn-up-d">\
+					<div class="ui-btn-inner ui-li">\
+						<div class="ui-btn-text">\
+							<a href="#" class="ui-link-inherit">\
+							<p class="ui-li-aside ui-li-desc">\
+							</p> <h3 class="ui-li-heading">'+user_name+'</h3>\
+							<p class="ui-li-desc">\
+							</p>\
+							<p class="ui-li-desc">\
+								'+ content +'\
+							</p> </a>\
+						</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>\
+					</div>\
+				</li>\
+			</ul>';
+			}else{
+		    loc_info='\
+		     <ul data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">\
+				<li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-li-has-count">\
+					'+time+'<span class="ui-li-count ui-btn-up-c ui-btn-corner-all"></span>\
+				</li>\
+				<li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"  data-theme="d" class="ui-btn  ui-li ui-btn-up-d">\
+					<div class="ui-btn-inner ui-li">\
+						<div class="ui-btn-text">\
+							<a href="#" class="ui-link-inherit">\
+							<p class="ui-li-aside ui-li-desc">\
+							</p> <h3 class="ui-li-heading">'+user_name+'</h3>\
+							<p class="ui-li-desc">\
+							</p>\
+							<p class="ui-li-desc">\
+								'+ content +'\
+							</p> </a>\
+						</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>\
+					</div>\
+				</li>\
+			</ul>';
+			}
+			$('#history-list').append(loc_info);
 		});
 	} 
 
@@ -87,7 +125,7 @@
 				'Authorization' : 'Basic ' + window.btoa(email + ':' + pw)
 			},
 			success : function(response) {
-				console.log(response);
+				//console.log(response);
 				var result = jQuery.parseJSON(response);
 				var data = result;
 				set_loc_msg(data);

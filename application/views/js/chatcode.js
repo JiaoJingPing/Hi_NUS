@@ -13,17 +13,17 @@ function chatConnection(channel_name){
         },
  
         disconnect : function() {        // LOST CONNECTION.
-			$('#enterButton').attr("disabled", true);
-			$("#enterButton").prop('value', 'Reconnecting...');
+			$('#chatButton').attr("disabled", true);
+			$("#chatButton").prop('value', 'Reconnecting...');
         },
  
         reconnect  : function() {        // CONNECTION RESTORED.
-            $("#enterButton").prop('value', 'Go');
-			$('#enterButton').removeAttr('disabled');
+            $("#chatButton").prop('value', 'Go');
+			$('#chatButton').removeAttr('disabled');
         },
  
         connect    : function() {        // CONNECTION ESTABLISHED.
-			$('#enterButton').removeAttr('disabled');
+			$('#chatButton').removeAttr('disabled');
         }
     })
 }

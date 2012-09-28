@@ -17,7 +17,6 @@
 				var last_loc = 'undefined';
 				if(data.geometry)
 					last_loc = get_location(data.geometry.x,data.geometry.y).name;
-				console.log(data.name);
 				$('#profile_last_location').html(last_loc);
 				$('#profile_last_location').addClass(data.gender);
 				$('#profile_pic').attr("src",data.profile);

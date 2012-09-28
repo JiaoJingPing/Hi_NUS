@@ -1,7 +1,7 @@
 <!-- Other Profile -->
 		<div data-role="page" id="page8">
 		     <div id='profile_header' data-theme="a" data-role="header">
-        <h3>Dear Friend</h3>
+        <h3 id='other_profile_title'>Dear Friend</h3>
     </div>
     <div data-role="content" class="middlecontent ceil-text">
     	<div class="photo-area">

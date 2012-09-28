@@ -2,7 +2,7 @@
 $this -> load -> view('util.php');
 ?>
 <!DOCTYPE html>
-<html manifest="<?php echo base_url()?>cache.manifest">
+<html >
 	<head>
 		<meta charset="utf8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -107,7 +107,7 @@ $this -> load -> view('util.php');
 							<a data-transition="slide" href="#page6" data-theme="" data-icon="info"> Profile </a>
 						</li>
 						<li>
-							<a data-transition="slide" href="#page7" data-theme="" data-icon="gear"> Setting </a>
+							<a data-transition="slide" href="#page7" data-theme="" data-icon="gear"> Logs </a>
 						</li>
 					</ul>
 				</div>

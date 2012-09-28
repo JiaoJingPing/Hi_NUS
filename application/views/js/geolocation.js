@@ -120,10 +120,51 @@
         var chatroom = $('#location_title').html();
 
         chatConnection(chatroom);
-        $('#enterButton').click(function(){
-            sendChat(chatroom, $("#contentBox").val());
-        });
         
+        $('#chatBtn').click(function(){
+            // startSending();
+            if($.trim($("#contentBox").val())){
+                var state = getState('member');
+                if (!state) {
+                    logout();
+                }
+                console.log(12321);
+                sendChat(chatroom, $("#contentBox").val());
+                var loc_id = window.get_loc_id();
+                var email = state.user;
+                var pw = state.pw;
+                
+
+                $.ajax({
+                    type : 'POST',
+                    url : urlConfig.location_msg,
+                    headers : {
+                        'Authorization' : 'Basic ' + window.btoa(email + ':' + pw)
+                    },
+                    data:{
+                        location_id : loc_id,
+                        content : $.trim($("#contentBox").val())
+                    },
+                    success : function(response) {
+                        console.log(response);
+                    },
+                    error : function(response) {
+                        console.log(response);
+                    }
+                });    
+            }
+                
+        });
+        $(window).bind('keypress', function(e) {
+            if (e.keyCode == 13) {
+
+                if ($('#contentBox').val().length > 0)
+                    var curElement = document.activeElement;
+                if (curElement.nodeName == "INPUT")
+                    $('#chatBtn').trigger('click');
+            }
+        });
+
 
         $.ajax({
             type : 'GET',
@@ -145,12 +186,19 @@
                     
                         var image = new google.maps.MarkerImage(value.profile,null,null,null,
                                     new google.maps.Size(30, 30));
+                        var displayName;
+                        //console.log(value.email+' '+getState('member').user);
+                        if(value.email==(getState('member').user)){
+                        	displayName='Me';
+                        }else{
+                        	displayName=value.name;
+                        }
                         var marker = new google.maps.Marker({
                             position: new google.maps.LatLng(parseFloat(value.geometry.x), parseFloat(value.geometry.y)),
                             map: map, 
                             icon: image,
                             email: value.email,
-                            title: value.name,
+                            title: displayName,
                             content: value.status,
                             pic:value.profile,
                         });
@@ -438,7 +486,7 @@
                     for (var i = 0; i < list.length; i++) {
                         var tmp_geo = list[i].geometry;
                         var point_list = get_point_list(tmp_geo);
-                        console.log(list[i]);
+                        //console.log(list[i]);
                         var tmp = {
                             id: list[i].location_id,
                             name: list[i].name,

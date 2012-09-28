@@ -13,18 +13,21 @@ class location_msg_model extends CI_Model {
 	function getLocationMsgWithCondition($param, $email = 'testmail@gmail.com') {
 		$date = new DateTime();
 		$before = $date -> getTimestamp();
-		$this -> db -> select('location.location_id AS location_id,location.name as location_name,location_msg.content as content,location_msg.email as email,location_msg.timestamp as timestamp,location.profile as location_profile');
-		$this -> db -> join('location', 'location.location_id = location_msg.location_id', 'right');
+		$after = $date -> getTimestamp()-60*60*24;
+		$this -> db -> select('user.name as username,location.location_id AS location_id,location.name as location_name,location_msg.content as content,location_msg.email as email,location_msg.timestamp as timestamp,location.profile as location_profile');
+		$this -> db -> join('location', 'location.location_id = location_msg.location_id');
+		$this -> db -> join('user', 'user.email = location_msg.email');
+		//$this -> db -> join('name', 'location_msg.email = user.email');
 		foreach ($param as $key => $value) {
 			if ($key == 'location_id' && $value) {
 				$this -> db -> where('location.location_id', $value);
 			} else if ($key == 'before' && $value) {
 				$before = $value;
 			} else if ($key == 'after' && $value) {
-				$this -> db -> where('timestamp >', " FROM_UNIXTIME( " . $value . " )", FALSE);
+				$after = $value;
 			}
 		}
-
+		$this -> db -> where('timestamp >', " FROM_UNIXTIME( " . $after . " )", FALSE);
 		$this -> db -> where("timestamp < ", " FROM_UNIXTIME( " . $before . " ) ", false);
 		//		$this -> db -> where('email', $email);
 
