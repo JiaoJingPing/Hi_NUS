@@ -192,5 +192,5 @@ div.hidden{
 }
 .middlecontent
 {
-	overflow-y: scroll;	
+	overflow-y: scroll	!important;
 }

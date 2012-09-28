@@ -4,7 +4,7 @@
 	<div data-theme="a" data-role="header" id="topbar">
 		<h3 id='logs_title'> Logs </h3>
 	</div>
-	<div data-role="content" class="middlecontent" >
+	<div data-role="content" class="middlecontent">
 		<ul id="history-list" data-role="listview"  data-filter="true" data-inset="true" data-filter-placeholder="Search people..." ></ul>
 
 		<!-- <ul data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">
