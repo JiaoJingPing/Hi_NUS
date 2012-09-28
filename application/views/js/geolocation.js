@@ -186,12 +186,19 @@
                     
                         var image = new google.maps.MarkerImage(value.profile,null,null,null,
                                     new google.maps.Size(30, 30));
+                        var displayName;
+                        //console.log(value.email+' '+getState('member').user);
+                        if(value.email==(getState('member').user)){
+                        	displayName='Me';
+                        }else{
+                        	displayName=value.name;
+                        }
                         var marker = new google.maps.Marker({
                             position: new google.maps.LatLng(parseFloat(value.geometry.x), parseFloat(value.geometry.y)),
                             map: map, 
                             icon: image,
                             email: value.email,
-                            title: value.name,
+                            title: displayName,
                             content: value.status,
                             pic:value.profile,
                         });
@@ -479,7 +486,7 @@
                     for (var i = 0; i < list.length; i++) {
                         var tmp_geo = list[i].geometry;
                         var point_list = get_point_list(tmp_geo);
-                        console.log(list[i]);
+                        //console.log(list[i]);
                         var tmp = {
                             id: list[i].location_id,
                             name: list[i].name,

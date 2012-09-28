@@ -41,7 +41,7 @@
 			};
 			$.post(urlConfig.new_user, user_info, function(result) {
 				if (result) {
-					setState('member', $('#email').val(), md5($('#password').val()), 24);
+					setState('member', $('#email').val(), md5($('#password').val()), 120);
 					window.location.href = urlConfig.home;
 				} else {
 					$('#email_error_msg').html('Sorry, this email has been used');
@@ -70,14 +70,16 @@
 				success : function(response) {
 					var result = jQuery.parseJSON(response);
 					if (result.isSuccess) {
-						setState('member', result.user, md5($('#login_pass').val()), 24);
+						setState('member', result.user, md5($('#login_pass').val()), 120);
 						window.location.href = urlConfig.home;
 					} else {
 						//invalid password or email
 						document.getElementById('login-msg').innerHTML = 'Invalid password or email, please try again';
 					}
 				},
-				
+				error:function(response){
+					console.log(response);
+				}
 			});
 		}
 	});

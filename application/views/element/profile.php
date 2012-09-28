@@ -2,7 +2,7 @@
 <div data-role="page" id="page6">
     <div id='profile_header' data-theme="a" data-role="header">
         
-        <h3>Profile</h3>
+        <h3 id='profile_title'>Profile</h3>
         <a id="logout" data-role="button" class="ui-btn-right" style="width:70px"> Logout </a>
 
     </div>

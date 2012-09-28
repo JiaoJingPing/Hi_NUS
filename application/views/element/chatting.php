@@ -42,7 +42,7 @@
 				</li>
 				<li>
 					<a href="#page7" data-theme="" onClick="switchToChat();" data-icon="gear">
-						Setting
+						Logs
 					</a>
 				</li>
 			</ul>

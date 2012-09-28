@@ -8,8 +8,9 @@ class member extends CI_Controller {
 		parent::__construct();
 		$this -> load -> helper('url');
 		//BASEURL
-		define('VIEW_URL', '../application/views/');
 		define('WEBSITE_URL', base_url() . 'index.php/');
+		define('VIEW_URL', WEBSITE_URL . '../application/views/');
+
 	}
 
 	function index() {
