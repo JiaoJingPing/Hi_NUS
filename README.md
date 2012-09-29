@@ -3,7 +3,7 @@
 Hi NUS is a location based Social Network that enables real time socializing with nearby people. 
 Hi NUS currently supports chat rooms for various locations within NUS. 
 
-URL:122.248.209.136/rest
+URL:http://hi-nus.com/
 
 The team comprises of 
 <table>
